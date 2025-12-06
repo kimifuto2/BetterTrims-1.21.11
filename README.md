@@ -5,8 +5,6 @@ BetterTrims 4.0
 [![Modrinth](https://img.shields.io/modrinth/dt/bettertrims?color=00AF5C&label=downloads&logo=modrinth)](https://modrinth.com/mod/bettertrims)
 [![CurseForge](https://cf.way2muchnoise.eu/full_821752_downloads.svg)](https://curseforge.com/minecraft/mc-mods/better-trims)
 
-:warning: For 3.0 go [here](https://github.com/Bawnorton/BetterTrims/blob/stonecutter/README.md) :warning: For 2.0 go [here](https://github.com/Bawnorton/BetterTrims/blob/main/README.md) :warning:
-
 #### See the [Wiki](https://moddedmc.wiki/en/project/bettertrims/latest/docs) for Developer Documentaion (adding your own effects) and User Information about the included Datapacks.
 
 ### Features
