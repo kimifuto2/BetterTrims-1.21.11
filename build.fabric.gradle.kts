@@ -146,15 +146,15 @@ tasks {
   }
 
   remapJar {
-    dependsOn("runDatagen")
+    dependsOn("runClientGameTest")
   }
 
   named<Jar>("sourcesJar") {
-    dependsOn("runDatagen")
+    dependsOn("runClientGameTest")
   }
 
-  named("runDatagen") {
-    dependsOn("runClientGameTest")
+  named("runClientGameTest") {
+    dependsOn("runDatagen")
   }
 
   processResources {

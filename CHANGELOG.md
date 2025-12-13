@@ -1,3 +1,7 @@
+# 4.0.4
+
+- Revert dynamic registry changes that caused issues with neoforge
+
 # 4.0.3
 
 - Fix items not being damaged at all when using neoforge

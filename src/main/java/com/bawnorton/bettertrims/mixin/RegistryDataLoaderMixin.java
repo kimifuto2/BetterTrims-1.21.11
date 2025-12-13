@@ -1,8 +1,9 @@
+//? if fabric {
 package com.bawnorton.bettertrims.mixin;
 
 import com.bawnorton.bettertrims.property.TrimProperty;
 import com.bawnorton.bettertrims.registry.BetterTrimsRegistries;
-import com.bawnorton.bettertrims.util.AppendableForwardingList;
+import com.google.common.collect.ImmutableList;
 import net.minecraft.resources.RegistryDataLoader;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -24,10 +25,15 @@ abstract class RegistryDataLoaderMixin {
 	public static List<RegistryDataLoader.RegistryData<?>> WORLDGEN_REGISTRIES;
 
 	static {
-		SYNCHRONIZED_REGISTRIES = new AppendableForwardingList<>(SYNCHRONIZED_REGISTRIES);
-		SYNCHRONIZED_REGISTRIES.add(new RegistryDataLoader.RegistryData<>(BetterTrimsRegistries.Keys.TRIM_PROPERTIES, TrimProperty.DIRECT_CODEC, false));
+		ImmutableList.Builder<RegistryDataLoader.RegistryData<?>> synchronizedBuilder = ImmutableList.builder();
+		synchronizedBuilder.addAll(SYNCHRONIZED_REGISTRIES);
+		synchronizedBuilder.add(new RegistryDataLoader.RegistryData<>(BetterTrimsRegistries.Keys.TRIM_PROPERTIES, TrimProperty.DIRECT_CODEC, false));
+		SYNCHRONIZED_REGISTRIES = synchronizedBuilder.build();
 
-		WORLDGEN_REGISTRIES = new AppendableForwardingList<>(WORLDGEN_REGISTRIES);
-		WORLDGEN_REGISTRIES.add(new RegistryDataLoader.RegistryData<>(BetterTrimsRegistries.Keys.TRIM_PROPERTIES, TrimProperty.DIRECT_CODEC, false));
+		ImmutableList.Builder<RegistryDataLoader.RegistryData<?>> worldgenBuilder = ImmutableList.builder();
+		worldgenBuilder.addAll(WORLDGEN_REGISTRIES);
+		worldgenBuilder.add(new RegistryDataLoader.RegistryData<>(BetterTrimsRegistries.Keys.TRIM_PROPERTIES, TrimProperty.DIRECT_CODEC, false));
+		WORLDGEN_REGISTRIES = worldgenBuilder.build();
 	}
 }
+//?}

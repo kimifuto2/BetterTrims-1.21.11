@@ -37,5 +37,10 @@ public final class EventHandler {
 				Pack.Position.TOP
 		);
 	}
+
+	@SubscribeEvent
+	public static void addDynamicReigstries(DataPackRegistryEvent.NewRegistry event) {
+		event.dataPackRegistry(BetterTrimsRegistries.Keys.TRIM_PROPERTIES, TrimProperty.DIRECT_CODEC, TrimProperty.DIRECT_CODEC);
+	}
 }
 *///?}
