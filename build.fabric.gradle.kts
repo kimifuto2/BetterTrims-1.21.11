@@ -51,6 +51,15 @@ java {
   targetCompatibility = JavaVersion.VERSION_21
 }
 
+// Architectury Loom's configureDataGeneration does NOT auto-add the datagen
+// output dir to the resources source set the way Fabric Loom does, so the
+// generated resourcepack/trim_properties data must be wired in explicitly.
+sourceSets {
+  main {
+    resources.srcDir("src/main/generated")
+  }
+}
+
 loom {
   accessWidenerPath.set(rootProject.file("src/main/resources/$minecraft.accesswidener"))
 
