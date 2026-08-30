@@ -48,9 +48,7 @@ public final class BetterTrimsRuntimeResources {
 			}
 
 			if (enabled) {
-				if (repo.isAvailable(packId) && !repo.getSelectedIds().contains(packId)) {
-					repo.addPack(packId);
-				}
+				repo.addPack(packId);
 			} else {
 				repo.removePack(packId);
 			}
@@ -67,9 +65,10 @@ public final class BetterTrimsRuntimeResources {
 	private static String findTrimEffectsPackId(PackRepository repo) {
 		Optional<Pack> match = repo.getAvailablePacks().stream()
 				.filter(pack -> {
-					String id = pack.getId();
-					String title = pack.getTitle().getString();
-					return id.contains(TARGET_TITLE) || title.toLowerCase().contains(TARGET_TITLE);
+					String id = pack.getId().toLowerCase();
+					String title = pack.getTitle().getString().toLowerCase();
+					String description = pack.getDescription().getString().toLowerCase();
+					return id.contains(TARGET_TITLE) || title.contains(TARGET_TITLE) || description.contains(TARGET_TITLE);
 				})
 				.findFirst();
 		return match.map(Pack::getId).orElse(null);
