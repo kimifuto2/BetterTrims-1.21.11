@@ -47,6 +47,8 @@
   "bettertrims.tooltip.ability.explode.explodes_with_radius": "以半径造成爆炸",
   "bettertrims.tooltip.ability.ignite.ignite_for": "点燃持续",
   "bettertrims.tooltip.ability.ignite.seconds": "秒",
+  "bettertrims.tooltip.ability.health_regen.grants": "恢复",
+  "bettertrims.tooltip.ability.health_regen.per_second": "生命/秒（无视饥饿）",
   "bettertrims.tooltip.ability.multiply_value": "将数值乘以",
   "bettertrims.tooltip.ability.play_sound.play": "播放音效",
   "bettertrims.tooltip.ability.remove_binomial": "有几率将数值降低 1",

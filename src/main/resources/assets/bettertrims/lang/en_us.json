@@ -47,6 +47,8 @@
   "bettertrims.tooltip.ability.explode.explodes_with_radius": "Create Explosion With Radius",
   "bettertrims.tooltip.ability.ignite.ignite_for": "Ignite for",
   "bettertrims.tooltip.ability.ignite.seconds": "Seconds",
+  "bettertrims.tooltip.ability.health_regen.grants": "Regenerate",
+  "bettertrims.tooltip.ability.health_regen.per_second": "Health/sec (ignores hunger)",
   "bettertrims.tooltip.ability.multiply_value": "Multiply Value by",
   "bettertrims.tooltip.ability.play_sound.play": "Play Sound",
   "bettertrims.tooltip.ability.remove_binomial": "Chance to Reduce Value by 1",

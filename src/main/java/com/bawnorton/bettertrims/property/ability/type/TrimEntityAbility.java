@@ -30,6 +30,7 @@ public interface TrimEntityAbility extends TrimElement {
 		Registry.register(registry, BetterTrims.rl("damage_entity"), DamageEntityAbility.CODEC);
 		Registry.register(registry, BetterTrims.rl("explode"), ExplodeAbility.CODEC);
 		Registry.register(registry, BetterTrims.rl("ignite"), IgniteAbility.CODEC);
+		Registry.register(registry, BetterTrims.rl("health_regen"), HealthRegenAbility.CODEC);
 		Registry.register(registry, BetterTrims.rl("play_sound"), PlaySoundAbility.CODEC);
 		Registry.register(registry, BetterTrims.rl("replace_block"), ReplaceBlockAbility.CODEC);
 		Registry.register(registry, BetterTrims.rl("replace_disk"), ReplaceDiskAbility.CODEC);

@@ -15,14 +15,14 @@
         }
       }
     ],
-    "bettertrims:incoming_damage": [
+    "bettertrims:second": [
       {
         "ability": {
-          "type": "bettertrims:multiply",
-          "value": {
+          "type": "bettertrims:health_regen",
+          "heal_per_second": {
             "type": "bettertrims:linear",
-            "base": 0.96,
-            "per_count_above_first": -0.04
+            "base": 0.4,
+            "per_count_above_first": 0.4
           }
         }
       }

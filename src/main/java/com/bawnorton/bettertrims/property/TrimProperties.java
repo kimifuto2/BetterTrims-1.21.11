@@ -7,6 +7,7 @@ import com.bawnorton.bettertrims.data.TrimMaterialTags;
 import com.bawnorton.bettertrims.property.ability.TrimAbilityComponents;
 import com.bawnorton.bettertrims.property.ability.type.TrimValueAbility;
 import com.bawnorton.bettertrims.property.ability.type.entity.ApplyMobEffectAbility;
+import com.bawnorton.bettertrims.property.ability.type.entity.HealthRegenAbility;
 import com.bawnorton.bettertrims.property.ability.type.entity.IgniteAbility;
 import com.bawnorton.bettertrims.property.ability.type.entity.PlaySoundAbility;
 import com.bawnorton.bettertrims.property.ability.type.entity.SpawnParticlesAbility;
@@ -437,12 +438,12 @@ public interface TrimProperties {
 						.ability(TrimAbilityComponents.EQUIPPED, new ToggleMobEffectAbility(MobEffects.WATER_BREATHING, CountBasedValue.constant(0)))
 						.build()
 		);
-		// Enchanted Golden Apple: +max health, reduced damage taken.
+		// Enchanted Golden Apple: +max health, hunger-ignoring regeneration (every second).
 		register(
 				context, key("enchanted_golden_apple"),
 				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.ENCHANTED_GOLDEN_APPLE))
 						.ability(TrimAbilityComponents.EQUIPPED, new AttributeAbility(BetterTrims.rl("trim_apple_health"), Attributes.MAX_HEALTH, CountBasedValue.linear(3f), AttributeModifier.Operation.ADD_VALUE))
-						.ability(TrimAbilityComponents.INCOMING_DAMAGE, TrimValueAbility.multiply(CountBasedValue.linear(0.96f, -0.04f)))
+						.ability(TrimAbilityComponents.SECOND, new HealthRegenAbility(CountBasedValue.linear(0.4f, 0.4f)))
 						.build()
 		);
 		// Fire Charge: ignite attacked entities (4s per piece).
