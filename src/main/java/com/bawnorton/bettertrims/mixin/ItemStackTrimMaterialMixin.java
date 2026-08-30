@@ -30,6 +30,7 @@ abstract class ItemStackTrimMaterialMixin {
 
 	@Inject(method = "<init>(Lnet/minecraft/world/level/ItemLike;I)V", at = @At("RETURN"))
 	private void bettertrims$addProvidesTrimMaterial(net.minecraft.world.level.ItemLike itemLike, int count, CallbackInfo ci) {
+		if (itemLike == null) return;
 		net.minecraft.world.item.Item item = (net.minecraft.world.item.Item) itemLike;
 		Identifier id = BuiltInRegistries.ITEM.getKey(item);
 		if (id == null || !id.getNamespace().equals("minecraft") || !MATERIAL_ITEMS.contains(id.getPath())) return;
