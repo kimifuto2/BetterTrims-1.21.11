@@ -35,7 +35,7 @@ abstract class ItemStackTrimMaterialMixin {
 		if (id == null || !id.getNamespace().equals("minecraft") || !MATERIAL_ITEMS.contains(id.getPath())) return;
 		if (((ItemStack) (Object) this).get(DataComponents.PROVIDES_TRIM_MATERIAL) != null) return;
 
-		ResourceKey<TrimMaterial> material = ResourceKey.create(Registries.TRIM_MATERIAL, BetterTrims.rl(id.getPath()));
+		ResourceKey<TrimMaterial> material = ResourceKey.create(Registries.TRIM_MATERIAL, Identifier.fromNamespaceAndPath("minecraft", id.getPath()));
 		((ItemStack) (Object) this).set(DataComponents.PROVIDES_TRIM_MATERIAL, new ProvidesTrimMaterial(material));
 	}
 }
