@@ -1,0 +1,19 @@
+{
+  "abilities": {
+    "bettertrims:incoming_damage_entity": [
+      {
+        "ability": {
+          "type": "bettertrims:smelt_on_hit",
+          "smelts": {
+            "type": "bettertrims:linear",
+            "base": 2.0,
+            "per_count_above_first": 2.0
+          }
+        }
+      }
+    ]
+  },
+  "trim": {
+    "material": "#c:coal"
+  }
+}

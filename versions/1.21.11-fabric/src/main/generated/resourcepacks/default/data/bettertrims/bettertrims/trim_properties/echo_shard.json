@@ -1,0 +1,20 @@
+{
+  "abilities": {
+    "bettertrims:second": [
+      {
+        "ability": {
+          "type": "bettertrims:recall_on_death",
+          "cooldown_seconds": {
+            "type": "bettertrims:linear",
+            "base": 60.0,
+            "per_count_above_first": -60.0
+          },
+          "seconds": 5.0
+        }
+      }
+    ]
+  },
+  "trim": {
+    "material": "#c:echo_shard"
+  }
+}

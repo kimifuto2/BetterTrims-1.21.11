@@ -1,0 +1,19 @@
+{
+  "abilities": {
+    "bettertrims:incoming_damage_entity": [
+      {
+        "ability": {
+          "type": "bettertrims:projectile_dodge",
+          "chance": {
+            "type": "bettertrims:linear",
+            "base": 0.25,
+            "per_count_above_first": 0.25
+          }
+        }
+      }
+    ]
+  },
+  "trim": {
+    "material": "#c:ender_pearl"
+  }
+}

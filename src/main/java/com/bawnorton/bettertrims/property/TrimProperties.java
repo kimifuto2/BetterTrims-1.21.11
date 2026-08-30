@@ -7,15 +7,22 @@ import com.bawnorton.bettertrims.data.TrimMaterialTags;
 import com.bawnorton.bettertrims.property.ability.TrimAbilityComponents;
 import com.bawnorton.bettertrims.property.ability.type.TrimValueAbility;
 import com.bawnorton.bettertrims.property.ability.type.entity.ApplyMobEffectAbility;
+import com.bawnorton.bettertrims.property.ability.type.entity.BeheadAbility;
 import com.bawnorton.bettertrims.property.ability.type.entity.HealthRegenAbility;
 import com.bawnorton.bettertrims.property.ability.type.entity.IgniteAbility;
 import com.bawnorton.bettertrims.property.ability.type.entity.PlaySoundAbility;
+import com.bawnorton.bettertrims.property.ability.type.entity.ProjectileDodgeAbility;
+import com.bawnorton.bettertrims.property.ability.type.entity.RecallOnDeathAbility;
+import com.bawnorton.bettertrims.property.ability.type.entity.ShareStatusEffectAbility;
+import com.bawnorton.bettertrims.property.ability.type.entity.SmeltItemsAbility;
 import com.bawnorton.bettertrims.property.ability.type.entity.SpawnParticlesAbility;
 import com.bawnorton.bettertrims.property.ability.type.entity.SummonEntityAbility;
+import com.bawnorton.bettertrims.property.ability.type.entity.ThornsAbility;
 import com.bawnorton.bettertrims.property.ability.type.misc.DamageImmunityAbility;
 import com.bawnorton.bettertrims.property.ability.type.misc.PiglinSafeAbility;
 import com.bawnorton.bettertrims.property.ability.type.toggle.AttributeAbility;
 import com.bawnorton.bettertrims.property.ability.type.toggle.ToggleMobEffectAbility;
+import com.bawnorton.bettertrims.property.ability.type.value.DodgeValue;
 import com.bawnorton.bettertrims.property.condition.DimensionCheck;
 import com.bawnorton.bettertrims.property.count.CountBasedValue;
 import com.bawnorton.bettertrims.property.item.TrimItemPropertyComponents;
@@ -411,7 +418,43 @@ public interface TrimProperties {
 	private static void bootstrapAllTheTrims(BootstrapContext<TrimProperty> context) {
 		HolderGetter<TrimMaterial> materialGetter = context.lookup(Registries.TRIM_MATERIAL);
 		HolderGetter<DimensionType> dimensionGetter = context.lookup(Registries.DIMENSION_TYPE);
-		// Glowstone Dust: +1 glowing, and bonus attributes.
+
+		// Chorus Fruit: +7% dodge chance per piece.
+		register(
+				context, key("chorus_fruit"),
+				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.CHORUS_FRUIT))
+						.ability(TrimAbilityComponents.INCOMING_DAMAGE, new DodgeValue(CountBasedValue.linear(0.07f, 0.07f)))
+						.build()
+		);
+		// Coal: smelt the attacker's held item on hit.
+		register(
+				context, key("coal"),
+				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.COAL))
+						.ability(TrimAbilityComponents.INCOMING_DAMAGE_ENTITY, new SmeltItemsAbility(CountBasedValue.linear(2f, 2f)))
+						.build()
+		);
+		// Dragon's Breath: share positive status effects with nearby teammates per piece.
+		register(
+				context, key("dragon_breath"),
+				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.DRAGON_BREATH))
+						.ability(TrimAbilityComponents.TICK, new ShareStatusEffectAbility(CountBasedValue.linear(1f, 1f), 8))
+						.build()
+		);
+		// Echo Shard: on death restore the state from 5 seconds ago (cooldown -60s per piece).
+		register(
+				context, key("echo_shard"),
+				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.ECHO_SHARD))
+						.ability(TrimAbilityComponents.SECOND, new RecallOnDeathAbility(CountBasedValue.constant(5f), CountBasedValue.linear(60f, -60f)))
+						.build()
+		);
+		// Ender Pearl: +25% projectile dodge chance per piece (staring does not anger Endermen is handled separately).
+		register(
+				context, key("ender_pearl"),
+				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.ENDER_PEARL))
+						.ability(TrimAbilityComponents.INCOMING_DAMAGE_ENTITY, new ProjectileDodgeAbility(CountBasedValue.linear(0.25f, 0.25f)))
+						.build()
+		);
+		// Glowstone Dust: +1 glowing; in the Nether: +attack damage, attack speed, movement, and damage reduction.
 		register(
 				context, key("glowstone_dust"),
 				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.GLOWSTONE_DUST))
@@ -419,31 +462,37 @@ public interface TrimProperties {
 						.ability(TrimAbilityComponents.EQUIPPED, AllOf.toggleAbilities(
 								new AttributeAbility(BetterTrims.rl("trim_glowstone_attack"), Attributes.ATTACK_DAMAGE, CountBasedValue.linear(0.5f), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL),
 								new AttributeAbility(BetterTrims.rl("trim_glowstone_speed"), Attributes.MOVEMENT_SPEED, CountBasedValue.linear(0.03f), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL),
-								new AttributeAbility(BetterTrims.rl("trim_glowstone_armour"), Attributes.ARMOR, CountBasedValue.linear(1), AttributeModifier.Operation.ADD_VALUE)
+								new AttributeAbility(BetterTrims.rl("trim_glowstone_attack_speed"), Attributes.ATTACK_SPEED, CountBasedValue.linear(0.3f), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
 						), DimensionCheck.of(dimensionGetter.getOrThrow(BetterTrimsDimensionTypeTags.NETHER)))
+						.ability(TrimAbilityComponents.INCOMING_DAMAGE, TrimValueAbility.multiply(CountBasedValue.linear(0.97f, -0.03f)),
+								DimensionCheck.of(dimensionGetter.getOrThrow(BetterTrimsDimensionTypeTags.NETHER)))
 						.build()
 		);
-		// Nether Brick: fire resistance + reduced fire damage taken.
+		// Nether Brick: fire resistance + 5% fire damage reduction per piece + behead chance.
 		register(
 				context, key("nether_brick"),
 				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.NETHER_BRICK))
 						.ability(TrimAbilityComponents.EQUIPPED, new ToggleMobEffectAbility(MobEffects.FIRE_RESISTANCE, CountBasedValue.constant(0)))
-						.ability(TrimAbilityComponents.INCOMING_DAMAGE, TrimValueAbility.multiply(CountBasedValue.linear(0.88f, -0.12f)),
+						.ability(TrimAbilityComponents.INCOMING_DAMAGE, TrimValueAbility.multiply(CountBasedValue.linear(0.95f, -0.05f)),
 								DamageSourceCondition.hasDamageSource(DamageSourcePredicate.Builder.damageType().tag(TagPredicate.is(DamageTypeTags.IS_FIRE))))
+						.ability(TrimAbilityComponents.POST_ATTACK, new BeheadAbility(CountBasedValue.linear(0.03f, 0.03f)))
 						.build()
 		);
-		// Prismarine Shard: water breathing.
+		// Prismarine Shard: swim speed (Dolphin's Grace) + thorns (no durability) + water breathing.
 		register(
 				context, key("prismarine_shard"),
 				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.PRISMARINE_SHARD))
+						.ability(TrimAbilityComponents.EQUIPPED, new ToggleMobEffectAbility(MobEffects.DOLPHINS_GRACE, CountBasedValue.constant(0)))
 						.ability(TrimAbilityComponents.EQUIPPED, new ToggleMobEffectAbility(MobEffects.WATER_BREATHING, CountBasedValue.constant(0)))
+						.ability(TrimAbilityComponents.INCOMING_DAMAGE_ENTITY, new ThornsAbility(CountBasedValue.linear(1f, 1f)))
 						.build()
 		);
-		// Enchanted Golden Apple: +max health, hunger-ignoring regeneration (every second).
+		// Enchanted Golden Apple: +max health, +damage reduction, hunger-ignoring regeneration.
 		register(
 				context, key("enchanted_golden_apple"),
 				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.ENCHANTED_GOLDEN_APPLE))
-						.ability(TrimAbilityComponents.EQUIPPED, new AttributeAbility(BetterTrims.rl("trim_apple_health"), Attributes.MAX_HEALTH, CountBasedValue.linear(3f), AttributeModifier.Operation.ADD_VALUE))
+						.ability(TrimAbilityComponents.EQUIPPED, new AttributeAbility(BetterTrims.rl("trim_apple_health"), Attributes.MAX_HEALTH, CountBasedValue.linear(3f, 3f), AttributeModifier.Operation.ADD_VALUE))
+						.ability(TrimAbilityComponents.INCOMING_DAMAGE, TrimValueAbility.multiply(CountBasedValue.linear(0.96f, -0.04f)))
 						.ability(TrimAbilityComponents.SECOND, new HealthRegenAbility(CountBasedValue.linear(0.4f, 0.4f)))
 						.build()
 		);
@@ -454,7 +503,7 @@ public interface TrimProperties {
 						.ability(TrimAbilityComponents.POST_ATTACK, new IgniteAbility(CountBasedValue.linear(4f, 4f)))
 						.build()
 		);
-		// Slime Ball: -knockback resistance (+knockback taken), +attack knockback.
+		// Slime Ball: -knockback resistance, +attack knockback (+boots bounce handled separately).
 		register(
 				context, key("slime_ball"),
 				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.SLIME_BALL))

@@ -1,0 +1,19 @@
+{
+  "abilities": {
+    "bettertrims:tick": [
+      {
+        "ability": {
+          "type": "bettertrims:share_status_effect",
+          "range": {
+            "type": "bettertrims:linear",
+            "base": 1.0,
+            "per_count_above_first": 1.0
+          }
+        }
+      }
+    ]
+  },
+  "trim": {
+    "material": "#c:dragon_breath"
+  }
+}

@@ -3,6 +3,7 @@ package com.bawnorton.bettertrims.mixin.property.ability.incoming_damage;
 import com.bawnorton.bettertrims.property.TrimProperties;
 import com.bawnorton.bettertrims.property.TrimProperty;
 import com.bawnorton.bettertrims.property.ability.TrimAbilityComponents;
+import com.bawnorton.bettertrims.property.ability.runner.TrimEntityAbilityRunner;
 import com.bawnorton.bettertrims.property.ability.runner.TrimValueAbilityRunner;
 import dev.kikugie.fletching_table.annotation.MixinEnvironment;
 import net.minecraft.server.level.ServerLevel;
@@ -35,6 +36,12 @@ abstract class LivingEntityMixin extends Entity {
 		for (TrimProperty property : TrimProperties.getProperties(level)) {
 			for (TrimValueAbilityRunner<?> ability : property.getValueAbilityRunners(TrimAbilityComponents.INCOMING_DAMAGE)) {
 				original = ability.runDamage(level, (LivingEntity) (Object) this, source, original);
+			}
+			for (TrimEntityAbilityRunner<?> ability : property.getEntityAbilityRunners(TrimAbilityComponents.INCOMING_DAMAGE_ENTITY)) {
+				Entity attacker = source.getEntity();
+				if (attacker != null) {
+					ability.runDamage(level, (LivingEntity) (Object) this, attacker, source, null);
+				}
 			}
 		}
 		return original;

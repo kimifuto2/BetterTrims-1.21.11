@@ -32,6 +32,10 @@ public interface TrimAbilityComponents {
 			"incoming_damage",
 			builder -> builder.persistent(ConditionalElement.ability(TrimValueAbility.CODEC, TrimContextParamSets.TRIM_DAMAGE).listOf())
 	);
+	DataComponentType<List<ConditionalElement<TrimEntityAbility>>> INCOMING_DAMAGE_ENTITY = register(
+			"incoming_damage_entity",
+			builder -> builder.persistent(ConditionalElement.ability(TrimEntityAbility.CODEC, TrimContextParamSets.TRIM_DAMAGE).listOf())
+	);
 	DataComponentType<List<ConditionalElement<DamageImmunityAbility>>> DAMAGE_IMMUNITY = register(
 			"damage_immunity",
 			builder -> builder.persistent(ConditionalElement.ability(DamageImmunityAbility.CODEC, TrimContextParamSets.TRIM_DAMAGE).listOf())

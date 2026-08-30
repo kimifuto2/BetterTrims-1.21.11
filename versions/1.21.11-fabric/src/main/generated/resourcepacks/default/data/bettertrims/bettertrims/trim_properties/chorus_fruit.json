@@ -1,0 +1,19 @@
+{
+  "abilities": {
+    "bettertrims:incoming_damage": [
+      {
+        "ability": {
+          "type": "bettertrims:dodge",
+          "chance": {
+            "type": "bettertrims:linear",
+            "base": 0.07,
+            "per_count_above_first": 0.07
+          }
+        }
+      }
+    ]
+  },
+  "trim": {
+    "material": "#c:chorus_fruit"
+  }
+}

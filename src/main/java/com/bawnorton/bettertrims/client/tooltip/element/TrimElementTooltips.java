@@ -1,10 +1,15 @@
 package com.bawnorton.bettertrims.client.tooltip.element;
 
 import com.bawnorton.bettertrims.property.AllOf;
+import com.bawnorton.bettertrims.property.ability.type.entity.BeheadAbility;
+import com.bawnorton.bettertrims.property.ability.type.entity.BounceAbility;
+import com.bawnorton.bettertrims.property.ability.type.entity.ProjectileDodgeAbility;
+import com.bawnorton.bettertrims.property.ability.type.entity.RecallOnDeathAbility;
 import com.bawnorton.bettertrims.property.ability.type.entity.*;
 import com.bawnorton.bettertrims.property.ability.type.toggle.AttributeAbility;
 import com.bawnorton.bettertrims.property.ability.type.toggle.ToggleMobEffectAbility;
 import com.bawnorton.bettertrims.property.ability.type.value.AddValue;
+import com.bawnorton.bettertrims.property.ability.type.value.DodgeValue;
 import com.bawnorton.bettertrims.property.ability.type.value.MultiplyValue;
 import com.bawnorton.bettertrims.property.ability.type.value.RemoveBinomial;
 import com.bawnorton.bettertrims.property.ability.type.value.SetValue;
@@ -27,11 +32,19 @@ public final class TrimElementTooltips {
 		register(ReplaceDiskAbility.class, new ReplaceDiskAbility.TooltipProvider());
 		register(RunFunctionAbility.class, new RunFunctionAbility.TooltipProvider());
 		register(SetBlockPropertiesAbility.class, new SetBlockPropertiesAbility.TooltipProvider());
+		register(ShareStatusEffectAbility.class, new ShareStatusEffectAbility.TooltipProvider());
+		register(SmeltItemsAbility.class, new SmeltItemsAbility.TooltipProvider());
+		register(BeheadAbility.class, new BeheadAbility.TooltipProvider());
+		register(BounceAbility.class, new BounceAbility.TooltipProvider());
+		register(ProjectileDodgeAbility.class, new ProjectileDodgeAbility.TooltipProvider());
+		register(RecallOnDeathAbility.class, new RecallOnDeathAbility.TooltipProvider());
 		register(SpawnParticlesAbility.class, new SpawnParticlesAbility.TooltipProvider());
+		register(ThornsAbility.class, new ThornsAbility.TooltipProvider());
 		register(SummonEntityAbility.class, new SummonEntityAbility.TooltipProvider());
 		register(AttributeAbility.class, new AttributeAbility.TooltipProvider());
 		register(ToggleMobEffectAbility.class, new ToggleMobEffectAbility.TooltipProvider());
 		register(AddValue.class, new AddValue.TooltipProvider());
+		register(DodgeValue.class, new DodgeValue.TooltipProvider());
 		register(MultiplyValue.class, new MultiplyValue.TooltipProvider());
 		register(RemoveBinomial.class, new RemoveBinomial.TooltipProvider());
 		register(SetValue.class, new SetValue.TooltipProvider());

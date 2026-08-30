@@ -3,6 +3,7 @@ package com.bawnorton.bettertrims.property.ability.type;
 import com.bawnorton.bettertrims.BetterTrims;
 import com.bawnorton.bettertrims.property.AllOf;
 import com.bawnorton.bettertrims.property.ability.type.value.AddValue;
+import com.bawnorton.bettertrims.property.ability.type.value.DodgeValue;
 import com.bawnorton.bettertrims.property.ability.type.value.MultiplyValue;
 import com.bawnorton.bettertrims.property.ability.type.value.RemoveBinomial;
 import com.bawnorton.bettertrims.property.ability.type.value.SetValue;
@@ -24,6 +25,7 @@ public interface TrimValueAbility extends TrimElement {
 	static MapCodec<? extends TrimValueAbility> bootstrap(Registry<MapCodec<? extends TrimValueAbility>> registry) {
 		Registry.register(registry, BetterTrims.rl("add"), AddValue.CODEC);
 		Registry.register(registry, BetterTrims.rl("all_of"), AllOf.ValueAbilities.CODEC);
+		Registry.register(registry, BetterTrims.rl("dodge"), DodgeValue.CODEC);
 		Registry.register(registry, BetterTrims.rl("multiply"), MultiplyValue.CODEC);
 		Registry.register(registry, BetterTrims.rl("remove_binomial"), RemoveBinomial.CODEC);
 		return Registry.register(registry, BetterTrims.rl("set"), SetValue.CODEC);

@@ -36,7 +36,14 @@ public interface TrimEntityAbility extends TrimElement {
 		Registry.register(registry, BetterTrims.rl("replace_disk"), ReplaceDiskAbility.CODEC);
 		Registry.register(registry, BetterTrims.rl("run_function"), RunFunctionAbility.CODEC);
 		Registry.register(registry, BetterTrims.rl("set_block_properties"), SetBlockPropertiesAbility.CODEC);
+		Registry.register(registry, BetterTrims.rl("share_status_effect"), ShareStatusEffectAbility.CODEC);
+		Registry.register(registry, BetterTrims.rl("smelt_on_hit"), SmeltItemsAbility.CODEC);
+		Registry.register(registry, BetterTrims.rl("behead"), BeheadAbility.CODEC);
+		Registry.register(registry, BetterTrims.rl("bounce"), BounceAbility.CODEC);
+		Registry.register(registry, BetterTrims.rl("projectile_dodge"), ProjectileDodgeAbility.CODEC);
+		Registry.register(registry, BetterTrims.rl("recall_on_death"), RecallOnDeathAbility.CODEC);
 		Registry.register(registry, BetterTrims.rl("spawn_particles"), SpawnParticlesAbility.CODEC);
+		Registry.register(registry, BetterTrims.rl("thorns"), ThornsAbility.CODEC);
 		return Registry.register(registry, BetterTrims.rl("summon_entity"), SummonEntityAbility.CODEC);
 	}
 
