@@ -209,7 +209,7 @@ public final class AbilityTooltipRenderer {
 	// Trim materials that have a Better Trims ability (simple description).
 	private static final Set<String> MATERIAL_DESCS = Set.of(
 			"resin", "gold", "iron", "diamond", "amethyst", "netherite",
-			"quartz", "redstone", "copper", "silver", "emerald"
+			"quartz", "redstone", "copper", "silver", "emerald", "lapis"
 	);
 	// Trim patterns that grant a mob effect when wearing 2+ pieces.
 	private static final Set<String> PATTERN_DESCS = Set.of(

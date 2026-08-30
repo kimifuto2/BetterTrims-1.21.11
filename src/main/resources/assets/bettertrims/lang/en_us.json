@@ -271,6 +271,8 @@
   "bettertrims.simple.material.copper": "Immune to lightning damage; charged projectiles summon lightning in storms",
   "bettertrims.simple.material.silver": "During the night: +attack, +movement, +armour; head grants Night Vision",
   "bettertrims.simple.material.emerald": "Cheaper villager trades per piece",
+  "bettertrims.simple.material.lapis": "Reduces enchanting table experience cost (~10% per piece)",
+  "bettertrims.tooltip.component.enchantment_cost": "When Enchanting",
   "bettertrims.simple.pattern.bolt": "Wearing 2+ pieces of this pattern: grants Dolphin's Grace",
   "bettertrims.simple.pattern.coast": "Wearing 2+ pieces of this pattern: grants Water Breathing",
   "bettertrims.simple.pattern.dune": "Wearing 2+ pieces of this pattern: grants Speed",

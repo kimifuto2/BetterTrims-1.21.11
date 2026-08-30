@@ -80,6 +80,10 @@ public interface TrimAbilityComponents {
 			"trade_cost",
 			builder -> builder.persistent(ConditionalElement.ability(TrimValueAbility.CODEC, TrimContextParamSets.TRIM_EQUIPMENT).listOf())
 	);
+	DataComponentType<List<ConditionalElement<TrimValueAbility>>> ENCHANTMENT_COST = register(
+			"enchantment_cost",
+			builder -> builder.persistent(ConditionalElement.ability(TrimValueAbility.CODEC, TrimContextParamSets.TRIM_EQUIPMENT).listOf())
+	);
 	DataComponentType<List<ConditionalElement<PiglinSafeAbility>>> PIGLIN_SAFE = register(
 			"piglin_safe",
 			builder -> builder.persistent(ConditionalElement.ability(PiglinSafeAbility.CODEC, TrimContextParamSets.TRIM_ENTITY).listOf())

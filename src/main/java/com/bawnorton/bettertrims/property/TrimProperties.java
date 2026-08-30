@@ -79,6 +79,7 @@ public interface TrimProperties {
 	ResourceKey<TrimProperty> SHADOWY = key("shadowy");
 	ResourceKey<TrimProperty> SOLAR_BONUSES = key("solar_bonuses");
 	ResourceKey<TrimProperty> WEARING_GOLD = key("wearing_gold");
+	ResourceKey<TrimProperty> ENCHANTMENT_DISCOUNT = key("enchantment_discount");
 
 	ResourceKey<TrimProperty> BOLT = key("bolt");
 	ResourceKey<TrimProperty> COAST = key("coast");
@@ -392,6 +393,13 @@ public interface TrimProperties {
 				IMPROVED_TRADING,
 				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.EMERALD))
 						.ability(TrimAbilityComponents.TRADE_COST, TrimValueAbility.multiply(CountBasedValue.linear(0.9f, -0.1f)))
+						.build()
+		);
+		register(
+				context,
+				ENCHANTMENT_DISCOUNT,
+				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.LAPIS))
+						.ability(TrimAbilityComponents.ENCHANTMENT_COST, TrimValueAbility.multiply(CountBasedValue.linear(0.9f, -0.1f)))
 						.build()
 		);
 	}
