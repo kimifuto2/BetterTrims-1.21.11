@@ -454,6 +454,16 @@ public interface TrimProperties {
 						.ability(TrimAbilityComponents.POST_ATTACK, new IgniteAbility(CountBasedValue.linear(4f, 4f)))
 						.build()
 		);
+		// Slime Ball: -knockback resistance (+knockback taken), +attack knockback.
+		register(
+				context, key("slime_ball"),
+				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.SLIME_BALL))
+						.ability(TrimAbilityComponents.EQUIPPED, AllOf.toggleAbilities(
+								new AttributeAbility(BetterTrims.rl("trim_slime_knockback_res"), Attributes.KNOCKBACK_RESISTANCE, CountBasedValue.linear(-0.25f, -0.25f), AttributeModifier.Operation.ADD_VALUE),
+								new AttributeAbility(BetterTrims.rl("trim_slime_attack_knockback"), Attributes.ATTACK_KNOCKBACK, CountBasedValue.linear(1f, 1f), AttributeModifier.Operation.ADD_VALUE)
+						))
+						.build()
+		);
 	}
 
 	static void bootstrapTrimEffects(BootstrapContext<TrimProperty> context) {
