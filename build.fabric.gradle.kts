@@ -19,6 +19,7 @@ plugins {
 }
 
 repositories {
+  mavenLocal()
   mavenCentral()
   maven("https://maven.parchmentmc.org")
   maven("https://maven.bawnorton.com/releases/")
