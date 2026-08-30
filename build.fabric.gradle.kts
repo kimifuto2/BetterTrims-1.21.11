@@ -22,6 +22,7 @@ repositories {
   mavenCentral()
   maven("https://maven.parchmentmc.org")
   maven("https://maven.bawnorton.com/releases/")
+  maven("https://maven.terraformersmc.com/releases/")
 }
 
 val minecraft: String by project
@@ -43,6 +44,8 @@ dependencies {
   deps("configurable") {
     modImplementation(annotationProcessor("com.bawnorton.configurable:configurable-$loader:$it")!!)
   }
+
+  modCompileOnly("com.terraformersmc:modmenu:17.0.0-beta.2")
 }
 
 java {
@@ -117,6 +120,7 @@ fletchingTable {
 
   fabric {
     entrypointMappings.put("fabric-datagen", "net.fabricmc.fabric.api.datagen.v1.FabricDataGeneratorEntrypoint")
+    entrypointMappings.put("modmenu", "com.terraformersmc.modmenu.api.ModMenuApi")
   }
 }
 
