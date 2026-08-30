@@ -21,9 +21,11 @@ import net.minecraft.client.gui.screens.inventory.tooltip.TooltipRenderUtil;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SmithingTemplateItem;
 import net.minecraft.world.item.equipment.trim.ArmorTrim;
 import org.jetbrains.annotations.Nullable;
 
@@ -224,6 +226,21 @@ public final class AbilityTooltipRenderer {
 	 */
 	public static void appendSimpleDescription(ItemStack stack, List<Component> lines) {
 		if (stack.isEmpty()) return;
+
+		// For an unused armor-trim smithing template item (e.g. sentry_armor_trim_smithing_template),
+		// show the effect that pattern grants when worn. This is what players see when holding
+		// the template itself, before trimming any armour.
+		if (stack.getItem() instanceof SmithingTemplateItem) {
+			Identifier id = BuiltInRegistries.ITEM.getKey(stack.getItem());
+			if (id != null && id.getPath().endsWith("_armor_trim_smithing_template")) {
+				String pattern = id.getPath().replace("_armor_trim_smithing_template", "");
+				if (PATTERN_DESCS.contains(pattern)) {
+					lines.add(Component.translatable("bettertrims.simple.pattern." + pattern).withStyle(ChatFormatting.GRAY));
+				}
+			}
+			return;
+		}
+
 		ArmorTrim trim = stack.get(DataComponents.TRIM);
 		if (trim == null) return;
 
