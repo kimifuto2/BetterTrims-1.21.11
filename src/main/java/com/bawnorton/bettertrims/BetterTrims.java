@@ -23,6 +23,9 @@ public final class BetterTrims {
 	@Configurable
 	public static boolean debug = false;
 
+	@Configurable
+	public static boolean enableTrimEffects = false;
+
 	public static void init() {
 		Networking.init();
 		LOGGER.debug("{} Initialized", MOD_ID);
@@ -31,7 +34,7 @@ public final class BetterTrims {
 				TRIM_EFFECTS,
 				FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(),
 				Component.translatable("bettertrims.resourcepack.effects"),
-				ResourcePackActivationType.NORMAL
+				enableTrimEffects ? ResourcePackActivationType.DEFAULT_ENABLED : ResourcePackActivationType.NORMAL
 		);
 
 		ResourceManagerHelper.registerBuiltinResourcePack(
