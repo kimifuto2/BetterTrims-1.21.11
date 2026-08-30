@@ -410,6 +410,7 @@ public interface TrimProperties {
 	// All The Trims style: custom item trim materials and their effects.
 	private static void bootstrapAllTheTrims(BootstrapContext<TrimProperty> context) {
 		HolderGetter<TrimMaterial> materialGetter = context.lookup(Registries.TRIM_MATERIAL);
+		HolderGetter<DimensionType> dimensionGetter = context.lookup(Registries.DIMENSION_TYPE);
 		// Glowstone Dust: +1 glowing, and bonus attributes.
 		register(
 				context, key("glowstone_dust"),
@@ -419,7 +420,7 @@ public interface TrimProperties {
 								new AttributeAbility(BetterTrims.rl("trim_glowstone_attack"), Attributes.ATTACK_DAMAGE, CountBasedValue.linear(0.5f), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL),
 								new AttributeAbility(BetterTrims.rl("trim_glowstone_speed"), Attributes.MOVEMENT_SPEED, CountBasedValue.linear(0.03f), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL),
 								new AttributeAbility(BetterTrims.rl("trim_glowstone_armour"), Attributes.ARMOR, CountBasedValue.linear(1), AttributeModifier.Operation.ADD_VALUE)
-						))
+						), DimensionCheck.of(dimensionGetter.getOrThrow(BetterTrimsDimensionTypeTags.NETHER)))
 						.build()
 		);
 		// Nether Brick: fire resistance + reduced fire damage taken.

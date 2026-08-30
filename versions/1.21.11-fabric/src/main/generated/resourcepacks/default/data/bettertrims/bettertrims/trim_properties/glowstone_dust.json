@@ -46,6 +46,10 @@
               }
             }
           ]
+        },
+        "requirements": {
+          "condition": "bettertrims:dimension_check",
+          "dimensions": "#bettertrims:is_nether"
         }
       }
     ]
