@@ -7,6 +7,7 @@ import com.bawnorton.bettertrims.data.TrimMaterialTags;
 import com.bawnorton.bettertrims.property.ability.TrimAbilityComponents;
 import com.bawnorton.bettertrims.property.ability.type.TrimValueAbility;
 import com.bawnorton.bettertrims.property.ability.type.entity.ApplyMobEffectAbility;
+import com.bawnorton.bettertrims.property.ability.type.entity.IgniteAbility;
 import com.bawnorton.bettertrims.property.ability.type.entity.PlaySoundAbility;
 import com.bawnorton.bettertrims.property.ability.type.entity.SpawnParticlesAbility;
 import com.bawnorton.bettertrims.property.ability.type.entity.SummonEntityAbility;
@@ -442,6 +443,13 @@ public interface TrimProperties {
 				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.ENCHANTED_GOLDEN_APPLE))
 						.ability(TrimAbilityComponents.EQUIPPED, new AttributeAbility(BetterTrims.rl("trim_apple_health"), Attributes.MAX_HEALTH, CountBasedValue.linear(3f), AttributeModifier.Operation.ADD_VALUE))
 						.ability(TrimAbilityComponents.INCOMING_DAMAGE, TrimValueAbility.multiply(CountBasedValue.linear(0.96f, -0.04f)))
+						.build()
+		);
+		// Fire Charge: ignite attacked entities (4s per piece).
+		register(
+				context, key("fire_charge"),
+				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.FIRE_CHARGE))
+						.ability(TrimAbilityComponents.POST_ATTACK, new IgniteAbility(CountBasedValue.linear(4f, 4f)))
 						.build()
 		);
 	}

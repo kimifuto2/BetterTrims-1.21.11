@@ -1,0 +1,19 @@
+{
+  "abilities": {
+    "bettertrims:post_attack": [
+      {
+        "ability": {
+          "type": "bettertrims:ignite",
+          "duration": {
+            "type": "bettertrims:linear",
+            "base": 4.0,
+            "per_count_above_first": 4.0
+          }
+        }
+      }
+    ]
+  },
+  "trim": {
+    "material": "#c:fire_charge"
+  }
+}
