@@ -1,0 +1,39 @@
+{
+  "abilities": {
+    "bettertrims:equipped": [
+      {
+        "ability": {
+          "type": "bettertrims:toggle_mob_effect",
+          "amplifier": 0.0,
+          "effect": "minecraft:fire_resistance"
+        }
+      }
+    ],
+    "bettertrims:incoming_damage": [
+      {
+        "ability": {
+          "type": "bettertrims:multiply",
+          "value": {
+            "type": "bettertrims:linear",
+            "base": 0.88,
+            "per_count_above_first": -0.12
+          }
+        },
+        "requirements": {
+          "condition": "minecraft:damage_source_properties",
+          "predicate": {
+            "tags": [
+              {
+                "expected": true,
+                "id": "minecraft:is_fire"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "trim": {
+    "material": "#c:nether_brick"
+  }
+}

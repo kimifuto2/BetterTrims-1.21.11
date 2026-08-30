@@ -402,6 +402,48 @@ public interface TrimProperties {
 						.ability(TrimAbilityComponents.ENCHANTMENT_COST, TrimValueAbility.multiply(CountBasedValue.linear(0.9f, -0.1f)))
 						.build()
 		);
+		bootstrapAllTheTrims(context);
+	}
+
+	// All The Trims style: custom item trim materials and their effects.
+	private static void bootstrapAllTheTrims(BootstrapContext<TrimProperty> context) {
+		HolderGetter<TrimMaterial> materialGetter = context.lookup(Registries.TRIM_MATERIAL);
+		// Glowstone Dust: +1 glowing, and bonus attributes.
+		register(
+				context, key("glowstone_dust"),
+				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.GLOWSTONE_DUST))
+						.ability(TrimAbilityComponents.EQUIPPED, new ToggleMobEffectAbility(MobEffects.GLOWING, CountBasedValue.constant(0)))
+						.ability(TrimAbilityComponents.EQUIPPED, AllOf.toggleAbilities(
+								new AttributeAbility(BetterTrims.rl("trim_glowstone_attack"), Attributes.ATTACK_DAMAGE, CountBasedValue.linear(0.5f), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL),
+								new AttributeAbility(BetterTrims.rl("trim_glowstone_speed"), Attributes.MOVEMENT_SPEED, CountBasedValue.linear(0.03f), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL),
+								new AttributeAbility(BetterTrims.rl("trim_glowstone_armour"), Attributes.ARMOR, CountBasedValue.linear(1), AttributeModifier.Operation.ADD_VALUE)
+						))
+						.build()
+		);
+		// Nether Brick: fire resistance + reduced fire damage taken.
+		register(
+				context, key("nether_brick"),
+				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.NETHER_BRICK))
+						.ability(TrimAbilityComponents.EQUIPPED, new ToggleMobEffectAbility(MobEffects.FIRE_RESISTANCE, CountBasedValue.constant(0)))
+						.ability(TrimAbilityComponents.INCOMING_DAMAGE, TrimValueAbility.multiply(CountBasedValue.linear(0.88f, -0.12f)),
+								DamageSourceCondition.hasDamageSource(DamageSourcePredicate.Builder.damageType().tag(TagPredicate.is(DamageTypeTags.IS_FIRE))))
+						.build()
+		);
+		// Prismarine Shard: water breathing.
+		register(
+				context, key("prismarine_shard"),
+				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.PRISMARINE_SHARD))
+						.ability(TrimAbilityComponents.EQUIPPED, new ToggleMobEffectAbility(MobEffects.WATER_BREATHING, CountBasedValue.constant(0)))
+						.build()
+		);
+		// Enchanted Golden Apple: +max health, reduced damage taken.
+		register(
+				context, key("enchanted_golden_apple"),
+				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.ENCHANTED_GOLDEN_APPLE))
+						.ability(TrimAbilityComponents.EQUIPPED, new AttributeAbility(BetterTrims.rl("trim_apple_health"), Attributes.MAX_HEALTH, CountBasedValue.linear(3f), AttributeModifier.Operation.ADD_VALUE))
+						.ability(TrimAbilityComponents.INCOMING_DAMAGE, TrimValueAbility.multiply(CountBasedValue.linear(0.96f, -0.04f)))
+						.build()
+		);
 	}
 
 	static void bootstrapTrimEffects(BootstrapContext<TrimProperty> context) {

@@ -1,0 +1,56 @@
+{
+  "abilities": {
+    "bettertrims:equipped": [
+      {
+        "ability": {
+          "type": "bettertrims:toggle_mob_effect",
+          "amplifier": 0.0,
+          "effect": "minecraft:glowing"
+        }
+      },
+      {
+        "ability": {
+          "type": "bettertrims:all_of",
+          "abilities": [
+            {
+              "type": "bettertrims:attribute",
+              "attribute": "minecraft:attack_damage",
+              "id": "bettertrims:trim_glowstone_attack",
+              "operation": "add_multiplied_total",
+              "value": {
+                "type": "bettertrims:linear",
+                "base": 0.5,
+                "per_count_above_first": 0.5
+              }
+            },
+            {
+              "type": "bettertrims:attribute",
+              "attribute": "minecraft:movement_speed",
+              "id": "bettertrims:trim_glowstone_speed",
+              "operation": "add_multiplied_total",
+              "value": {
+                "type": "bettertrims:linear",
+                "base": 0.03,
+                "per_count_above_first": 0.03
+              }
+            },
+            {
+              "type": "bettertrims:attribute",
+              "attribute": "minecraft:armor",
+              "id": "bettertrims:trim_glowstone_armour",
+              "operation": "add_value",
+              "value": {
+                "type": "bettertrims:linear",
+                "base": 1.0,
+                "per_count_above_first": 1.0
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "trim": {
+    "material": "#c:glowstone_dust"
+  }
+}

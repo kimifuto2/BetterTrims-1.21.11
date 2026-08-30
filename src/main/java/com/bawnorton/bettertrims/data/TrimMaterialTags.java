@@ -18,6 +18,17 @@ public interface TrimMaterialTags {
 	TagKey<TrimMaterial> AMETHYST = bind("amethyst");
 	TagKey<TrimMaterial> RESIN = bind("resin");
 	TagKey<TrimMaterial> SILVER = bind("silver");
+	TagKey<TrimMaterial> CHORUS_FRUIT = bind("chorus_fruit");
+	TagKey<TrimMaterial> COAL = bind("coal");
+	TagKey<TrimMaterial> DRAGON_BREATH = bind("dragon_breath");
+	TagKey<TrimMaterial> ECHO_SHARD = bind("echo_shard");
+	TagKey<TrimMaterial> ENCHANTED_GOLDEN_APPLE = bind("enchanted_golden_apple");
+	TagKey<TrimMaterial> ENDER_PEARL = bind("ender_pearl");
+	TagKey<TrimMaterial> FIRE_CHARGE = bind("fire_charge");
+	TagKey<TrimMaterial> GLOWSTONE_DUST = bind("glowstone_dust");
+	TagKey<TrimMaterial> NETHER_BRICK = bind("nether_brick");
+	TagKey<TrimMaterial> PRISMARINE_SHARD = bind("prismarine_shard");
+	TagKey<TrimMaterial> SLIME_BALL = bind("slime_ball");
 
 	private static TagKey<TrimMaterial> bind(String name) {
 		return TagKey.create(Registries.TRIM_MATERIAL, Identifier.fromNamespaceAndPath("c", name));

@@ -1,0 +1,16 @@
+{
+  "abilities": {
+    "bettertrims:equipped": [
+      {
+        "ability": {
+          "type": "bettertrims:toggle_mob_effect",
+          "amplifier": 0.0,
+          "effect": "minecraft:water_breathing"
+        }
+      }
+    ]
+  },
+  "trim": {
+    "material": "#c:prismarine_shard"
+  }
+}
