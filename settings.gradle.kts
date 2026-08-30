@@ -3,6 +3,7 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
         maven("https://maven.fabricmc.net/")
+        maven("https://maven.architectury.dev/")
         maven("https://maven.neoforged.net/releases/")
         maven("https://maven.kikugie.dev/releases")
         maven("https://maven.kikugie.dev/snapshots")
@@ -21,8 +22,9 @@ stonecutter {
         mc("1.21.1", loaders = listOf("fabric", "neoforge"))
         mc("1.21.8", loaders = listOf("fabric", "neoforge"))
         mc("1.21.10", loaders = listOf("fabric", "neoforge"))
+        mc("1.21.11", loaders = listOf("fabric"))
 
-        vcsVersion = "1.21.10-fabric"
+        vcsVersion = "1.21.11-fabric"
     }
 }
 

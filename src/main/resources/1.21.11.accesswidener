@@ -1,0 +1,10 @@
+accessWidener v2 named
+accessible class net/minecraft/advancements/criterion/LocationPredicate$PositionPredicate
+accessible class net/minecraft/advancements/criterion/StatePropertiesPredicate$PropertyMatcher
+accessible class net/minecraft/advancements/criterion/StatePropertiesPredicate$ExactMatcher
+accessible class net/minecraft/advancements/criterion/StatePropertiesPredicate$RangedMatcher
+accessible class net/minecraft/advancements/criterion/StatePropertiesPredicate$ValueMatcher
+accessible class net/minecraft/advancements/criterion/PlayerPredicate$StatMatcher
+accessible class net/minecraft/advancements/criterion/PlayerPredicate$AdvancementPredicate
+accessible class net/minecraft/advancements/criterion/PlayerPredicate$AdvancementCriterionsPredicate
+accessible class net/minecraft/advancements/criterion/PlayerPredicate$AdvancementDonePredicate

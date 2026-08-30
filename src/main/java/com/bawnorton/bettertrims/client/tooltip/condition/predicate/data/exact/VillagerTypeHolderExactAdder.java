@@ -4,7 +4,7 @@ import com.bawnorton.bettertrims.client.tooltip.component.CompositeContainerComp
 import com.bawnorton.bettertrims.client.tooltip.condition.LootConditionTooltips;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.Holder;
-import net.minecraft.world.entity.npc.VillagerType;
+import net.minecraft.world.entity.npc.villager.VillagerType;
 
 public final class VillagerTypeHolderExactAdder implements ExactAdder<Holder<VillagerType>> {
 	@Override

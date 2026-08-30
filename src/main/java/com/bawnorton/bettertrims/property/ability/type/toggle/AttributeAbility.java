@@ -15,7 +15,7 @@ import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -31,9 +31,9 @@ import java.util.List;
 /*import com.bawnorton.bettertrims.mixin.accessor.ItemStackAccessor;
  *///?}
 
-public record AttributeAbility(ResourceLocation id, Holder<Attribute> attribute, CountBasedValue value, AttributeModifier.Operation operation) implements TrimToggleAbility {
+public record AttributeAbility(Identifier id, Holder<Attribute> attribute, CountBasedValue value, AttributeModifier.Operation operation) implements TrimToggleAbility {
 	public static final MapCodec<AttributeAbility> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-			ResourceLocation.CODEC.fieldOf("id").forGetter(AttributeAbility::id),
+			Identifier.CODEC.fieldOf("id").forGetter(AttributeAbility::id),
 			Attribute.CODEC.fieldOf("attribute").forGetter(AttributeAbility::attribute),
 			CountBasedValue.CODEC.fieldOf("value").forGetter(AttributeAbility::value),
 			AttributeModifier.Operation.CODEC.fieldOf("operation").forGetter(AttributeAbility::operation)

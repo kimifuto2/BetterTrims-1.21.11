@@ -6,7 +6,7 @@ import com.bawnorton.bettertrims.client.tooltip.component.CompositeContainerComp
 import com.bawnorton.bettertrims.client.tooltip.condition.LootConditionTooltips;
 import com.bawnorton.bettertrims.version.VRegistry;
 import it.unimi.dsi.fastutil.ints.IntList;
-import net.minecraft.advancements.critereon.*;
+import net.minecraft.advancements.criterion.*;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -348,7 +348,7 @@ public interface EntityPredicateTooltip {
 			CompositeContainerComponent.Builder entryBuilder = CompositeContainerComponent.builder().vertical();
 			equipmentComponents.forEach((entry) -> entryBuilder.component(
 					CompositeContainerComponent.builder()
-							.literal("• ", Styler::condition)
+							.literal("鈥?", Styler::condition)
 							.component(entry)
 							.build())
 			);

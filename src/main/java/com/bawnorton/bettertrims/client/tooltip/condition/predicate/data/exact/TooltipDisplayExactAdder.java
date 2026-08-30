@@ -8,7 +8,7 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.component.TooltipDisplay;
 
 import java.util.SequencedSet;
@@ -30,7 +30,7 @@ public final class TooltipDisplayExactAdder implements ExactAdder<TooltipDisplay
 					.translate(key("tooltip_display.hidden_components"), Styler::condition)
 					.space()
 					.cycle(cycleBuilder -> hiddenComponents.forEach(type -> {
-						ResourceLocation typeKey = BuiltInRegistries.DATA_COMPONENT_TYPE.getKey(type);
+						Identifier typeKey = BuiltInRegistries.DATA_COMPONENT_TYPE.getKey(type);
 						String typeName = typeKey != null ? typeKey.toString() : "unregistered";
 						cycleBuilder.textComponent(Styler.name(Component.literal(typeName)));
 					}));

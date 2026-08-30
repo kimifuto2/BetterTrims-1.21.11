@@ -3,7 +3,7 @@ package com.bawnorton.bettertrims.client.tooltip.condition.predicate.data.partia
 import com.bawnorton.bettertrims.client.tooltip.component.CompositeContainerComponent;
 import com.bawnorton.bettertrims.client.tooltip.condition.LootConditionTooltips;
 import com.bawnorton.bettertrims.client.tooltip.util.Styler;
-import net.minecraft.advancements.critereon.CollectionPredicate;
+import net.minecraft.advancements.criterion.CollectionPredicate;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.component.predicates.WritableBookPredicate;
 import net.minecraft.network.chat.Component;

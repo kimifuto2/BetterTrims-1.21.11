@@ -3,9 +3,9 @@ package com.bawnorton.bettertrims.client.tooltip.condition.predicate;
 import com.bawnorton.bettertrims.client.tooltip.util.Styler;
 import com.bawnorton.bettertrims.client.tooltip.component.CompositeContainerComponent;
 import com.bawnorton.bettertrims.client.tooltip.condition.LootConditionTooltips;
-import net.minecraft.advancements.critereon.BlockPredicate;
-import net.minecraft.advancements.critereon.NbtPredicate;
-import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.advancements.criterion.BlockPredicate;
+import net.minecraft.advancements.criterion.NbtPredicate;
+import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
@@ -18,7 +18,7 @@ import java.util.Optional;
 
 //? if >=1.21.8 {
 import com.bawnorton.bettertrims.client.tooltip.condition.predicate.data.DataComponentMatchersTooltip;
-import net.minecraft.advancements.critereon.DataComponentMatchers;
+import net.minecraft.advancements.criterion.DataComponentMatchers;
 //?}
 
 public interface BlockPredicateTooltip {

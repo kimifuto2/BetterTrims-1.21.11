@@ -12,7 +12,7 @@ plugins {
   kotlin("jvm")
   `maven-publish`
   id("bettertrims.common")
-  id("fabric-loom")
+  id("dev.architectury.loom")
   id("me.modmuss50.mod-publish-plugin")
   id("com.google.devtools.ksp") version "2.2.0-2.0.2"
   id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.18"

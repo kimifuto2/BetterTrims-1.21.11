@@ -1,7 +1,7 @@
 package com.bawnorton.bettertrims.data;
 
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.equipment.trim.TrimMaterial;
 
@@ -20,6 +20,6 @@ public interface TrimMaterialTags {
 	TagKey<TrimMaterial> SILVER = bind("silver");
 
 	private static TagKey<TrimMaterial> bind(String name) {
-		return TagKey.create(Registries.TRIM_MATERIAL, ResourceLocation.fromNamespaceAndPath("c", name));
+		return TagKey.create(Registries.TRIM_MATERIAL, Identifier.fromNamespaceAndPath("c", name));
 	}
 }

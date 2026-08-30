@@ -3,7 +3,7 @@ package com.bawnorton.bettertrims.client.tooltip.condition.predicate.data.partia
 import com.bawnorton.bettertrims.client.tooltip.component.CompositeContainerComponent;
 import com.bawnorton.bettertrims.client.tooltip.condition.LootConditionTooltips;
 import com.bawnorton.bettertrims.client.tooltip.condition.predicate.PredicateTooltip;
-import net.minecraft.advancements.critereon.*;
+import net.minecraft.advancements.criterion.*;
 import net.minecraft.core.component.predicates.DamagePredicate;
 import net.minecraft.client.multiplayer.ClientLevel;
 

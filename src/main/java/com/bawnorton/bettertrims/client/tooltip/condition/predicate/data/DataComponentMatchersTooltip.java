@@ -5,14 +5,14 @@ import com.bawnorton.bettertrims.client.tooltip.component.CompositeContainerComp
 import com.bawnorton.bettertrims.client.tooltip.condition.LootConditionTooltips;
 import com.bawnorton.bettertrims.client.tooltip.condition.predicate.PredicateTooltip;
 import com.bawnorton.bettertrims.client.tooltip.util.Styler;
-import net.minecraft.advancements.critereon.DataComponentMatchers;
+import net.minecraft.advancements.criterion.DataComponentMatchers;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.component.DataComponentExactPredicate;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.predicates.DataComponentPredicate;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.Map;
 import java.util.Optional;
@@ -48,7 +48,7 @@ public interface DataComponentMatchersTooltip {
 			Map.Entry<DataComponentType<?>, Optional<?>> entry = entries.iterator().next();
 			Optional<?> value = entry.getValue();
 			if (value.isEmpty()) {
-				ResourceLocation key = BuiltInRegistries.DATA_COMPONENT_TYPE.getKey(entry.getKey());
+				Identifier key = BuiltInRegistries.DATA_COMPONENT_TYPE.getKey(entry.getKey());
 				if (key != null) {
 					builder.translate(key("exact.any_for_type"), Styler::condition, Styler.property(Component.literal(key.toString())));
 				} else {
@@ -66,9 +66,9 @@ public interface DataComponentMatchersTooltip {
 				Optional<?> value = entry.getValue();
 				CompositeContainerComponent.Builder termBuilder = CompositeContainerComponent.builder()
 						.space()
-						.literal("• ", Styler::condition);
+						.literal("鈥?", Styler::condition);
 				if (value.isEmpty()) {
-					ResourceLocation key = BuiltInRegistries.DATA_COMPONENT_TYPE.getKey(entry.getKey());
+					Identifier key = BuiltInRegistries.DATA_COMPONENT_TYPE.getKey(entry.getKey());
 					if (key != null) {
 						termBuilder.translate(key("exact.any_for_type"), Styler::condition, Styler.property(Component.literal(key.toString())));
 					} else {
@@ -96,7 +96,7 @@ public interface DataComponentMatchersTooltip {
 			for (Map.Entry<DataComponentPredicate.Type<?>, DataComponentPredicate> entry : partial.entrySet()) {
 				CompositeContainerComponent.Builder termBuilder = CompositeContainerComponent.builder()
 						.space()
-						.literal("• ", Styler::condition);
+						.literal("鈥?", Styler::condition);
 				PartialDataComponentPredicateTooltipAdders.addToBuilder(level, entry.getKey(), entry.getValue(), state, builder);
 				listBuilder.component(termBuilder.build());
 			}

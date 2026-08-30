@@ -22,7 +22,7 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.equipment.trim.ArmorTrim;
 import org.jetbrains.annotations.Nullable;
@@ -45,7 +45,7 @@ public final class AbilityTooltipRenderer {
 	private static TrimPropertiesTooltip currentTooltip = null;
 	private static final LongSet EXCEPTION_HASHES = new LongArraySet();
 
-	public static void render(GuiGraphics graphics, ItemStack stack, Font font, Rect2i tooltipBounds, int mouseX, @Nullable ResourceLocation background) {
+	public static void render(GuiGraphics graphics, ItemStack stack, Font font, Rect2i tooltipBounds, int mouseX, @Nullable Identifier background) {
 		if (stack.isEmpty()) return;
 
 		ArmorTrim trim = stack.get(DataComponents.TRIM);
@@ -94,7 +94,7 @@ public final class AbilityTooltipRenderer {
 		return false;
 	}
 
-	private static void renderProperties(GuiGraphics graphics, ClientLevel level, Font font, ArmorTrim trim, Rect2i tooltipBounds, boolean horizontallyFlipped, ResourceLocation background) {
+	private static void renderProperties(GuiGraphics graphics, ClientLevel level, Font font, ArmorTrim trim, Rect2i tooltipBounds, boolean horizontallyFlipped, Identifier background) {
 		currentTooltip = tooltips.computeIfAbsent(trim, a -> {
 			Map<Matcher, List<TrimProperty>> matchedProperties = new HashMap<>();
 			for (TrimProperty property : TrimProperties.getProperties(level)) {
@@ -112,7 +112,7 @@ public final class AbilityTooltipRenderer {
 	}
 
 	@SuppressWarnings("DataFlowIssue")
-	private static void renderPrompt(GuiGraphics graphics, Font font, Rect2i tooltipBounds, boolean horizontallyFlipped, @Nullable ResourceLocation background) {
+	private static void renderPrompt(GuiGraphics graphics, Font font, Rect2i tooltipBounds, boolean horizontallyFlipped, @Nullable Identifier background) {
 		int promptWidth = 8;
 		int promptHeight = 8;
 		int xOffset = tooltipBounds.getX() + (horizontallyFlipped ? -promptWidth - 10 : tooltipBounds.getWidth() + 10);
@@ -167,7 +167,7 @@ public final class AbilityTooltipRenderer {
 		}
 	}
 
-	private static void renderError(GuiGraphics graphics, Font font, Rect2i tooltipBounds, boolean shouldFlip, @Nullable ResourceLocation background) {
+	private static void renderError(GuiGraphics graphics, Font font, Rect2i tooltipBounds, boolean shouldFlip, @Nullable Identifier background) {
 		List<ClientTooltipComponent> errorComponents = List.of(new ClientTextTooltip(Component.translatable("bettertrims.tooltip.properties.error").withStyle(ChatFormatting.RED).getVisualOrderText()));
 		int offsetX = tooltipBounds.getX() + tooltipBounds.getWidth() + (shouldFlip ? 14 : 0);
 		int offsetY = tooltipBounds.getY();

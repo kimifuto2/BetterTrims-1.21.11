@@ -14,7 +14,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +26,7 @@ public interface TrimAbilityComponents {
 
 	Codec<DataComponentMap> CODEC = DataComponentMap.makeCodec(COMPONENT_CODEC);
 
-	Map<ResourceLocation, Component> TOOLTIPS = new HashMap<>();
+	Map<Identifier, Component> TOOLTIPS = new HashMap<>();
 
 	DataComponentType<List<ConditionalElement<TrimValueAbility>>> INCOMING_DAMAGE = register(
 			"incoming_damage",
@@ -86,7 +86,7 @@ public interface TrimAbilityComponents {
 	);
 
 	private static <T> DataComponentType<T> register(String name, UnaryOperator<DataComponentType.Builder<T>> operator) {
-		ResourceLocation id = BetterTrims.rl(name);
+		Identifier id = BetterTrims.rl(name);
 		TOOLTIPS.put(id, Component.translatable("bettertrims.tooltip.component." + name));
 		return Registry.register(
 				BetterTrimsRegistries.TRIM_ABILITY_COMPONENT_TYPE,

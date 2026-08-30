@@ -3,9 +3,9 @@ package com.bawnorton.bettertrims.client.tooltip.condition.predicate;
 import com.bawnorton.bettertrims.client.tooltip.util.Styler;
 import com.bawnorton.bettertrims.client.tooltip.component.CompositeContainerComponent;
 import com.bawnorton.bettertrims.client.tooltip.condition.LootConditionTooltips;
-import net.minecraft.advancements.critereon.DamageSourcePredicate;
-import net.minecraft.advancements.critereon.EntityPredicate;
-import net.minecraft.advancements.critereon.TagPredicate;
+import net.minecraft.advancements.criterion.DamageSourcePredicate;
+import net.minecraft.advancements.criterion.EntityPredicate;
+import net.minecraft.advancements.criterion.TagPredicate;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.world.damagesource.DamageType;
 

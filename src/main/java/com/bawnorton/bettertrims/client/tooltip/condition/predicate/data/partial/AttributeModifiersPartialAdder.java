@@ -4,14 +4,14 @@ import com.bawnorton.bettertrims.client.tooltip.component.CompositeContainerComp
 import com.bawnorton.bettertrims.client.tooltip.condition.LootConditionTooltips;
 import com.bawnorton.bettertrims.client.tooltip.condition.predicate.PredicateTooltip;
 import com.bawnorton.bettertrims.client.tooltip.util.Styler;
-import net.minecraft.advancements.critereon.CollectionPredicate;
+import net.minecraft.advancements.criterion.CollectionPredicate;
 import net.minecraft.core.component.predicates.AttributeModifiersPredicate;
-import net.minecraft.advancements.critereon.MinMaxBounds;
+import net.minecraft.advancements.criterion.MinMaxBounds;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -33,7 +33,7 @@ public final class AttributeModifiersPartialAdder implements PartialAdder</*$ at
 					modifiers.orElseThrow(),
 					"attribute_modifiers",
 					(predicateLevel, entryPredicate, predicateState, collectionBuilder) -> {
-						Optional<ResourceLocation> id = entryPredicate.id();
+						Optional<Identifier> id = entryPredicate.id();
 						Optional<HolderSet<Attribute>> attributeSet = entryPredicate.attribute();
 						Optional<EquipmentSlotGroup> slot = entryPredicate.slot();
 						Optional<AttributeModifier.Operation> operation = entryPredicate.operation();

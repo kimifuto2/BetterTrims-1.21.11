@@ -9,7 +9,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.Rect2i;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +42,7 @@ public class TrimPropertiesTooltip {
 		}
 	}
 
-	public void render(GuiGraphics graphics, ClientLevel level, Font font, Rect2i parentTooltipBounds, boolean horizontallyFlipped, ResourceLocation background) {
+	public void render(GuiGraphics graphics, ClientLevel level, Font font, Rect2i parentTooltipBounds, boolean horizontallyFlipped, Identifier background) {
 		if (index >= pages.size()) return;
 
 		TrimTooltipPage page = pages.get(index);

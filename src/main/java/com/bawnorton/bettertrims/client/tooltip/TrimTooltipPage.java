@@ -30,7 +30,7 @@ import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -244,7 +244,7 @@ public class TrimTooltipPage {
 	}
 
 	private ClientTooltipComponent generateTitle(ClientLevel level, int index, int total) {
-		ResourceLocation propertyId = VRegistry.get(level, BetterTrimsRegistries.Keys.TRIM_PROPERTIES).getKey(property);
+		Identifier propertyId = VRegistry.get(level, BetterTrimsRegistries.Keys.TRIM_PROPERTIES).getKey(property);
 		if (propertyId == null) {
 			BetterTrims.LOGGER.warn("Property {} does not have a registry name", property);
 			propertyId = BetterTrims.rl("unknown");

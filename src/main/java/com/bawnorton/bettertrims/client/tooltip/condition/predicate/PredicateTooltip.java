@@ -6,8 +6,8 @@ import com.bawnorton.bettertrims.client.tooltip.component.CompositeBuilder;
 import com.bawnorton.bettertrims.client.tooltip.component.CompositeContainerComponent;
 import com.bawnorton.bettertrims.client.tooltip.condition.LootConditionTooltips;
 import com.bawnorton.bettertrims.version.VRegistry;
-import net.minecraft.advancements.critereon.MinMaxBounds;
-import net.minecraft.advancements.critereon.TagPredicate;
+import net.minecraft.advancements.criterion.MinMaxBounds;
+import net.minecraft.advancements.criterion.TagPredicate;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
@@ -84,7 +84,7 @@ public interface PredicateTooltip {
 						Component name = Styler.name(nameMapper.apply(holder.unwrap().map(registry::getValueOrThrow, Function.identity()), elementBuilder).copy());
 						cycler.component(CompositeContainerComponent.builder().textComponent(name).component(elementBuilder.build()).build());
 					} else {
-						cycler.textComponent(Styler.name(Component.literal(holder.unwrap().map(ResourceKey::location, registry::getKey).toString())));
+						cycler.textComponent(Styler.name(Component.literal(holder.unwrap().map(ResourceKey::identifier, registry::getKey).toString())));
 					}
 				}))
 				.build();

@@ -20,7 +20,6 @@ fun Project.applyMixinDebugSettings(
     }.files.singleFile
 
     vmArgConsumer("-javaagent:$mixinJarFile")
-    vmArgConsumer("-XX:+AllowEnhancedClassRefinition")
     propertyConsumer("mixin.hotSwap", "true")
     propertyConsumer("mixin.debug.export", "true")
 }
@@ -68,18 +67,18 @@ fun getReplacements() = listOf(
     Replacement("<1.21.8", "MacosUtil.IS_MACOS", "Minecraft.ON_OSX"),
 
     Replacement("<1.21.8", "DataComponentPredicates", "ItemSubPredicates", id = "item_data_predicates"),
-    Replacement("<1.21.8", "net.minecraft.core.component.predicates.DataComponentPredicate", "net.minecraft.advancements.critereon.ItemSubPredicate"),
-    Replacement("<1.21.8", "net.minecraft.core.component.predicates.DamagePredicate", "net.minecraft.advancements.critereon.ItemDamagePredicate"),
-    Replacement("<1.21.8", "net.minecraft.core.component.predicates.EnchantmentsPredicate", "net.minecraft.advancements.critereon.ItemEnchantmentsPredicate"),
-    Replacement("<1.21.8", "net.minecraft.core.component.predicates.PotionsPredicate", "net.minecraft.advancements.critereon.ItemPotionsPredicate"),
-    Replacement("<1.21.8", "net.minecraft.core.component.predicates.CustomDataPredicate", "net.minecraft.advancements.critereon.ItemCustomDataPredicate"),
-    Replacement("<1.21.8", "net.minecraft.core.component.predicates.ContainerPredicate", "net.minecraft.advancements.critereon.ItemContainerPredicate"),
-    Replacement("<1.21.8", "net.minecraft.core.component.predicates.BundlePredicate", "net.minecraft.advancements.critereon.ItemBundlePredicate"),
-    Replacement("<1.21.8", "net.minecraft.core.component.predicates.FireworkExplosionPredicate", "net.minecraft.advancements.critereon.ItemFireworkExplosionPredicate"),
-    Replacement("<1.21.8", "net.minecraft.core.component.predicates.FireworksPredicate", "net.minecraft.advancements.critereon.ItemFireworksPredicate"),
-    Replacement("<1.21.8", "net.minecraft.core.component.predicates.WritableBookPredicate", "net.minecraft.advancements.critereon.ItemWritableBookPredicate"),
-    Replacement("<1.21.8", "net.minecraft.core.component.predicates.WrittenBookPredicate", "net.minecraft.advancements.critereon.ItemWrittenBookPredicate"),
-    Replacement("<1.21.8", "net.minecraft.core.component.predicates.AttributeModifiersPredicate", "net.minecraft.advancements.critereon.ItemAttributeModifiersPredicate"),
-    Replacement("<1.21.8", "net.minecraft.core.component.predicates.JukeboxPlayablePredicate", "net.minecraft.advancements.critereon.ItemJukeboxPlayablePredicate"),
-    Replacement("<1.21.8", "net.minecraft.core.component.predicates.TrimPredicate", "net.minecraft.advancements.critereon.ItemTrimPredicate")
+    Replacement("<1.21.8", "net.minecraft.core.component.predicates.DataComponentPredicate", "net.minecraft.advancements.criterion.ItemSubPredicate"),
+    Replacement("<1.21.8", "net.minecraft.core.component.predicates.DamagePredicate", "net.minecraft.advancements.criterion.ItemDamagePredicate"),
+    Replacement("<1.21.8", "net.minecraft.core.component.predicates.EnchantmentsPredicate", "net.minecraft.advancements.criterion.ItemEnchantmentsPredicate"),
+    Replacement("<1.21.8", "net.minecraft.core.component.predicates.PotionsPredicate", "net.minecraft.advancements.criterion.ItemPotionsPredicate"),
+    Replacement("<1.21.8", "net.minecraft.core.component.predicates.CustomDataPredicate", "net.minecraft.advancements.criterion.ItemCustomDataPredicate"),
+    Replacement("<1.21.8", "net.minecraft.core.component.predicates.ContainerPredicate", "net.minecraft.advancements.criterion.ItemContainerPredicate"),
+    Replacement("<1.21.8", "net.minecraft.core.component.predicates.BundlePredicate", "net.minecraft.advancements.criterion.ItemBundlePredicate"),
+    Replacement("<1.21.8", "net.minecraft.core.component.predicates.FireworkExplosionPredicate", "net.minecraft.advancements.criterion.ItemFireworkExplosionPredicate"),
+    Replacement("<1.21.8", "net.minecraft.core.component.predicates.FireworksPredicate", "net.minecraft.advancements.criterion.ItemFireworksPredicate"),
+    Replacement("<1.21.8", "net.minecraft.core.component.predicates.WritableBookPredicate", "net.minecraft.advancements.criterion.ItemWritableBookPredicate"),
+    Replacement("<1.21.8", "net.minecraft.core.component.predicates.WrittenBookPredicate", "net.minecraft.advancements.criterion.ItemWrittenBookPredicate"),
+    Replacement("<1.21.8", "net.minecraft.core.component.predicates.AttributeModifiersPredicate", "net.minecraft.advancements.criterion.ItemAttributeModifiersPredicate"),
+    Replacement("<1.21.8", "net.minecraft.core.component.predicates.JukeboxPlayablePredicate", "net.minecraft.advancements.criterion.ItemJukeboxPlayablePredicate"),
+    Replacement("<1.21.8", "net.minecraft.core.component.predicates.TrimPredicate", "net.minecraft.advancements.criterion.ItemTrimPredicate")
 )

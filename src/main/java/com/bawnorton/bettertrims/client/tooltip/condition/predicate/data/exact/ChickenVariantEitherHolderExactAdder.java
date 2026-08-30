@@ -4,7 +4,7 @@ package com.bawnorton.bettertrims.client.tooltip.condition.predicate.data.exact;
 import com.bawnorton.bettertrims.client.tooltip.component.CompositeContainerComponent;
 import com.bawnorton.bettertrims.client.tooltip.condition.LootConditionTooltips;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.world.entity.animal.ChickenVariant;
+import net.minecraft.world.entity.animal.chicken.ChickenVariant;
 import net.minecraft.world.item.EitherHolder;
 
 public class ChickenVariantEitherHolderExactAdder implements ExactAdder<EitherHolder<ChickenVariant>> {

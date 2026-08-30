@@ -17,7 +17,7 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
@@ -63,7 +63,7 @@ public record DamageEntityAbility(CountBasedValue minDamage, CountBasedValue max
 		@Override
 		public ClientTooltipComponent getTooltip(ClientLevel level, DamageEntityAbility element, boolean includeCount) {
 			Registry<DamageType> registry = VRegistry.get(level, Registries.DAMAGE_TYPE);
-			ResourceLocation type = element.damageType().unwrap().map(ResourceKey::location, registry::getKey);
+			Identifier type = element.damageType().unwrap().map(ResourceKey::identifier, registry::getKey);
 
 			List<Float> minValues = element.minDamage().getValues(4);
 			List<Float> maxValues = element.maxDamage().getValues(4);

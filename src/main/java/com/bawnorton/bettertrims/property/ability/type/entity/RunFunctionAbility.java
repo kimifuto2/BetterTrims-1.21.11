@@ -12,10 +12,12 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.ServerFunctionManager;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.permissions.LevelBasedPermissionSet;
+import net.minecraft.server.permissions.PermissionLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -23,9 +25,9 @@ import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
-public record RunFunctionAbility(ResourceLocation function, String tooltipTranslationKey) implements TrimEntityAbility {
+public record RunFunctionAbility(Identifier function, String tooltipTranslationKey) implements TrimEntityAbility {
 	public static final MapCodec<RunFunctionAbility> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-			ResourceLocation.CODEC.fieldOf("function").forGetter(RunFunctionAbility::function),
+			Identifier.CODEC.fieldOf("function").forGetter(RunFunctionAbility::function),
 			Codec.STRING.fieldOf("tooltip_translation_key").forGetter(RunFunctionAbility::tooltipTranslationKey)
 	).apply(instance, RunFunctionAbility::new));
 
@@ -38,7 +40,7 @@ public record RunFunctionAbility(ResourceLocation function, String tooltipTransl
 					Vec3 position = target.getPosition(1);
 					Vec2 rotation = target.getRotationVector();
 					CommandSourceStack stack = server.createCommandSourceStack()
-							.withPermission(4)
+							.withPermission(LevelBasedPermissionSet.forLevel(PermissionLevel.byId(4)))
 							.withSuppressedOutput()
 							.withEntity(target)
 							.withLevel(level)

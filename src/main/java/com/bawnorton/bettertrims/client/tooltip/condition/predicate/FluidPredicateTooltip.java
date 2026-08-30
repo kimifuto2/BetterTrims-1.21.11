@@ -2,8 +2,8 @@ package com.bawnorton.bettertrims.client.tooltip.condition.predicate;
 
 import com.bawnorton.bettertrims.client.tooltip.component.CompositeContainerComponent;
 import com.bawnorton.bettertrims.client.tooltip.condition.LootConditionTooltips;
-import net.minecraft.advancements.critereon.FluidPredicate;
-import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.advancements.criterion.FluidPredicate;
+import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;

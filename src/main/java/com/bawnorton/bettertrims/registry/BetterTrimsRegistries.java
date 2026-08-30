@@ -16,14 +16,14 @@ import net.minecraft.core.MappedRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class BetterTrimsRegistries {
-	private static final Map<ResourceLocation, Supplier<?>> LOADERS = Maps.newLinkedHashMap();
+	private static final Map<Identifier, Supplier<?>> LOADERS = Maps.newLinkedHashMap();
 
 	public static final Registry<DataComponentType<?>> TRIM_ABILITY_COMPONENT_TYPE = createRegistry(Keys.TRIM_ABILITY_COMPONENT_TYPE, TrimAbilityComponents::bootstrap);
 	public static final Registry<DataComponentType<?>> TRIM_ITEM_PROPERTY_COMPONENT_TYPE = createRegistry(Keys.TRIM_ITEM_PROPERTY_COMPONENT_TYPE, TrimItemPropertyComponents::bootstrap);
@@ -36,7 +36,7 @@ public class BetterTrimsRegistries {
 
 	private static <T> Registry<T> createRegistry(ResourceKey<Registry<T>> key, Function<Registry<T>, Object> bootstrap) {
 		Registry<T> registry = new MappedRegistry<>(key, Lifecycle.stable());
-		LOADERS.put(key.location(), () -> bootstrap.apply(registry));
+		LOADERS.put(key.identifier(), () -> bootstrap.apply(registry));
 		return registry;
 	}
 

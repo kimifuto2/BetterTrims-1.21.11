@@ -5,15 +5,15 @@ import com.bawnorton.bettertrims.client.tooltip.condition.predicate.data.Partial
 import com.bawnorton.bettertrims.client.tooltip.util.Styler;
 import com.bawnorton.bettertrims.client.tooltip.component.CompositeContainerComponent;
 import com.bawnorton.bettertrims.client.tooltip.condition.LootConditionTooltips;
-import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.advancements.critereon.MinMaxBounds;
+import net.minecraft.advancements.criterion.ItemPredicate;
+import net.minecraft.advancements.criterion.MinMaxBounds;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 
 import java.util.Map;
@@ -21,7 +21,7 @@ import java.util.Optional;
 import java.util.Set;
 
 //? if >=1.21.8 {
-import net.minecraft.advancements.critereon.DataComponentMatchers;
+import net.minecraft.advancements.criterion.DataComponentMatchers;
 import com.bawnorton.bettertrims.client.tooltip.condition.predicate.data.DataComponentMatchersTooltip;
 //?} else {
 /*import net.minecraft.core.component.predicates.DataComponentPredicate;
@@ -104,7 +104,7 @@ public interface ItemPredicateTooltip {
 			Map.Entry<DataComponentType<?>, Optional<?>> entry = entries.iterator().next();
 			Optional<?> value = entry.getValue();
 			if (value.isEmpty()) {
-				ResourceLocation key = BuiltInRegistries.DATA_COMPONENT_TYPE.getKey(entry.getKey());
+				Identifier key = BuiltInRegistries.DATA_COMPONENT_TYPE.getKey(entry.getKey());
 				if (key != null) {
 					builder.translate(key("data.exact.any_for_type"), Styler::condition, Styler.property(Component.literal(key.toString())));
 				} else {
@@ -122,9 +122,9 @@ public interface ItemPredicateTooltip {
 				Optional<?> value = entry.getValue();
 				CompositeContainerComponent.Builder termBuilder = CompositeContainerComponent.builder()
 						.space()
-						.literal("• ", Styler::condition);
+						.literal("鈥?", Styler::condition);
 				if (value.isEmpty()) {
-					ResourceLocation key = BuiltInRegistries.DATA_COMPONENT_TYPE.getKey(entry.getKey());
+					Identifier key = BuiltInRegistries.DATA_COMPONENT_TYPE.getKey(entry.getKey());
 					if (key != null) {
 						termBuilder.translate(key("data.exact.any_for_type"), Styler::condition, Styler.property(Component.literal(key.toString())));
 					} else {
@@ -157,7 +157,7 @@ public interface ItemPredicateTooltip {
 			for (Map.Entry<ItemSubPredicate.Type<?>, ItemSubPredicate> entry : subPredicates.entrySet()) {
 				CompositeContainerComponent.Builder termBuilder = CompositeContainerComponent.builder()
 						.space()
-						.literal("• ", Styler::condition);
+						.literal("鈥?", Styler::condition);
 				PartialDataComponentPredicateTooltipAdders.addToBuilder(level, entry.getKey(), entry.getValue(), state, builder);
 				listBuilder.component(termBuilder.build());
 			}

@@ -18,7 +18,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.ConstantFloat;
@@ -95,7 +95,7 @@ public record SpawnParticlesAbility(
 				}
 				default -> {
 					Registry<ParticleType<?>> registry = VRegistry.get(level, Registries.PARTICLE_TYPE);
-					ResourceLocation particleType = registry.getKey(element.particle().getType());
+					Identifier particleType = registry.getKey(element.particle().getType());
 					if (particleType == null) yield null;
 
 					yield Styler.name(Component.literal(particleType.toString()));

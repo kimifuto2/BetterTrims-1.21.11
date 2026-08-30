@@ -9,7 +9,7 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.item.component.DamageResistant;
@@ -25,7 +25,7 @@ public final class DamageResistantExactAdder implements ExactAdder<DamageResista
 				.cycle(cycleBuilder -> {
 					Registry<DamageType> registry = VRegistry.get(level, Registries.DAMAGE_TYPE);
 					registry.getOrThrow(types).forEach(type -> {
-						ResourceLocation damageType = type.unwrap().map(ResourceKey::location, registry::getKey);
+						Identifier damageType = type.unwrap().map(ResourceKey::identifier, registry::getKey);
 						cycleBuilder.literal(damageType.toString(), Styler::name);
 					});
 				});

@@ -3,7 +3,7 @@ package com.bawnorton.bettertrims.client.tooltip.condition.predicate;
 import com.bawnorton.bettertrims.client.tooltip.util.Styler;
 import com.bawnorton.bettertrims.client.tooltip.component.CompositeContainerComponent;
 import com.bawnorton.bettertrims.client.tooltip.condition.LootConditionTooltips;
-import net.minecraft.advancements.critereon.*;
+import net.minecraft.advancements.criterion.*;
 import net.minecraft.client.multiplayer.ClientLevel;
 
 import java.util.Optional;

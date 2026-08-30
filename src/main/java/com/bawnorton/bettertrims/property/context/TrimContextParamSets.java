@@ -3,14 +3,14 @@ package com.bawnorton.bettertrims.property.context;
 import com.bawnorton.bettertrims.BetterTrims;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.context.ContextKeySet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 
 import java.util.function.Consumer;
 
 public final class TrimContextParamSets {
-	private static final BiMap<ResourceLocation, ContextKeySet> REGISTRY = HashBiMap.create();
+	private static final BiMap<Identifier, ContextKeySet> REGISTRY = HashBiMap.create();
 
 	public static final ContextKeySet TRIM_DAMAGE = register(
 			"trim_damage",
@@ -61,9 +61,9 @@ public final class TrimContextParamSets {
 		ContextKeySet.Builder builder = new ContextKeySet.Builder();
 		ctor.accept(builder);
 		ContextKeySet contextKeySet = builder.build();
-		ResourceLocation resourceLocation = BetterTrims.rl(name);
-		if (REGISTRY.put(resourceLocation, contextKeySet) != null) {
-			throw new IllegalStateException("Trim parameter set " + resourceLocation + " is already registered");
+		Identifier Identifier = BetterTrims.rl(name);
+		if (REGISTRY.put(Identifier, contextKeySet) != null) {
+			throw new IllegalStateException("Trim parameter set " + Identifier + " is already registered");
 		} else {
 			return contextKeySet;
 		}

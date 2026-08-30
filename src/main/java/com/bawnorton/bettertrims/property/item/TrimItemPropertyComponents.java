@@ -10,7 +10,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +22,7 @@ public interface TrimItemPropertyComponents {
 
 	Codec<DataComponentMap> CODEC = DataComponentMap.makeCodec(COMPONENT_CODEC);
 
-	Map<ResourceLocation, Component> TOOLTIPS = new HashMap<>();
+	Map<Identifier, Component> TOOLTIPS = new HashMap<>();
 
 	DataComponentType<List<ConditionalElement<DamageImmunityItemProperty>>> DAMAGE_IMMUNITY = register(
 			"damage_immunity",
@@ -30,7 +30,7 @@ public interface TrimItemPropertyComponents {
 	);
 
 	private static <T> DataComponentType<T> register(String name, UnaryOperator<DataComponentType.Builder<T>> operator) {
-		ResourceLocation id = BetterTrims.rl(name);
+		Identifier id = BetterTrims.rl(name);
 		TOOLTIPS.put(id, Component.translatable("bettertrims.tooltip.component.%s".formatted(name)));
 		return Registry.register(
 				BetterTrimsRegistries.TRIM_ITEM_PROPERTY_COMPONENT_TYPE,

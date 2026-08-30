@@ -16,12 +16,12 @@ import com.bawnorton.bettertrims.client.tooltip.util.Styler;
 import com.bawnorton.bettertrims.property.condition.DimensionCheck;
 import com.bawnorton.bettertrims.util.TriState;
 import com.bawnorton.bettertrims.version.VRegistry;
-import net.minecraft.Util;
-import net.minecraft.advancements.critereon.DamageSourcePredicate;
-import net.minecraft.advancements.critereon.EntityPredicate;
-import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.advancements.critereon.LocationPredicate;
-import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.util.Util;
+import net.minecraft.advancements.criterion.DamageSourcePredicate;
+import net.minecraft.advancements.criterion.EntityPredicate;
+import net.minecraft.advancements.criterion.ItemPredicate;
+import net.minecraft.advancements.criterion.LocationPredicate;
+import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.screens.Screen;
@@ -36,7 +36,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.dimension.DimensionType;
@@ -157,7 +157,7 @@ public interface LootConditionTooltips {
 							), Styler::condition
 					).vertical();
 					for (LootItemCondition term : composite.bettertrims$terms()) {
-						CompositeContainerComponent.Builder termBuilder = CompositeContainerComponent.builder().literal("• ", Styler::condition);
+						CompositeContainerComponent.Builder termBuilder = CompositeContainerComponent.builder().literal("鈥?", Styler::condition);
 						addConditionToTooltip(level, term, termBuilder, state.withInverted(false));
 						builder.component(termBuilder.build());
 					}
@@ -412,7 +412,7 @@ public interface LootConditionTooltips {
 				map.put(
 						LootItemConditions.REFERENCE, (ClientLevel level, ConditionReference conditionReference, CompositeContainerComponent.Builder parentBuilder, State state) -> {
 							ResourceKey<LootItemCondition> name = conditionReference.name();
-							ResourceLocation id = name.location();
+							Identifier id = name.identifier();
 							parentBuilder.textComponent(Styler.condition(Component.translatable(
 									"bettertrims.tooltip.condition.reference.%s".formatted(state.key()),
 									Styler.name(Component.literal(id.toString()))

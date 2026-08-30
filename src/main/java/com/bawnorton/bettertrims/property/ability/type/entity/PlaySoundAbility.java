@@ -17,7 +17,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
@@ -38,7 +38,7 @@ public record PlaySoundAbility(Holder<SoundEvent> soundEvent, FloatProvider volu
 	).apply(instance, PlaySoundAbility::new));
 
 	public static Component getSoundName(Registry<SoundEvent> registry, Holder<SoundEvent> soundHolder) {
-		ResourceLocation sound = soundHolder.unwrap().map(ResourceKey::location, registry::getKey);
+		Identifier sound = soundHolder.unwrap().map(ResourceKey::identifier, registry::getKey);
 		if (sound == null) {
 			SoundEvent soundEvent = soundHolder.unwrap().map(registry::getValueOrThrow, Function.identity());
 			//? if >=1.21.8 {

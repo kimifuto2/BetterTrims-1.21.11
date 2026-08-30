@@ -6,7 +6,7 @@ import com.bawnorton.bettertrims.client.tooltip.util.Styler;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.HolderSet;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.level.block.Block;
@@ -57,7 +57,7 @@ public final class ToolExactAdder implements ExactAdder<Tool> {
 									.translate(key("tool.rule"), Styler::condition)
 									.spaced();
 							if (blockTagKey.isPresent()) {
-								ResourceLocation tag = blockTagKey.orElseThrow().location();
+								Identifier tag = blockTagKey.orElseThrow().location();
 								ruleBuilder.translate(
 										key("tool.rule.tag"),
 										Styler::condition,

@@ -3,7 +3,7 @@ package com.bawnorton.bettertrims;
 import com.bawnorton.bettertrims.networking.Networking;
 import com.bawnorton.configurable.Configurable;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,8 +17,8 @@ public final class BetterTrims {
 	public static final String MOD_ID = "bettertrims";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-	public static final ResourceLocation DEFAULT = BetterTrims.rl("default");
-	public static final ResourceLocation TRIM_EFFECTS = BetterTrims.rl("trim_effects");
+	public static final Identifier DEFAULT = BetterTrims.rl("default");
+	public static final Identifier TRIM_EFFECTS = BetterTrims.rl("trim_effects");
 
 	@Configurable
 	public static boolean debug = false;
@@ -43,7 +43,7 @@ public final class BetterTrims {
 		//?}
 	}
 
-	public static ResourceLocation rl(String path) {
-		return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
+	public static Identifier rl(String path) {
+		return Identifier.fromNamespaceAndPath(MOD_ID, path);
 	}
 }

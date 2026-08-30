@@ -6,7 +6,7 @@ import com.bawnorton.bettertrims.client.tooltip.condition.LootConditionTooltips;
 import com.bawnorton.bettertrims.client.tooltip.util.Styler;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.component.UseCooldown;
 
 import java.util.Optional;
@@ -15,7 +15,7 @@ public final class UseCooldownExactAdder implements ExactAdder<UseCooldown> {
 	@Override
 	public void addToBuilder(ClientLevel level, UseCooldown cooldown, LootConditionTooltips.State state, CompositeContainerComponent.Builder builder) {
 		float seconds = cooldown.seconds();
-		Optional<ResourceLocation> resourceLocation = cooldown.cooldownGroup();
+		Optional<Identifier> Identifier = cooldown.cooldownGroup();
 		CompositeContainerComponent.Builder cooldownBuilder = CompositeContainerComponent.builder()
 				.space()
 				.translate(
@@ -23,7 +23,7 @@ public final class UseCooldownExactAdder implements ExactAdder<UseCooldown> {
 						Styler::condition,
 						Styler.number(seconds)
 				);
-		resourceLocation.ifPresent(location -> cooldownBuilder.space().translate(
+		Identifier.ifPresent(location -> cooldownBuilder.space().translate(
 				key("use_cooldown.group"),
 				Styler::condition,
 				Styler.name(Component.literal(location.toString()))

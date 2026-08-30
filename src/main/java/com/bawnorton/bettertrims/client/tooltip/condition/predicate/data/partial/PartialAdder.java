@@ -5,7 +5,7 @@ import com.bawnorton.bettertrims.client.tooltip.condition.LootConditionTooltips;
 import com.bawnorton.bettertrims.client.tooltip.condition.predicate.PredicateTooltip;
 import com.bawnorton.bettertrims.client.tooltip.condition.predicate.data.PartialDataComponentPredicateTooltipAdders;
 import com.bawnorton.bettertrims.client.tooltip.util.Styler;
-import net.minecraft.advancements.critereon.*;
+import net.minecraft.advancements.criterion.*;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.component.predicates.DataComponentPredicate;
 

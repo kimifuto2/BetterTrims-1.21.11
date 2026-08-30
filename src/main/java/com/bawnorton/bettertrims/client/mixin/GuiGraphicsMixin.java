@@ -13,7 +13,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner;
 import net.minecraft.client.renderer.Rect2i;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector2ic;
@@ -45,7 +45,7 @@ abstract class GuiGraphicsMixin {
 			int x,
 			int y,
 			ClientTooltipPositioner positioner,
-			@Nullable ResourceLocation background,
+			@Nullable Identifier background,
 			boolean focused
 	) {
 		ItemStack stack = AbilityTooltipRenderer.getStack();
@@ -86,7 +86,7 @@ abstract class GuiGraphicsMixin {
 			//? if fabric {
 			method = "renderTooltip",
 			//?} else {
-			/*method = "renderTooltip(Lnet/minecraft/client/gui/Font;Ljava/util/List;IILnet/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipPositioner;Lnet/minecraft/resources/ResourceLocation;Lnet/minecraft/world/item/ItemStack;)V",
+			/*method = "renderTooltip(Lnet/minecraft/client/gui/Font;Ljava/util/List;IILnet/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipPositioner;Lnet/minecraft/resources/Identifier;Lnet/minecraft/world/item/ItemStack;)V",
 			*///?}
 			//?} else {
 			/*method = "renderTooltipInternal",

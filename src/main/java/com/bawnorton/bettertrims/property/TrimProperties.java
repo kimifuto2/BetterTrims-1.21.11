@@ -20,7 +20,7 @@ import com.bawnorton.bettertrims.property.item.TrimItemPropertyComponents;
 import com.bawnorton.bettertrims.property.item.type.DamageImmunityItemProperty;
 import com.bawnorton.bettertrims.registry.BetterTrimsAttributes;
 import com.bawnorton.bettertrims.registry.BetterTrimsRegistries;
-import net.minecraft.advancements.critereon.*;
+import net.minecraft.advancements.criterion.*;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;

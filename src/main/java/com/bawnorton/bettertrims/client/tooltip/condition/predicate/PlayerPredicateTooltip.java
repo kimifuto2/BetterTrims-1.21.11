@@ -6,16 +6,16 @@ import com.bawnorton.bettertrims.client.tooltip.condition.LootConditionTooltips;
 import com.bawnorton.bettertrims.version.VRegistry;
 import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
 import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.critereon.EntityPredicate;
-import net.minecraft.advancements.critereon.GameTypePredicate;
-import net.minecraft.advancements.critereon.MinMaxBounds;
-import net.minecraft.advancements.critereon.PlayerPredicate;
+import net.minecraft.advancements.criterion.EntityPredicate;
+import net.minecraft.advancements.criterion.GameTypePredicate;
+import net.minecraft.advancements.criterion.MinMaxBounds;
+import net.minecraft.advancements.criterion.PlayerPredicate;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.GameType;
 
@@ -24,7 +24,7 @@ import java.util.Map;
 import java.util.Optional;
 
 //? if >=1.21.8
-import net.minecraft.advancements.critereon.InputPredicate;
+import net.minecraft.advancements.criterion.InputPredicate;
 
 public interface PlayerPredicateTooltip {
 	static void addToBuilder(ClientLevel level, PlayerPredicate predicate, LootConditionTooltips.State state, CompositeContainerComponent.Builder builder) {
@@ -40,11 +40,11 @@ public interface PlayerPredicateTooltip {
 		//? if >=1.21.8 {
 		Object2BooleanMap<ResourceKey<Recipe<?>>> recipes = predicate.recipes();
 		//?} else {
-		/*Object2BooleanMap<ResourceLocation> recipes = predicate.recipes();
+		/*Object2BooleanMap<Identifier> recipes = predicate.recipes();
 		 *///?}
 		addRecipesToBuilder(level, recipes, state, builder);
 
-		Map<ResourceLocation, PlayerPredicate.AdvancementPredicate> advancements = predicate.advancements();
+		Map<Identifier, PlayerPredicate.AdvancementPredicate> advancements = predicate.advancements();
 		addAdvancementsToBuilder(level, advancements, state, builder);
 
 		Optional<EntityPredicate> lookingAt = predicate.lookingAt();
@@ -108,7 +108,7 @@ public interface PlayerPredicateTooltip {
 				.space()
 				.cycle(cycleBuilder -> recipes.object2BooleanEntrySet().forEach(entry -> {
 					boolean knows = entry.getBooleanValue();
-					ResourceLocation id = entry.getKey().location();
+					Identifier id = entry.getKey().identifier();
 					Component name = Styler.name(Component.literal(id.toString()));
 					cycleBuilder.component(CompositeContainerComponent.builder()
 							.translate(key("recipe.%s".formatted(knows ? "knows" : "does_not_know")), Styler::condition, name)
@@ -117,7 +117,7 @@ public interface PlayerPredicateTooltip {
 		builder.component(recipesBuilder.build());
 	}
 	//?} else {
-	/*static void addRecipesToBuilder(ClientLevel level, Object2BooleanMap<ResourceLocation> recipes, LootConditionTooltips.State state, CompositeContainerComponent.Builder builder) {
+	/*static void addRecipesToBuilder(ClientLevel level, Object2BooleanMap<Identifier> recipes, LootConditionTooltips.State state, CompositeContainerComponent.Builder builder) {
 		if (recipes.isEmpty()) return;
 
 		CompositeContainerComponent.Builder recipesBuilder = CompositeContainerComponent.builder()
@@ -126,7 +126,7 @@ public interface PlayerPredicateTooltip {
 				.space()
 				.cycle(cycleBuilder -> recipes.object2BooleanEntrySet().forEach(entry -> {
 					boolean knows = entry.getBooleanValue();
-					ResourceLocation id = entry.getKey();
+					Identifier id = entry.getKey();
 					Component name = Styler.name(Component.literal(id.toString()));
 					cycleBuilder.component(CompositeContainerComponent.builder()
 							.translate(key("recipe.%s".formatted(knows ? "knows" : "does_not_know")), Styler::condition, name)
@@ -136,7 +136,7 @@ public interface PlayerPredicateTooltip {
 	}
 	*///?}
 
-	static void addAdvancementsToBuilder(ClientLevel level, Map<ResourceLocation, PlayerPredicate.AdvancementPredicate> advancements, LootConditionTooltips.State state, CompositeContainerComponent.Builder builder) {
+	static void addAdvancementsToBuilder(ClientLevel level, Map<Identifier, PlayerPredicate.AdvancementPredicate> advancements, LootConditionTooltips.State state, CompositeContainerComponent.Builder builder) {
 		if (advancements.isEmpty()) return;
 
 		Registry<Advancement> registry = VRegistry.get(level, Registries.ADVANCEMENT);
