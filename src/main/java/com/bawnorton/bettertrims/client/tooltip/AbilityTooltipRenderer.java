@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 //? if >=1.21.8 {
 import net.minecraft.client.renderer.RenderPipelines;
@@ -203,5 +204,40 @@ public final class AbilityTooltipRenderer {
 
 	public static void clearStack() {
 		STACK_CAPTURE.remove();
+	}
+
+	// Trim materials that have a Better Trims ability (simple description).
+	private static final Set<String> MATERIAL_DESCS = Set.of(
+			"resin", "gold", "iron", "diamond", "amethyst", "netherite",
+			"quartz", "redstone", "copper", "silver", "emerald"
+	);
+	// Trim patterns that grant a mob effect when wearing 2+ pieces.
+	private static final Set<String> PATTERN_DESCS = Set.of(
+			"bolt", "coast", "dune", "eye", "flow", "host", "raiser", "rib",
+			"sentry", "shaper", "silence", "snout", "spire", "tide", "vex",
+			"ward", "wayfinder", "wild"
+	);
+
+	/**
+	 * Appends a simple, concise one-line description of the trim's material and
+	 * pattern effects to the item's tooltip (in addition to the detailed Alt view).
+	 */
+	public static void appendSimpleDescription(ItemStack stack, List<Component> lines) {
+		if (stack.isEmpty()) return;
+		ArmorTrim trim = stack.get(DataComponents.TRIM);
+		if (trim == null) return;
+
+		trim.material().unwrapKey().ifPresent(key -> {
+			String path = key.identifier().getPath();
+			if (MATERIAL_DESCS.contains(path)) {
+				lines.add(Component.translatable("bettertrims.simple.material." + path).withStyle(ChatFormatting.GRAY));
+			}
+		});
+		trim.pattern().unwrapKey().ifPresent(key -> {
+			String path = key.identifier().getPath();
+			if (PATTERN_DESCS.contains(path)) {
+				lines.add(Component.translatable("bettertrims.simple.pattern." + path).withStyle(ChatFormatting.GRAY));
+			}
+		});
 	}
 }
