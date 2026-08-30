@@ -1,6 +1,7 @@
 {
-  "asset_name": "allthetrims/glowstone_dust",
+  "asset_name": "glowstone_dust",
   "description": {
+        "color": "#FFE66E",
     "translate": "allthetrims.material.glowstone_dust"
   }
 }

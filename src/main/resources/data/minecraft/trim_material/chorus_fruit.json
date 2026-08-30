@@ -1,6 +1,7 @@
 {
-  "asset_name": "allthetrims/chorus_fruit",
+  "asset_name": "chorus_fruit",
   "description": {
+        "color": "#B478C8",
     "translate": "allthetrims.material.chorus_fruit"
   }
 }

@@ -1,6 +1,7 @@
 {
-  "asset_name": "allthetrims/fire_charge",
+  "asset_name": "fire_charge",
   "description": {
+        "color": "#FF783C",
     "translate": "allthetrims.material.fire_charge"
   }
 }

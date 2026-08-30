@@ -1,6 +1,7 @@
 {
-  "asset_name": "allthetrims/prismarine_shard",
+  "asset_name": "prismarine_shard",
   "description": {
+        "color": "#6EC8B4",
     "translate": "allthetrims.material.prismarine_shard"
   }
 }

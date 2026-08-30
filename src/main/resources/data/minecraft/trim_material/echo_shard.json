@@ -1,6 +1,7 @@
 {
-  "asset_name": "allthetrims/echo_shard",
+  "asset_name": "echo_shard",
   "description": {
+        "color": "#A0D7D7",
     "translate": "allthetrims.material.echo_shard"
   }
 }

@@ -1,0 +1,304 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "cases": [
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/leather_chestplate_quartz_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -6265536
+            }
+          ]
+        },
+        "when": "minecraft:quartz"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/leather_chestplate_iron_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -6265536
+            }
+          ]
+        },
+        "when": "minecraft:iron"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/leather_chestplate_netherite_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -6265536
+            }
+          ]
+        },
+        "when": "minecraft:netherite"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/leather_chestplate_redstone_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -6265536
+            }
+          ]
+        },
+        "when": "minecraft:redstone"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/leather_chestplate_copper_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -6265536
+            }
+          ]
+        },
+        "when": "minecraft:copper"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/leather_chestplate_gold_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -6265536
+            }
+          ]
+        },
+        "when": "minecraft:gold"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/leather_chestplate_emerald_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -6265536
+            }
+          ]
+        },
+        "when": "minecraft:emerald"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/leather_chestplate_diamond_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -6265536
+            }
+          ]
+        },
+        "when": "minecraft:diamond"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/leather_chestplate_lapis_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -6265536
+            }
+          ]
+        },
+        "when": "minecraft:lapis"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/leather_chestplate_amethyst_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -6265536
+            }
+          ]
+        },
+        "when": "minecraft:amethyst"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/leather_chestplate_resin_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -6265536
+            }
+          ]
+        },
+        "when": "minecraft:resin"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/leather_chestplate_coal_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -6265536
+            }
+          ]
+        },
+        "when": "minecraft:coal"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/leather_chestplate_chorus_fruit_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -6265536
+            }
+          ]
+        },
+        "when": "minecraft:chorus_fruit"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/leather_chestplate_dragon_breath_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -6265536
+            }
+          ]
+        },
+        "when": "minecraft:dragon_breath"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/leather_chestplate_echo_shard_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -6265536
+            }
+          ]
+        },
+        "when": "minecraft:echo_shard"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/leather_chestplate_enchanted_golden_apple_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -6265536
+            }
+          ]
+        },
+        "when": "minecraft:enchanted_golden_apple"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/leather_chestplate_ender_pearl_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -6265536
+            }
+          ]
+        },
+        "when": "minecraft:ender_pearl"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/leather_chestplate_fire_charge_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -6265536
+            }
+          ]
+        },
+        "when": "minecraft:fire_charge"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/leather_chestplate_glowstone_dust_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -6265536
+            }
+          ]
+        },
+        "when": "minecraft:glowstone_dust"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/leather_chestplate_nether_brick_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -6265536
+            }
+          ]
+        },
+        "when": "minecraft:nether_brick"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/leather_chestplate_prismarine_shard_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -6265536
+            }
+          ]
+        },
+        "when": "minecraft:prismarine_shard"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/leather_chestplate_slime_ball_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -6265536
+            }
+          ]
+        },
+        "when": "minecraft:slime_ball"
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/leather_chestplate",
+      "tints": [
+        {
+          "type": "minecraft:dye",
+          "default": -6265536
+        }
+      ]
+    },
+    "property": "minecraft:trim_material"
+  }
+}

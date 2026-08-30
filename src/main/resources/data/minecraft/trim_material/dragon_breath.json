@@ -1,6 +1,7 @@
 {
-  "asset_name": "allthetrims/dragon_breath",
+  "asset_name": "dragon_breath",
   "description": {
+        "color": "#CD78DC",
     "translate": "allthetrims.material.dragon_breath"
   }
 }

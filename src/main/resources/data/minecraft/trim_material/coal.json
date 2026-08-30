@@ -1,6 +1,7 @@
 {
-  "asset_name": "allthetrims/coal",
+  "asset_name": "coal",
   "description": {
+        "color": "#6E6E6E",
     "translate": "allthetrims.material.coal"
   }
 }

@@ -1,0 +1,48 @@
+{
+  "sources": [
+    {
+      "type": "minecraft:directory",
+      "prefix": "item/",
+      "source": "item"
+    },
+    {
+      "type": "minecraft:paletted_permutations",
+      "palette_key": "minecraft:trims/color_palettes/trim_palette",
+      "permutations": {
+        "amethyst": "minecraft:trims/color_palettes/amethyst",
+        "copper": "minecraft:trims/color_palettes/copper",
+        "copper_darker": "minecraft:trims/color_palettes/copper_darker",
+        "diamond": "minecraft:trims/color_palettes/diamond",
+        "diamond_darker": "minecraft:trims/color_palettes/diamond_darker",
+        "emerald": "minecraft:trims/color_palettes/emerald",
+        "gold": "minecraft:trims/color_palettes/gold",
+        "gold_darker": "minecraft:trims/color_palettes/gold_darker",
+        "iron": "minecraft:trims/color_palettes/iron",
+        "iron_darker": "minecraft:trims/color_palettes/iron_darker",
+        "lapis": "minecraft:trims/color_palettes/lapis",
+        "netherite": "minecraft:trims/color_palettes/netherite",
+        "netherite_darker": "minecraft:trims/color_palettes/netherite_darker",
+        "quartz": "minecraft:trims/color_palettes/quartz",
+        "redstone": "minecraft:trims/color_palettes/redstone",
+        "resin": "minecraft:trims/color_palettes/resin",
+        "chorus_fruit": "minecraft:trims/color_palettes/chorus_fruit",
+        "coal": "minecraft:trims/color_palettes/coal",
+        "dragon_breath": "minecraft:trims/color_palettes/dragon_breath",
+        "echo_shard": "minecraft:trims/color_palettes/echo_shard",
+        "enchanted_golden_apple": "minecraft:trims/color_palettes/enchanted_golden_apple",
+        "ender_pearl": "minecraft:trims/color_palettes/ender_pearl",
+        "fire_charge": "minecraft:trims/color_palettes/fire_charge",
+        "glowstone_dust": "minecraft:trims/color_palettes/glowstone_dust",
+        "nether_brick": "minecraft:trims/color_palettes/nether_brick",
+        "prismarine_shard": "minecraft:trims/color_palettes/prismarine_shard",
+        "slime_ball": "minecraft:trims/color_palettes/slime_ball"
+      },
+      "textures": [
+        "minecraft:trims/items/helmet_trim",
+        "minecraft:trims/items/chestplate_trim",
+        "minecraft:trims/items/leggings_trim",
+        "minecraft:trims/items/boots_trim"
+      ]
+    }
+  ]
+}

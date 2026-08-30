@@ -1,6 +1,7 @@
 {
-  "asset_name": "allthetrims/nether_brick",
+  "asset_name": "nether_brick",
   "description": {
+        "color": "#B45A46",
     "translate": "allthetrims.material.nether_brick"
   }
 }

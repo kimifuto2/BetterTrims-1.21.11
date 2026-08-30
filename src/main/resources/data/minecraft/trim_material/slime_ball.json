@@ -1,6 +1,7 @@
 {
-  "asset_name": "allthetrims/slime_ball",
+  "asset_name": "slime_ball",
   "description": {
+        "color": "#8CDC64",
     "translate": "allthetrims.material.slime_ball"
   }
 }

@@ -1,6 +1,7 @@
 {
-  "asset_name": "allthetrims/enchanted_golden_apple",
+  "asset_name": "enchanted_golden_apple",
   "description": {
+        "color": "#FFC850",
     "translate": "allthetrims.material.enchanted_golden_apple"
   }
 }
