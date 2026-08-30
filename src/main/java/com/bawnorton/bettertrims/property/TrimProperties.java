@@ -468,23 +468,24 @@ public interface TrimProperties {
 								DimensionCheck.of(dimensionGetter.getOrThrow(BetterTrimsDimensionTypeTags.NETHER)))
 						.build()
 		);
-		// Nether Brick: fire resistance + 5% fire damage reduction per piece + behead chance.
+		// Nether Brick: fire resistance + 5% fire damage reduction per piece + small damage boost + behead chance.
 		register(
 				context, key("nether_brick"),
 				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.NETHER_BRICK))
 						.ability(TrimAbilityComponents.EQUIPPED, new ToggleMobEffectAbility(MobEffects.FIRE_RESISTANCE, CountBasedValue.constant(0)))
 						.ability(TrimAbilityComponents.INCOMING_DAMAGE, TrimValueAbility.multiply(CountBasedValue.linear(0.95f, -0.05f)),
 								DamageSourceCondition.hasDamageSource(DamageSourcePredicate.Builder.damageType().tag(TagPredicate.is(DamageTypeTags.IS_FIRE))))
-						.ability(TrimAbilityComponents.POST_ATTACK, new BeheadAbility(CountBasedValue.linear(0.03f, 0.03f)))
+						.ability(TrimAbilityComponents.POST_ATTACK, new BeheadAbility(CountBasedValue.linear(0.2f, 0.1f), CountBasedValue.linear(1f, 1f), CountBasedValue.linear(0.03f, 0.03f)))
 						.build()
 		);
-		// Prismarine Shard: swim speed (Dolphin's Grace) + thorns (no durability) + water breathing.
+		// Prismarine Shard: swim speed (Dolphin's Grace) + water breathing.
 		register(
 				context, key("prismarine_shard"),
 				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.PRISMARINE_SHARD))
-						.ability(TrimAbilityComponents.EQUIPPED, new ToggleMobEffectAbility(MobEffects.DOLPHINS_GRACE, CountBasedValue.constant(0)))
-						.ability(TrimAbilityComponents.EQUIPPED, new ToggleMobEffectAbility(MobEffects.WATER_BREATHING, CountBasedValue.constant(0)))
-						.ability(TrimAbilityComponents.INCOMING_DAMAGE_ENTITY, new ThornsAbility(CountBasedValue.linear(1f, 1f)))
+						.ability(TrimAbilityComponents.EQUIPPED, AllOf.toggleAbilities(
+								new ToggleMobEffectAbility(MobEffects.DOLPHINS_GRACE, CountBasedValue.constant(0)),
+								new ToggleMobEffectAbility(MobEffects.WATER_BREATHING, CountBasedValue.constant(0))
+						))
 						.build()
 		);
 		// Enchanted Golden Apple: +max health, +damage reduction, hunger-ignoring regeneration.
@@ -503,7 +504,7 @@ public interface TrimProperties {
 						.ability(TrimAbilityComponents.POST_ATTACK, new IgniteAbility(CountBasedValue.linear(4f, 4f)))
 						.build()
 		);
-		// Slime Ball: -knockback resistance, +attack knockback (+boots bounce handled separately).
+		// Slime Ball: -knockback resistance, +attack knockback, and slow attacked targets (2s per piece).
 		register(
 				context, key("slime_ball"),
 				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.SLIME_BALL))
@@ -511,6 +512,7 @@ public interface TrimProperties {
 								new AttributeAbility(BetterTrims.rl("trim_slime_knockback_res"), Attributes.KNOCKBACK_RESISTANCE, CountBasedValue.linear(-0.25f, -0.25f), AttributeModifier.Operation.ADD_VALUE),
 								new AttributeAbility(BetterTrims.rl("trim_slime_attack_knockback"), Attributes.ATTACK_KNOCKBACK, CountBasedValue.linear(1f, 1f), AttributeModifier.Operation.ADD_VALUE)
 						))
+						.ability(TrimAbilityComponents.POST_ATTACK, new ApplyMobEffectAbility(MobEffects.SLOWNESS, CountBasedValue.constant(0), CountBasedValue.linear(2f, 2f)))
 						.build()
 		);
 	}

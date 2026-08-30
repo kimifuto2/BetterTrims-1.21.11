@@ -11,6 +11,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -20,8 +21,9 @@ import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
-// When the wearer is hit, spends a chance to "smelt" the attacker's held item into its
-// furnace output (e.g. raw -> cooked). The number of smelts scales per piece worn.
+// Automatically smelts smeltable items from the wearer's inventory (ores -> ingots etc), a
+// number of items that scales per trim piece worn (e.g. 2, 4, 6, 8). The smelted products drop
+// back into the inventory in the same slot.
 public record SmeltItemsAbility(CountBasedValue smelts) implements TrimEntityAbility {
 	public static final MapCodec<SmeltItemsAbility> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 			CountBasedValue.CODEC.fieldOf("smelts").forGetter(SmeltItemsAbility::smelts)
@@ -30,24 +32,31 @@ public record SmeltItemsAbility(CountBasedValue smelts) implements TrimEntityAbi
 	@Override
 	public void apply(ServerLevel level, LivingEntity wearer, Entity target, TrimmedItems items, @Nullable EquipmentSlot targetSlot, Vec3 origin) {
 		int count = (int) smelts.calculate(items.size());
-		if (count <= 0) return;
-		if (!(target instanceof LivingEntity attacker)) return;
+		if (count <= 0 || !(wearer instanceof ServerPlayer player)) return;
 
-		for (EquipmentSlot slot : new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND}) {
-			if (count <= 0) break;
-			ItemStack held = attacker.getItemBySlot(slot);
-			if (held.isEmpty()) continue;
+		net.minecraft.world.entity.player.Inventory inventory = player.getInventory();
+		for (int slot = 0; slot < inventory.getContainerSize() && count > 0; slot++) {
+			ItemStack stack = inventory.getItem(slot);
+			if (stack.isEmpty()) continue;
 
-			SingleRecipeInput input = new SingleRecipeInput(held);
-			level.recipeAccess().getRecipeFor(RecipeType.SMELTING, input, level).ifPresent(recipe -> {
-				ItemStack result = recipe.value().assemble(input, level.registryAccess()).copy();
-				if (!result.isEmpty()) {
-					held.shrink(1);
-					attacker.setItemSlot(slot, result);
+			ItemStack smelted = trySmelt(level, stack);
+			if (!smelted.isEmpty()) {
+				stack.shrink(1);
+				if (stack.isEmpty()) {
+					inventory.setItem(slot, smelted);
+				} else {
+					inventory.add(smelted);
 				}
-			});
-			count--;
+				count--;
+			}
 		}
+	}
+
+	private static ItemStack trySmelt(ServerLevel level, ItemStack stack) {
+		SingleRecipeInput input = new SingleRecipeInput(stack);
+		return level.recipeAccess().getRecipeFor(RecipeType.SMELTING, input, level)
+				.map(recipe -> recipe.value().assemble(input, level.registryAccess()).copy())
+				.orElse(ItemStack.EMPTY);
 	}
 
 	@Override

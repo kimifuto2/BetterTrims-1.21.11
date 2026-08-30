@@ -48,8 +48,8 @@ public record ShareStatusEffectAbility(CountBasedValue range, int effectLimit) i
 		List<LivingEntity> recipients = level.getEntitiesOfClass(LivingEntity.class, box, other -> {
 			if (other == wearer) return false;
 			if (!(other instanceof Mob mob)) return true;
-			// Do not share onto something that actively targets the wearer.
-			return !mob.getTarget().equals(wearer);
+			// Do not share onto something that actively targets the wearer (getTarget() may be null).
+			return !wearer.equals(mob.getTarget());
 		});
 
 		for (LivingEntity recipient : recipients) {
