@@ -1,4 +1,8 @@
 {
+  "bettertrims.config.title": "Better Trims Configuration",
+  "bettertrims.config.enableTrimEffects": "Enable Trim Pattern Effects",
+  "bettertrims.config.disallowTrimTemplateCopy": "Disallow Armour-Trim Template Copy",
+  "bettertrims.config.debug": "Debug Mode",
   "attribute.name.bettertrims.true_invisibility": "True Visibility",
   "key.bettertrims.blink": "Blink (double-tap)",
   "effect.bettertrims.echo_shard_cooldown": "Echo Cooldown",

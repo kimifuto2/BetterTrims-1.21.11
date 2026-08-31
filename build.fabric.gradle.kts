@@ -19,6 +19,7 @@ plugins {
 }
 
 repositories {
+  mavenLocal()
   mavenCentral()
   maven("https://maven.parchmentmc.org")
   maven("https://maven.bawnorton.com/releases/")
@@ -39,6 +40,8 @@ dependencies {
 
   modImplementation("net.fabricmc:fabric-loader:0.17.2")
   modImplementation("net.fabricmc.fabric-api:fabric-api:${deps("fabric_api")}")
+
+  modCompileOnly("com.terraformersmc:modmenu:17.0.0-beta.2")
 
   deps("configurable") {
     modImplementation(annotationProcessor("com.bawnorton.configurable:configurable-$loader:$it")!!)

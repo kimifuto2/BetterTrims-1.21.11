@@ -1,4 +1,8 @@
 {
+  "bettertrims.config.title": "Better Trims 配置",
+  "bettertrims.config.enableTrimEffects": "开启纹饰图案效果",
+  "bettertrims.config.disallowTrimTemplateCopy": "禁止复制盔甲纹饰模板",
+  "bettertrims.config.debug": "调试模式",
   "attribute.name.bettertrims.true_invisibility": "真实可见",
   "key.bettertrims.blink": "瞬步（双击）",
   "effect.bettertrims.echo_shard_cooldown": "回响冷却",
