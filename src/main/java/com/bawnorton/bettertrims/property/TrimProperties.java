@@ -444,7 +444,7 @@ public interface TrimProperties {
 		register(
 				context, key("echo_shard"),
 				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.ECHO_SHARD))
-						.ability(TrimAbilityComponents.SECOND, new RecallOnDeathAbility(CountBasedValue.constant(5f), CountBasedValue.linear(60f, -60f)))
+						.ability(TrimAbilityComponents.SECOND, new RecallOnDeathAbility(CountBasedValue.constant(5f), CountBasedValue.lookup(List.of(600f, 300f, 180f, 60f), CountBasedValue.constant(60f))))
 						.build()
 		);
 		// Ender Pearl: +25% projectile dodge chance per piece (staring does not anger Endermen is handled separately).
@@ -489,7 +489,7 @@ public interface TrimProperties {
 		register(
 				context, key("enchanted_golden_apple"),
 				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.ENCHANTED_GOLDEN_APPLE))
-						.ability(TrimAbilityComponents.EQUIPPED, new AttributeAbility(BetterTrims.rl("trim_apple_health"), Attributes.MAX_HEALTH, CountBasedValue.linear(3f, 3f), AttributeModifier.Operation.ADD_VALUE))
+						.ability(TrimAbilityComponents.EQUIPPED, new AttributeAbility(BetterTrims.rl("trim_apple_health"), Attributes.MAX_HEALTH, CountBasedValue.lookup(List.of(6f, 12f, 16f, 20f), CountBasedValue.constant(20f)), AttributeModifier.Operation.ADD_VALUE))
 						.ability(TrimAbilityComponents.INCOMING_DAMAGE, TrimValueAbility.multiply(CountBasedValue.linear(0.96f, -0.04f)))
 						.ability(TrimAbilityComponents.SECOND, new HealthRegenAbility(CountBasedValue.linear(0.4f, 0.4f)))
 						.build()
@@ -505,7 +505,7 @@ public interface TrimProperties {
 		register(
 				context, key("slime_ball"),
 				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.SLIME_BALL))
-						.ability(TrimAbilityComponents.EQUIPPED, new AttributeAbility(BetterTrims.rl("trim_slime_knockback_res"), Attributes.KNOCKBACK_RESISTANCE, CountBasedValue.linear(1f, 1f), AttributeModifier.Operation.ADD_VALUE))
+						.ability(TrimAbilityComponents.EQUIPPED, new AttributeAbility(BetterTrims.rl("trim_slime_knockback_res"), Attributes.KNOCKBACK_RESISTANCE, CountBasedValue.linear(0.1f, 0.1f), AttributeModifier.Operation.ADD_VALUE))
 						.ability(TrimAbilityComponents.POST_ATTACK, new ApplyMobEffectAbility(MobEffects.SLOWNESS, CountBasedValue.constant(0), CountBasedValue.linear(2f, 2f)))
 						.build()
 		);

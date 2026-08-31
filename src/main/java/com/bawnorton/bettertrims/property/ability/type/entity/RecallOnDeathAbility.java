@@ -49,6 +49,10 @@ public record RecallOnDeathAbility(CountBasedValue seconds, CountBasedValue cool
 					.translate("bettertrims.tooltip.ability.recall_on_death", Styler::positive)
 					.space()
 					.cycle(builder -> element.seconds().getValueComponents(4, includeCount).forEach(builder::textComponent))
+					.space()
+					.translate("bettertrims.tooltip.ability.recall_on_death.cooldown", Styler::positive)
+					.space()
+					.cycle(builder -> element.cooldownSeconds().getValueComponents(4, includeCount, f -> net.minecraft.network.chat.Component.literal("%.0f秒".formatted(f)), f -> f > 0).forEach(builder::textComponent))
 					.spaced()
 					.build();
 		}
