@@ -508,7 +508,7 @@ public interface TrimProperties {
 				context, key("enchanted_golden_apple"),
 				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.ENCHANTED_GOLDEN_APPLE))
 						.ability(TrimAbilityComponents.EQUIPPED, new AttributeAbility(BetterTrims.rl("trim_apple_health"), Attributes.MAX_HEALTH, CountBasedValue.lookup(List.of(6f, 12f, 16f, 20f), CountBasedValue.constant(20f)), AttributeModifier.Operation.ADD_VALUE))
-						.ability(TrimAbilityComponents.SECOND, new ApplyMobEffectAbility(MobEffects.REGENERATION, CountBasedValue.lookup(List.of(1f, 1f, 1f, 2f), CountBasedValue.constant(2f)), CountBasedValue.constant(8f)))
+						.ability(TrimAbilityComponents.SECOND, new ApplyMobEffectAbility(MobEffects.REGENERATION, CountBasedValue.lookup(List.of(0f, 0f, 0f, 1f), CountBasedValue.constant(1f)), CountBasedValue.constant(8f)))
 						.ability(TrimAbilityComponents.INCOMING_DAMAGE, TrimValueAbility.multiply(CountBasedValue.linear(0.95f, -0.05f)))
 						.build()
 		);

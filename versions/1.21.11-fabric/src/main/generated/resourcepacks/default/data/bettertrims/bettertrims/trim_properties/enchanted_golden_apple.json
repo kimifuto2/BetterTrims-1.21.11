@@ -38,12 +38,12 @@
           "type": "bettertrims:apply_mob_effect",
           "amplifier": {
             "type": "bettertrims:lookup",
-            "fallback": 2.0,
+            "fallback": 1.0,
             "values": [
-              1.0,
-              1.0,
-              1.0,
-              2.0
+              0.0,
+              0.0,
+              0.0,
+              1.0
             ]
           },
           "duration": 8.0,
