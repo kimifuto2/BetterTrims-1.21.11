@@ -30,17 +30,28 @@ public final class EnderBlinkHandler {
 			return;
 		}
 
-		// Teleport toward the aimed position (ender-pearl style, with particles).
-		// randomTeleport returns false when the destination is not a safe free spot (e.g. aimed at
-		// the side of a block). If it fails, do NOT consume the cooldown/HUD icon.
-		boolean teleported = player.randomTeleport(target.x, target.y, target.z, true);
+		// Nudge the aim point slightly back toward the player so a side-face hit resolves to the
+		// free air cell in front of the block (side faces allowed), then reject only when the
+		// destination rests under a solid block (i.e. aiming at a block's bottom face).
+		Vec3 dir = player.position().subtract(target);
+		double len = dir.length();
+		Vec3 adjusted = len > 0.001 ? target.add(dir.scale(0.5 / len)) : target;
+
+		net.minecraft.core.BlockPos pos = net.minecraft.core.BlockPos.containing(adjusted);
+		if (level.getBlockState(pos.above()).isSolid()) {
+			// Bottom face of a block: cannot blink into the block's underside.
+			player.displayClientMessage(net.minecraft.network.chat.Component.literal("该位置无法传送"), true);
+			return;
+		}
+
+		boolean teleported = player.randomTeleport(adjusted.x, adjusted.y, adjusted.z, true);
 		if (!teleported) {
 			player.displayClientMessage(net.minecraft.network.chat.Component.literal("该位置无法传送"), true);
 			return;
 		}
 		PropertyCooldowns.LAST_BLINK.put(player.getUUID(), now);
 		BetterTrimsEffects.applyCooldown(BetterTrimsEffects.ENDER_BLINK_COOLDOWN, player, cooldownSeconds);
-		BetterTrims.LOGGER.info("[AllTheTrims] Ender blink for {} to ({}, {}, {})", player.getName().getString(), target.x, target.y, target.z);
+		BetterTrims.LOGGER.info("[AllTheTrims] Ender blink for {} to ({}, {}, {})", player.getName().getString(), adjusted.x, adjusted.y, adjusted.z);
 	}
 
 	// Refreshes the HUD cooldown icon once per second while cooling down (called from the
