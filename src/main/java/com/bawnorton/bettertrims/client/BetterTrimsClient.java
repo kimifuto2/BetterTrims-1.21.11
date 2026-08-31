@@ -15,6 +15,7 @@ public final class BetterTrimsClient {
 
 	public static void init() {
 		ClientNetworking.init();
+		EnderBlinkClient.init();
 		BetterTrims.LOGGER.debug("{} Client Initialized", BetterTrims.MOD_ID);
 	}
 

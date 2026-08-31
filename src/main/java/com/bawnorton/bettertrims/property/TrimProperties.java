@@ -505,9 +505,15 @@ public interface TrimProperties {
 				context, key("enchanted_golden_apple"),
 				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.ENCHANTED_GOLDEN_APPLE))
 						.ability(TrimAbilityComponents.EQUIPPED, new AttributeAbility(BetterTrims.rl("trim_apple_health"), Attributes.MAX_HEALTH, CountBasedValue.lookup(List.of(6f, 12f, 16f, 20f), CountBasedValue.constant(20f)), AttributeModifier.Operation.ADD_VALUE))
-						.ability(TrimAbilityComponents.EQUIPPED, new ToggleMobEffectAbility(MobEffects.REGENERATION, CountBasedValue.constant(1)))
 						.ability(TrimAbilityComponents.INCOMING_DAMAGE, TrimValueAbility.multiply(CountBasedValue.linear(0.96f, -0.04f)))
 						.ability(TrimAbilityComponents.SECOND, new HealthRegenAbility(CountBasedValue.linear(0.4f, 0.4f)))
+						.build()
+		);
+		// Enchanted Golden Apple (full set): Regeneration I only when all 4 pieces are worn.
+		register(
+				context, key("enchanted_golden_apple_fullset"),
+				TrimProperty.builder(Matcher.forMaterial(materialGetter.getOrThrow(TrimMaterialTags.ENCHANTED_GOLDEN_APPLE), 4))
+						.ability(TrimAbilityComponents.EQUIPPED, new ToggleMobEffectAbility(MobEffects.REGENERATION, CountBasedValue.constant(1)))
 						.build()
 		);
 		// Fire Charge: ignite attacked entities (4s per piece).

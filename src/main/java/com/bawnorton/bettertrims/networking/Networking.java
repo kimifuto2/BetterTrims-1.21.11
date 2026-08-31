@@ -1,6 +1,7 @@
 package com.bawnorton.bettertrims.networking;
 
 import com.bawnorton.bettertrims.mixin.accessor.SmithingTrimRecipeAccessor;
+import com.bawnorton.bettertrims.networking.packet.EnderBlinkPayload;
 import com.bawnorton.bettertrims.networking.packet.TrimPatternSourcePayload;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
@@ -40,6 +41,8 @@ public class Networking {
 	//? if fabric {
 	public static void init() {
 		PayloadTypeRegistry.playS2C().register(TrimPatternSourcePayload.TYPE, TrimPatternSourcePayload.CODEC);
+		PayloadTypeRegistry.playC2S().register(EnderBlinkPayload.TYPE, EnderBlinkPayload.CODEC);
+		ServerPlayNetworking.registerGlobalReceiver(EnderBlinkPayload.TYPE, (payload, context) -> payload.handle(context));
 
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) ->
 				send(handler.player, new TrimPatternSourcePayload(patternProviders))
