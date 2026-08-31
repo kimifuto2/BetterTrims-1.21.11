@@ -48,11 +48,17 @@ abstract class LivingEntityRecallMixin extends Entity {
 		if (lastUse != null && now - lastUse < cooldownSeconds) return;
 		LAST_USE.put(player.getUUID(), now);
 
-		// Rewind: restore full health and hunger, play the totem visual.
+		// Rewind: restore full health and hunger. No flying-totem animation (event 35); instead we
+		// emit the totem sound + particles so the player still gets strong feedback.
 		player.setHealth(player.getMaxHealth());
 		player.getFoodData().setFoodLevel(20);
 		player.getFoodData().setSaturation(20.0F);
-		level.broadcastEntityEvent(player, (byte) 35);
+		player.playSound(net.minecraft.sounds.SoundEvents.TOTEM_USE, 1.0F, 1.0F);
+		level.sendParticles(
+				net.minecraft.core.particles.ParticleTypes.TOTEM_OF_UNDYING,
+				player.getX(), player.getY() + 1.0, player.getZ(),
+				64, 0.5, 1.5, 0.5, 0.01
+		);
 		// HUD countdown icon.
 		BetterTrimsEffects.applyCooldown(player, cooldownSeconds);
 
@@ -61,10 +67,13 @@ abstract class LivingEntityRecallMixin extends Entity {
 	}
 
 	// Keeps the HUD countdown icon fresh while the player wears echo-shard trim and is cooling down.
+	// Only refreshed once per second to avoid the HUD number flickering (残影).
 	@Inject(method = "baseTick", at = @At("TAIL"))
 	private void bettertrims$echoShardCooldownTick(CallbackInfo ci) {
 		if (!(level() instanceof ServerLevel level)) return;
 		if (!((Object) this instanceof ServerPlayer player)) return;
+		if (player.tickCount % 20 != 0) return; // once per second only
+
 		int pieces = countEchoShardPieces(player);
 		if (pieces <= 0) {
 			BetterTrimsEffects.clearCooldown(player);

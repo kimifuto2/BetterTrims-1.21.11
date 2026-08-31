@@ -8,6 +8,7 @@ import com.bawnorton.bettertrims.property.ability.TrimAbilityComponents;
 import com.bawnorton.bettertrims.property.ability.type.TrimValueAbility;
 import com.bawnorton.bettertrims.property.ability.type.entity.ApplyMobEffectAbility;
 import com.bawnorton.bettertrims.property.ability.type.entity.BeheadAbility;
+import com.bawnorton.bettertrims.property.ability.type.entity.DamageEntityAbility;
 import com.bawnorton.bettertrims.property.ability.type.entity.HealthRegenAbility;
 import com.bawnorton.bettertrims.property.ability.type.entity.IgniteAbility;
 import com.bawnorton.bettertrims.property.ability.type.entity.PlaySoundAbility;
@@ -418,6 +419,7 @@ public interface TrimProperties {
 	private static void bootstrapAllTheTrims(BootstrapContext<TrimProperty> context) {
 		HolderGetter<TrimMaterial> materialGetter = context.lookup(Registries.TRIM_MATERIAL);
 		HolderGetter<DimensionType> dimensionGetter = context.lookup(Registries.DIMENSION_TYPE);
+		HolderGetter<EntityType<?>> entityTypeGetter = context.lookup(Registries.ENTITY_TYPE);
 
 		// Chorus Fruit: +7% dodge chance per piece.
 		register(
@@ -478,11 +480,22 @@ public interface TrimProperties {
 						.ability(TrimAbilityComponents.POST_ATTACK, new BeheadAbility(CountBasedValue.linear(0.2f, 0.1f), CountBasedValue.linear(1f, 1f), CountBasedValue.linear(0.03f, 0.03f)))
 						.build()
 		);
-		// Prismarine Shard: water breathing only.
+		// Prismarine Shard: water breathing + bonus damage vs aquatic mobs.
 		register(
 				context, key("prismarine_shard"),
 				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.PRISMARINE_SHARD))
 						.ability(TrimAbilityComponents.EQUIPPED, new ToggleMobEffectAbility(MobEffects.WATER_BREATHING, CountBasedValue.constant(0)))
+						.ability(TrimAbilityComponents.POST_ATTACK,
+								new DamageEntityAbility(
+										CountBasedValue.linear(2f, 2f),
+										CountBasedValue.linear(2f, 2f),
+										context.lookup(Registries.DAMAGE_TYPE).getOrThrow(net.minecraft.world.damagesource.DamageTypes.GENERIC)
+								),
+								LootItemEntityPropertyCondition.hasProperties(
+										LootContext.EntityTarget.THIS,
+										EntityPredicate.Builder.entity().entityType(getEntityTypePredicate(entityTypeGetter, net.minecraft.tags.EntityTypeTags.AQUATIC))
+								)
+						)
 						.build()
 		);
 		// Enchanted Golden Apple: +max health, +damage reduction, hunger-ignoring regeneration.
