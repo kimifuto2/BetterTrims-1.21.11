@@ -37,7 +37,6 @@ public final class TrimElementTooltips {
 		register(SetBlockPropertiesAbility.class, new SetBlockPropertiesAbility.TooltipProvider());
 		register(ShareStatusEffectAbility.class, new ShareStatusEffectAbility.TooltipProvider());
 		register(SmeltItemsAbility.class, new SmeltItemsAbility.TooltipProvider());
-		register(BeheadAbility.class, new BeheadAbility.TooltipProvider());
 		register(BounceAbility.class, new BounceAbility.TooltipProvider());
 		register(ProjectileDodgeAbility.class, new ProjectileDodgeAbility.TooltipProvider());
 		register(RecallOnDeathAbility.class, new RecallOnDeathAbility.TooltipProvider());
