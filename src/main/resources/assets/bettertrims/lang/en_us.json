@@ -37,6 +37,7 @@
   "bettertrims.resourcepack.effects": "Trim Effects",
   "bettertrims.config.title": "Better Trims",
   "bettertrims.config.enableTrimEffects": "Enable Trim Effects",
+  "bettertrims.config.disallowTrimTemplateCopy": "Disallow Armour-Trim Template Copy",
   "bettertrims.config.debug": "Debug",
   "bettertrims.tooltip.ability.add_value.add": "Add",
   "bettertrims.tooltip.ability.add_value.to_value": "to Value",

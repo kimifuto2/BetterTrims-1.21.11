@@ -23,7 +23,7 @@ public final class BetterTrimsConfigScreen extends Screen {
 	@Override
 	protected void init() {
 		int centerX = this.width / 2;
-		int top = this.height / 2 - 26;
+		int top = this.height / 2 - 40;
 
 		addRenderableWidget(CycleButton.<Boolean>onOffBuilder(BetterTrims.enableTrimEffects)
 				.create(centerX - BUTTON_WIDTH / 2, top, BUTTON_WIDTH, BUTTON_HEIGHT,
@@ -42,6 +42,15 @@ public final class BetterTrimsConfigScreen extends Screen {
 							BetterTrims.debug = value;
 							ConfigurableApi.saveChanges();
 							BetterTrims.LOGGER.debug("debug set to {}", value);
+						}));
+
+		addRenderableWidget(CycleButton.<Boolean>onOffBuilder(BetterTrims.disallowTrimTemplateCopy)
+				.create(centerX - BUTTON_WIDTH / 2, top + 2 * (BUTTON_HEIGHT + 4), BUTTON_WIDTH, BUTTON_HEIGHT,
+						Component.translatable("bettertrims.config.disallowTrimTemplateCopy"),
+						(button, value) -> {
+							BetterTrims.disallowTrimTemplateCopy = value;
+							ConfigurableApi.saveChanges();
+							BetterTrims.LOGGER.debug("disallowTrimTemplateCopy set to {}", value);
 						}));
 
 		addRenderableWidget(Button.builder(Component.translatable("gui.done"), button -> this.onClose())

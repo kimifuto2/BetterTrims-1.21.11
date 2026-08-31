@@ -37,6 +37,7 @@
   "bettertrims.resourcepack.effects": "纹饰效果",
   "bettertrims.config.title": "Better Trims 设置",
   "bettertrims.config.enableTrimEffects": "启用纹饰效果",
+  "bettertrims.config.disallowTrimTemplateCopy": "禁止复制盔甲纹饰模板",
   "bettertrims.config.debug": "调试",
   "bettertrims.tooltip.ability.add_value.add": "增加",
   "bettertrims.tooltip.ability.add_value.to_value": "至数值",

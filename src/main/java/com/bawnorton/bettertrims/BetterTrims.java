@@ -26,6 +26,9 @@ public final class BetterTrims {
 	@Configurable
 	public static boolean enableTrimEffects = false;
 
+	@Configurable
+	public static boolean disallowTrimTemplateCopy = false;
+
 	public static void init() {
 		Networking.init();
 		LOGGER.debug("{} Initialized", MOD_ID);
