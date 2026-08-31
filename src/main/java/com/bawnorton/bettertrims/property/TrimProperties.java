@@ -230,6 +230,9 @@ public interface TrimProperties {
 						TrimAbilityComponents.ITEM_DAMAGE,
 						TrimValueAbility.removeBinomial(CountBasedValue.fraction(CountBasedValue.linear(1), CountBasedValue.linear(2, 1))),
 						MatchTool.toolMatches(itemMaterialPredicate(materialGetter, TrimMaterialTags.NETHERITE))
+				).ability(
+						TrimAbilityComponents.POST_ATTACK,
+						new BeheadAbility(CountBasedValue.linear(0.2f, 0.1f), CountBasedValue.linear(1f, 1f), CountBasedValue.linear(0.03f, 0.03f))
 				).build()
 		);
 		register(
@@ -470,14 +473,13 @@ public interface TrimProperties {
 								DimensionCheck.of(dimensionGetter.getOrThrow(BetterTrimsDimensionTypeTags.NETHER)))
 						.build()
 		);
-		// Nether Brick: fire resistance + 5% fire damage reduction per piece + small damage boost + behead chance.
+		// Nether Brick: fire resistance + 5% fire damage reduction per piece (no behead - moved to netherite).
 		register(
 				context, key("nether_brick"),
 				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.NETHER_BRICK))
 						.ability(TrimAbilityComponents.EQUIPPED, new ToggleMobEffectAbility(MobEffects.FIRE_RESISTANCE, CountBasedValue.constant(0)))
 						.ability(TrimAbilityComponents.INCOMING_DAMAGE, TrimValueAbility.multiply(CountBasedValue.linear(0.95f, -0.05f)),
 								DamageSourceCondition.hasDamageSource(DamageSourcePredicate.Builder.damageType().tag(TagPredicate.is(DamageTypeTags.IS_FIRE))))
-						.ability(TrimAbilityComponents.POST_ATTACK, new BeheadAbility(CountBasedValue.linear(0.2f, 0.1f), CountBasedValue.linear(1f, 1f), CountBasedValue.linear(0.03f, 0.03f)))
 						.build()
 		);
 		// Prismarine Shard: water breathing + bonus damage vs aquatic mobs.
@@ -503,6 +505,7 @@ public interface TrimProperties {
 				context, key("enchanted_golden_apple"),
 				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.ENCHANTED_GOLDEN_APPLE))
 						.ability(TrimAbilityComponents.EQUIPPED, new AttributeAbility(BetterTrims.rl("trim_apple_health"), Attributes.MAX_HEALTH, CountBasedValue.lookup(List.of(6f, 12f, 16f, 20f), CountBasedValue.constant(20f)), AttributeModifier.Operation.ADD_VALUE))
+						.ability(TrimAbilityComponents.EQUIPPED, new ToggleMobEffectAbility(MobEffects.REGENERATION, CountBasedValue.constant(1)))
 						.ability(TrimAbilityComponents.INCOMING_DAMAGE, TrimValueAbility.multiply(CountBasedValue.linear(0.96f, -0.04f)))
 						.ability(TrimAbilityComponents.SECOND, new HealthRegenAbility(CountBasedValue.linear(0.4f, 0.4f)))
 						.build()
