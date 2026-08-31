@@ -502,26 +502,14 @@ public interface TrimProperties {
 						)
 						.build()
 		);
-		// Enchanted Golden Apple: +max health (6/12/16/20), -5% damage per piece.
+		// Enchanted Golden Apple: +max health (6/12/16/20), -5% damage per piece, and Regeneration
+		// that scales with pieces (I at 1-3 pieces, II at 4 pieces).
 		register(
 				context, key("enchanted_golden_apple"),
 				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.ENCHANTED_GOLDEN_APPLE))
 						.ability(TrimAbilityComponents.EQUIPPED, new AttributeAbility(BetterTrims.rl("trim_apple_health"), Attributes.MAX_HEALTH, CountBasedValue.lookup(List.of(6f, 12f, 16f, 20f), CountBasedValue.constant(20f)), AttributeModifier.Operation.ADD_VALUE))
+						.ability(TrimAbilityComponents.EQUIPPED, new ToggleMobEffectAbility(MobEffects.REGENERATION, CountBasedValue.lookup(List.of(1f, 1f, 1f, 2f), CountBasedValue.constant(2f))))
 						.ability(TrimAbilityComponents.INCOMING_DAMAGE, TrimValueAbility.multiply(CountBasedValue.linear(0.95f, -0.05f)))
-						.build()
-		);
-		// Enchanted Golden Apple (2+ pieces): Regeneration I.
-		register(
-				context, key("enchanted_golden_apple_halfset"),
-				TrimProperty.builder(Matcher.forMaterial(materialGetter.getOrThrow(TrimMaterialTags.ENCHANTED_GOLDEN_APPLE), 2))
-						.ability(TrimAbilityComponents.EQUIPPED, new ToggleMobEffectAbility(MobEffects.REGENERATION, CountBasedValue.constant(1)))
-						.build()
-		);
-		// Enchanted Golden Apple (full set): Regeneration II only when all 4 pieces are worn.
-		register(
-				context, key("enchanted_golden_apple_fullset"),
-				TrimProperty.builder(Matcher.forMaterial(materialGetter.getOrThrow(TrimMaterialTags.ENCHANTED_GOLDEN_APPLE), 4))
-						.ability(TrimAbilityComponents.EQUIPPED, new ToggleMobEffectAbility(MobEffects.REGENERATION, CountBasedValue.constant(2)))
 						.build()
 		);
 		// Fire Charge: ignite attacked entities (4s per piece).
