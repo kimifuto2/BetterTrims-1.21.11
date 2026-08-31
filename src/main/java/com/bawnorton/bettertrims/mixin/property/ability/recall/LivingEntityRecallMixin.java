@@ -1,6 +1,7 @@
 package com.bawnorton.bettertrims.mixin.property.ability.recall;
 
 import com.bawnorton.bettertrims.BetterTrims;
+import com.bawnorton.bettertrims.property.ability.misc.PropertyCooldowns;
 import com.bawnorton.bettertrims.registry.BetterTrimsEffects;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -17,10 +18,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-
 // Echo Shard: on lethal damage, mimic the Totem of Undying animation but "rewind" the player:
 // restore full health and hunger, and broadcast the totem animation (entity event 35).
 // Cooldown scales per piece: 10min / 5min / 3min / 1min for 1..4 pieces. Tracks last use in memory.
@@ -30,8 +27,6 @@ abstract class LivingEntityRecallMixin extends Entity {
 	LivingEntityRecallMixin(EntityType<?> entityType, Level level) {
 		super(entityType, level);
 	}
-
-	private static final Map<UUID, Long> LAST_USE = new ConcurrentHashMap<>();
 
 	@Inject(method = "checkTotemDeathProtection", at = @At("HEAD"), cancellable = true)
 	private void bettertrims$echoShardRecall(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
@@ -44,9 +39,9 @@ abstract class LivingEntityRecallMixin extends Entity {
 
 		long cooldownSeconds = cooldownFor(pieces);
 		long now = level.getGameTime() / 20L;
-		Long lastUse = LAST_USE.get(player.getUUID());
+		Long lastUse = PropertyCooldowns.LAST_USE.get(player.getUUID());
 		if (lastUse != null && now - lastUse < cooldownSeconds) return;
-		LAST_USE.put(player.getUUID(), now);
+		PropertyCooldowns.LAST_USE.put(player.getUUID(), now);
 
 		// Rewind: restore full health and hunger. No flying-totem animation (event 35); instead we
 		// emit the totem sound + particles so the player still gets strong feedback.
@@ -80,7 +75,7 @@ abstract class LivingEntityRecallMixin extends Entity {
 			return;
 		}
 
-		Long lastUse = LAST_USE.get(player.getUUID());
+		Long lastUse = PropertyCooldowns.LAST_USE.get(player.getUUID());
 		if (lastUse == null) return;
 
 		long cooldownSeconds = cooldownFor(pieces);

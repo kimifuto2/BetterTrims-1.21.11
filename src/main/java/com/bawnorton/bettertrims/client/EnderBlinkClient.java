@@ -46,7 +46,14 @@ public final class EnderBlinkClient {
 			if (minecraft.gui.getGuiTicks() - lastSneakTick <= 10) {
 				Vec3 eye = player.getEyePosition();
 				Vec3 look = player.getLookAngle();
-				Vec3 target = eye.add(look.scale(8.0));
+				// Aim point: raycast 60 blocks ahead; if no block hit, use the 60-block endpoint.
+				Vec3 target;
+				net.minecraft.world.phys.HitResult hit = player.pick(60.0, 1.0F, false);
+				if (hit.getType() != net.minecraft.world.phys.HitResult.Type.MISS) {
+					target = hit.getLocation();
+				} else {
+					target = eye.add(look.scale(60.0));
+				}
 				//? if fabric {
 				ClientPlayNetworking.send(new EnderBlinkPayload(target.x, target.y, target.z));
 				//?}

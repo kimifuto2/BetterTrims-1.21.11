@@ -8,16 +8,10 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-
 // Ender-pearl style blink: on double-tap Shift (client) the server teleports the player toward
 // the aimed position, reusing the ender-pearl randomTeleport mechanics. Cooldown scales per
 // piece: 2min / 1.5min / 1min / 30s for 1..4 pieces, and is shown as a HUD potion icon + seconds.
 public final class EnderBlinkHandler {
-	private static final Map<UUID, Long> LAST_BLINK = new ConcurrentHashMap<>();
-
 	public static void onBlinkRequest(ServerPlayer player, Vec3 target) {
 		ServerLevel level = (ServerLevel) player.level();
 		int pieces = countEnderPearlPieces(player);
@@ -25,9 +19,17 @@ public final class EnderBlinkHandler {
 
 		long cooldownSeconds = cooldownFor(pieces);
 		long now = level.getGameTime() / 20L;
-		Long last = LAST_BLINK.get(player.getUUID());
+		Long last = PropertyCooldowns.LAST_BLINK.get(player.getUUID());
 		if (last != null && now - last < cooldownSeconds) return;
-		LAST_BLINK.put(player.getUUID(), now);
+
+
+		// Range check: cannot blink beyond max radius for the current piece count.
+		double maxRadius = maxRadiusFor(pieces);
+		if (player.distanceToSqr(target) > maxRadius * maxRadius) {
+			player.displayClientMessage(net.minecraft.network.chat.Component.literal("超出范围无法传送"), true);
+			return;
+		}
+		PropertyCooldowns.LAST_BLINK.put(player.getUUID(), now);
 
 		// Teleport toward the aimed position (ender-pearl style, with particles).
 		player.randomTeleport(target.x, target.y, target.z, true);
@@ -44,7 +46,7 @@ public final class EnderBlinkHandler {
 			return;
 		}
 
-		Long last = LAST_BLINK.get(player.getUUID());
+		Long last = PropertyCooldowns.LAST_BLINK.get(player.getUUID());
 		if (last == null) return;
 
 		long remaining = cooldownFor(pieces) - (level.getGameTime() / 20L - last);
@@ -76,6 +78,16 @@ public final class EnderBlinkHandler {
 			case 2 -> 90L;
 			case 3 -> 60L;
 			default -> 30L;
+		};
+	}
+
+	private static double maxRadiusFor(int pieces) {
+		// 1 piece 10, 2 pieces 20, 3 pieces 35, 4 pieces 50 (blocks).
+		return switch (pieces) {
+			case 1 -> 10.0;
+			case 2 -> 20.0;
+			case 3 -> 35.0;
+			default -> 50.0;
 		};
 	}
 }
