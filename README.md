@@ -75,4 +75,14 @@ Only Shows Relevant Information Based on Context:
 - 纯原版可用的材质：石英、铁、金、铜、钻石、下界合金、红石、绿宝石、紫水晶、树脂（青金石原版也有）。**银**需第三方「银」模组。
 - **青金石附魔折扣**为本 1.21.11 移植版新增；其余为 BetterTrims 自带能力。
 
+---
+
+## 配置（Config）
+
+可通过 [ModMenu](https://modrinth.com/mod/modmenu) 在游戏内调整（默认写回 `config/better-trims.json5`）：
+
+- **禁止复制盔甲纹饰模板**（默认关闭）：开启后锻造台无法复制盔甲纹饰锻造模板，适合想增加难度的玩家。默认允许复制（原版行为）。
+- **开启纹饰图案效果**：启用/禁用 `bettertrims:trim_effects` 数据包（纹饰图案穿戴 2 件以上触发状态效果）。
+- **调试模式**：BetterTrims 调试日志。
+
 
