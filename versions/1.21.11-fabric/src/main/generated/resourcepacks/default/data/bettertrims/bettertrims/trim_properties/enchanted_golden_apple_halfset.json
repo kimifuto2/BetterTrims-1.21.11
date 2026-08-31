@@ -1,0 +1,17 @@
+{
+  "abilities": {
+    "bettertrims:equipped": [
+      {
+        "ability": {
+          "type": "bettertrims:toggle_mob_effect",
+          "amplifier": 1.0,
+          "effect": "minecraft:regeneration"
+        }
+      }
+    ]
+  },
+  "trim": {
+    "material": "#c:enchanted_golden_apple",
+    "min_count": 2
+  }
+}
