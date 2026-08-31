@@ -478,14 +478,11 @@ public interface TrimProperties {
 						.ability(TrimAbilityComponents.POST_ATTACK, new BeheadAbility(CountBasedValue.linear(0.2f, 0.1f), CountBasedValue.linear(1f, 1f), CountBasedValue.linear(0.03f, 0.03f)))
 						.build()
 		);
-		// Prismarine Shard: swim speed (Dolphin's Grace) + water breathing.
+		// Prismarine Shard: water breathing only.
 		register(
 				context, key("prismarine_shard"),
 				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.PRISMARINE_SHARD))
-						.ability(TrimAbilityComponents.EQUIPPED, AllOf.toggleAbilities(
-								new ToggleMobEffectAbility(MobEffects.DOLPHINS_GRACE, CountBasedValue.constant(0)),
-								new ToggleMobEffectAbility(MobEffects.WATER_BREATHING, CountBasedValue.constant(0))
-						))
+						.ability(TrimAbilityComponents.EQUIPPED, new ToggleMobEffectAbility(MobEffects.WATER_BREATHING, CountBasedValue.constant(0)))
 						.build()
 		);
 		// Enchanted Golden Apple: +max health, +damage reduction, hunger-ignoring regeneration.
@@ -504,14 +501,11 @@ public interface TrimProperties {
 						.ability(TrimAbilityComponents.POST_ATTACK, new IgniteAbility(CountBasedValue.linear(4f, 4f)))
 						.build()
 		);
-		// Slime Ball: -knockback resistance, +attack knockback, and slow attacked targets (2s per piece).
+		// Slime Ball: +knockback resistance per piece, and slow attacked targets (2s per piece).
 		register(
 				context, key("slime_ball"),
 				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.SLIME_BALL))
-						.ability(TrimAbilityComponents.EQUIPPED, AllOf.toggleAbilities(
-								new AttributeAbility(BetterTrims.rl("trim_slime_knockback_res"), Attributes.KNOCKBACK_RESISTANCE, CountBasedValue.linear(-0.25f, -0.25f), AttributeModifier.Operation.ADD_VALUE),
-								new AttributeAbility(BetterTrims.rl("trim_slime_attack_knockback"), Attributes.ATTACK_KNOCKBACK, CountBasedValue.linear(1f, 1f), AttributeModifier.Operation.ADD_VALUE)
-						))
+						.ability(TrimAbilityComponents.EQUIPPED, new AttributeAbility(BetterTrims.rl("trim_slime_knockback_res"), Attributes.KNOCKBACK_RESISTANCE, CountBasedValue.linear(1f, 1f), AttributeModifier.Operation.ADD_VALUE))
 						.ability(TrimAbilityComponents.POST_ATTACK, new ApplyMobEffectAbility(MobEffects.SLOWNESS, CountBasedValue.constant(0), CountBasedValue.linear(2f, 2f)))
 						.build()
 		);
