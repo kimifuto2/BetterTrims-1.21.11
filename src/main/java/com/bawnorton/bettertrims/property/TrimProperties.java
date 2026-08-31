@@ -179,8 +179,8 @@ public interface TrimProperties {
 								new AttributeAbility(BetterTrims.rl("trim_mining_speed"), Attributes.MINING_EFFICIENCY, CountBasedValue.countSquared(1), AttributeModifier.Operation.ADD_VALUE)
 						)
 						.ability(
-								TrimAbilityComponents.EQUIPPED,
-								new ToggleMobEffectAbility(MobEffects.HASTE, CountBasedValue.constant(1)),
+								TrimAbilityComponents.SECOND,
+								new ApplyMobEffectAbility(MobEffects.HASTE, CountBasedValue.constant(1), CountBasedValue.constant(8)),
 								wearingFullSet(materialGetter, TrimMaterialTags.IRON)
 						)
 						.build()
@@ -240,7 +240,7 @@ public interface TrimProperties {
 				context,
 				FIREPROOF,
 				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.NETHERITE))
-						.ability(TrimAbilityComponents.EQUIPPED, new ToggleMobEffectAbility(MobEffects.FIRE_RESISTANCE, CountBasedValue.constant(0)))
+						.ability(TrimAbilityComponents.SECOND, new ApplyMobEffectAbility(MobEffects.FIRE_RESISTANCE, CountBasedValue.constant(0), CountBasedValue.constant(8)))
 						.itemProperty(
 								TrimItemPropertyComponents.DAMAGE_IMMUNITY,
 								DamageImmunityItemProperty.INSTANCE,
@@ -397,8 +397,8 @@ public interface TrimProperties {
 								DimensionCheck.of(dimensionGetter.getOrThrow(BetterTrimsDimensionTypeTags.HAS_MOON))
 						)
 				).ability(
-						TrimAbilityComponents.EQUIPPED,
-						new ToggleMobEffectAbility(MobEffects.NIGHT_VISION, CountBasedValue.constant(0)),
+						TrimAbilityComponents.SECOND,
+						new ApplyMobEffectAbility(MobEffects.NIGHT_VISION, CountBasedValue.constant(0), CountBasedValue.constant(8)),
 						wearingInSlot(materialGetter, TrimMaterialTags.SILVER, EquipmentSlot.HEAD)
 				).build()
 		);
@@ -465,7 +465,7 @@ public interface TrimProperties {
 		register(
 				context, key("glowstone_dust"),
 				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.GLOWSTONE_DUST))
-						.ability(TrimAbilityComponents.EQUIPPED, new ToggleMobEffectAbility(MobEffects.GLOWING, CountBasedValue.constant(0)))
+						.ability(TrimAbilityComponents.SECOND, new ApplyMobEffectAbility(MobEffects.GLOWING, CountBasedValue.constant(0), CountBasedValue.constant(8)))
 						.ability(TrimAbilityComponents.EQUIPPED, AllOf.toggleAbilities(
 								new AttributeAbility(BetterTrims.rl("trim_glowstone_attack"), Attributes.ATTACK_DAMAGE, CountBasedValue.linear(0.5f), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL),
 								new AttributeAbility(BetterTrims.rl("trim_glowstone_speed"), Attributes.MOVEMENT_SPEED, CountBasedValue.linear(0.03f), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL),
@@ -479,7 +479,7 @@ public interface TrimProperties {
 		register(
 				context, key("nether_brick"),
 				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.NETHER_BRICK))
-						.ability(TrimAbilityComponents.EQUIPPED, new ToggleMobEffectAbility(MobEffects.FIRE_RESISTANCE, CountBasedValue.constant(0)))
+						.ability(TrimAbilityComponents.SECOND, new ApplyMobEffectAbility(MobEffects.FIRE_RESISTANCE, CountBasedValue.constant(0), CountBasedValue.constant(8)))
 						.ability(TrimAbilityComponents.INCOMING_DAMAGE, TrimValueAbility.multiply(CountBasedValue.linear(0.95f, -0.05f)),
 								DamageSourceCondition.hasDamageSource(DamageSourcePredicate.Builder.damageType().tag(TagPredicate.is(DamageTypeTags.IS_FIRE))))
 						.build()
@@ -488,7 +488,7 @@ public interface TrimProperties {
 		register(
 				context, key("prismarine_shard"),
 				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.PRISMARINE_SHARD))
-						.ability(TrimAbilityComponents.EQUIPPED, new ToggleMobEffectAbility(MobEffects.WATER_BREATHING, CountBasedValue.constant(0)))
+						.ability(TrimAbilityComponents.SECOND, new ApplyMobEffectAbility(MobEffects.WATER_BREATHING, CountBasedValue.constant(0), CountBasedValue.constant(8)))
 						.ability(TrimAbilityComponents.POST_ATTACK,
 								new DamageEntityAbility(
 										CountBasedValue.linear(2f, 2f),
