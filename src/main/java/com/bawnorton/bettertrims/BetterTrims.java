@@ -1,6 +1,7 @@
 package com.bawnorton.bettertrims;
 
 import com.bawnorton.bettertrims.networking.Networking;
+import com.bawnorton.bettertrims.registry.BetterTrimsEffects;
 import com.bawnorton.configurable.Configurable;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -28,6 +29,7 @@ public final class BetterTrims {
 
 	public static void init() {
 		Networking.init();
+		BetterTrimsEffects.init();
 		LOGGER.debug("{} Initialized", MOD_ID);
 		//? if fabric {
 		ResourceManagerHelper.registerBuiltinResourcePack(

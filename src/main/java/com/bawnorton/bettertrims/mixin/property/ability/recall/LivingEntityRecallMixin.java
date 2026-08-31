@@ -1,6 +1,7 @@
 package com.bawnorton.bettertrims.mixin.property.ability.recall;
 
 import com.bawnorton.bettertrims.BetterTrims;
+import com.bawnorton.bettertrims.registry.BetterTrimsEffects;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
@@ -13,6 +14,7 @@ import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Map;
@@ -22,6 +24,7 @@ import java.util.concurrent.ConcurrentHashMap;
 // Echo Shard: on lethal damage, mimic the Totem of Undying animation but "rewind" the player:
 // restore full health and hunger, and broadcast the totem animation (entity event 35).
 // Cooldown scales per piece: 10min / 5min / 3min / 1min for 1..4 pieces. Tracks last use in memory.
+// While cooling down, a mob-effect HUD icon shows the remaining seconds (potion-panel style).
 @Mixin(LivingEntity.class)
 abstract class LivingEntityRecallMixin extends Entity {
 	LivingEntityRecallMixin(EntityType<?> entityType, Level level) {
@@ -50,9 +53,34 @@ abstract class LivingEntityRecallMixin extends Entity {
 		player.getFoodData().setFoodLevel(20);
 		player.getFoodData().setSaturation(20.0F);
 		level.broadcastEntityEvent(player, (byte) 35);
+		// HUD countdown icon.
+		BetterTrimsEffects.applyCooldown(player, cooldownSeconds);
 
 		BetterTrims.LOGGER.info("[AllTheTrims] Echo Shard recall triggered for {}", player.getName().getString());
 		cir.setReturnValue(true);
+	}
+
+	// Keeps the HUD countdown icon fresh while the player wears echo-shard trim and is cooling down.
+	@Inject(method = "baseTick", at = @At("TAIL"))
+	private void bettertrims$echoShardCooldownTick(CallbackInfo ci) {
+		if (!(level() instanceof ServerLevel level)) return;
+		if (!((Object) this instanceof ServerPlayer player)) return;
+		int pieces = countEchoShardPieces(player);
+		if (pieces <= 0) {
+			BetterTrimsEffects.clearCooldown(player);
+			return;
+		}
+
+		Long lastUse = LAST_USE.get(player.getUUID());
+		if (lastUse == null) return;
+
+		long cooldownSeconds = cooldownFor(pieces);
+		long remaining = cooldownSeconds - (level.getGameTime() / 20L - lastUse);
+		if (remaining > 0) {
+			BetterTrimsEffects.applyCooldown(player, remaining);
+		} else {
+			BetterTrimsEffects.clearCooldown(player);
+		}
 	}
 
 	private static int countEchoShardPieces(ServerPlayer player) {

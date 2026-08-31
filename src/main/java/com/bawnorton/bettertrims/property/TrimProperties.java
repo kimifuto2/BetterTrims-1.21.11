@@ -426,11 +426,11 @@ public interface TrimProperties {
 						.ability(TrimAbilityComponents.INCOMING_DAMAGE, new DodgeValue(CountBasedValue.linear(0.07f, 0.07f)))
 						.build()
 		);
-		// Coal: smelt the attacker's held item on hit.
+		// Coal: automatically smelts smeltable items from the wearer's inventory (2 smelts per piece).
 		register(
 				context, key("coal"),
 				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.COAL))
-						.ability(TrimAbilityComponents.INCOMING_DAMAGE_ENTITY, new SmeltItemsAbility(CountBasedValue.linear(2f, 2f)))
+						.ability(TrimAbilityComponents.SECOND, new SmeltItemsAbility(CountBasedValue.linear(2f, 2f)))
 						.build()
 		);
 		// Dragon's Breath: share positive status effects with nearby teammates per piece.
