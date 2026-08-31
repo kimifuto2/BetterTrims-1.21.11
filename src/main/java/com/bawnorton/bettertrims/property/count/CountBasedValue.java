@@ -205,7 +205,8 @@ public interface CountBasedValue {
 
 		@Override
 		public float calculate(int count) {
-			return count <= this.values.size() ? this.values.get(count - 1) : this.fallback.calculate(count);
+			if (count <= 0 || count > this.values.size()) return this.fallback.calculate(count);
+			return this.values.get(count - 1);
 		}
 
 		@Override
