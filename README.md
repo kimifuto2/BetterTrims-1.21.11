@@ -94,5 +94,15 @@ Only Shows Relevant Information Based on Context:
 
 > ⚠️ 这 11 个材质目前**注册在数据层**，但要真正能在锻造台当纹饰用，还需往对应物品注入 `provides_trim_material` 组件（见下文"待办"）。
 
+---
+
+## 配置（Config）
+
+可通过 [ModMenu](https://modrinth.com/mod/modmenu) 在游戏内调整（默认写回 `config/better-trims.json5`）：
+
+- **禁止复制盔甲纹饰模板**（默认关闭）：开启后锻造台无法复制盔甲纹饰锻造模板，适合想增加难度的玩家。默认允许复制（原版行为）。
+- **开启纹饰图案效果**：启用/禁用 `bettertrims:trim_effects` 数据包（纹饰图案穿戴 2 件以上触发状态效果）。
+- **调试模式**：BetterTrims 调试日志。
+
 
 
