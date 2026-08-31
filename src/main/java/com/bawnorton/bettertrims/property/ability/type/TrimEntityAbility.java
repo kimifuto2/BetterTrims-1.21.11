@@ -26,6 +26,7 @@ public interface TrimEntityAbility extends TrimElement {
 	static MapCodec<? extends TrimEntityAbility> bootstrap(Registry<MapCodec<? extends TrimEntityAbility>> registry) {
 		Registry.register(registry, BetterTrims.rl("all_of"), AllOf.EntityAbilities.CODEC);
 		Registry.register(registry, BetterTrims.rl("apply_mob_effect"), ApplyMobEffectAbility.CODEC);
+		Registry.register(registry, BetterTrims.rl("blink_notice"), BlinkNoticeAbility.CODEC);
 		Registry.register(registry, BetterTrims.rl("change_item_damage"), ChangeItemDamageAbility.CODEC);
 		Registry.register(registry, BetterTrims.rl("damage_entity"), DamageEntityAbility.CODEC);
 		Registry.register(registry, BetterTrims.rl("explode"), ExplodeAbility.CODEC);

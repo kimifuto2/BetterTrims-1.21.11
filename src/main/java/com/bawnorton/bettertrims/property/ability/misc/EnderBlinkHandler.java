@@ -29,10 +29,16 @@ public final class EnderBlinkHandler {
 			player.displayClientMessage(net.minecraft.network.chat.Component.literal("超出范围无法传送"), true);
 			return;
 		}
-		PropertyCooldowns.LAST_BLINK.put(player.getUUID(), now);
 
 		// Teleport toward the aimed position (ender-pearl style, with particles).
-		player.randomTeleport(target.x, target.y, target.z, true);
+		// randomTeleport returns false when the destination is not a safe free spot (e.g. aimed at
+		// the side of a block). If it fails, do NOT consume the cooldown/HUD icon.
+		boolean teleported = player.randomTeleport(target.x, target.y, target.z, true);
+		if (!teleported) {
+			player.displayClientMessage(net.minecraft.network.chat.Component.literal("该位置无法传送"), true);
+			return;
+		}
+		PropertyCooldowns.LAST_BLINK.put(player.getUUID(), now);
 		BetterTrimsEffects.applyCooldown(BetterTrimsEffects.ENDER_BLINK_COOLDOWN, player, cooldownSeconds);
 		BetterTrims.LOGGER.info("[AllTheTrims] Ender blink for {} to ({}, {}, {})", player.getName().getString(), target.x, target.y, target.z);
 	}

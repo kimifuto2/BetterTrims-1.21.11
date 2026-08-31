@@ -8,6 +8,7 @@ import com.bawnorton.bettertrims.property.ability.TrimAbilityComponents;
 import com.bawnorton.bettertrims.property.ability.type.TrimValueAbility;
 import com.bawnorton.bettertrims.property.ability.type.entity.ApplyMobEffectAbility;
 import com.bawnorton.bettertrims.property.ability.type.entity.BeheadAbility;
+import com.bawnorton.bettertrims.property.ability.type.entity.BlinkNoticeAbility;
 import com.bawnorton.bettertrims.property.ability.type.entity.DamageEntityAbility;
 import com.bawnorton.bettertrims.property.ability.type.entity.HealthRegenAbility;
 import com.bawnorton.bettertrims.property.ability.type.entity.IgniteAbility;
@@ -457,6 +458,7 @@ public interface TrimProperties {
 				context, key("ender_pearl"),
 				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.ENDER_PEARL))
 						.ability(TrimAbilityComponents.INCOMING_DAMAGE_ENTITY, new ProjectileDodgeAbility(CountBasedValue.linear(0.25f, 0.25f)))
+						.ability(TrimAbilityComponents.SECOND, new BlinkNoticeAbility())
 						.build()
 		);
 		// Glowstone Dust: +1 glowing; in the Nether: +attack damage, attack speed, movement, and damage reduction.

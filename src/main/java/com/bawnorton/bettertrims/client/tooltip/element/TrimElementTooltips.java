@@ -2,6 +2,7 @@ package com.bawnorton.bettertrims.client.tooltip.element;
 
 import com.bawnorton.bettertrims.property.AllOf;
 import com.bawnorton.bettertrims.property.ability.type.entity.BeheadAbility;
+import com.bawnorton.bettertrims.property.ability.type.entity.BlinkNoticeAbility;
 import com.bawnorton.bettertrims.property.ability.type.entity.BounceAbility;
 import com.bawnorton.bettertrims.property.ability.type.entity.ProjectileDodgeAbility;
 import com.bawnorton.bettertrims.property.ability.type.entity.RecallOnDeathAbility;
@@ -23,6 +24,8 @@ public final class TrimElementTooltips {
 
 	static {
 		register(ApplyMobEffectAbility.class, new ApplyMobEffectAbility.TooltipProvider());
+		register(BeheadAbility.class, new BeheadAbility.TooltipProvider());
+		register(BlinkNoticeAbility.class, new BlinkNoticeAbility.TooltipProvider());
 		register(ChangeItemDamageAbility.class, new ChangeItemDamageAbility.TooltipProvider());
 		register(DamageEntityAbility.class, new DamageEntityAbility.TooltipProvider());
 		register(ExplodeAbility.class, new ExplodeAbility.TooltipProvider());
