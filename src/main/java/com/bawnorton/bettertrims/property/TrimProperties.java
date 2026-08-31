@@ -503,12 +503,12 @@ public interface TrimProperties {
 						.build()
 		);
 		// Enchanted Golden Apple: +max health (6/12/16/20), -5% damage per piece, and a timed
-		// Regeneration (8s, refreshed each second while worn; I at 1-3 pieces, II at 4 pieces).
+		// Regeneration (8s, refreshed each second while worn; only when wearing the full 4-piece set, Regeneration II).
 		register(
 				context, key("enchanted_golden_apple"),
 				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.ENCHANTED_GOLDEN_APPLE))
 						.ability(TrimAbilityComponents.EQUIPPED, new AttributeAbility(BetterTrims.rl("trim_apple_health"), Attributes.MAX_HEALTH, CountBasedValue.lookup(List.of(6f, 12f, 16f, 20f), CountBasedValue.constant(20f)), AttributeModifier.Operation.ADD_VALUE))
-						.ability(TrimAbilityComponents.SECOND, new ApplyMobEffectAbility(MobEffects.REGENERATION, CountBasedValue.lookup(List.of(0f, 0f, 0f, 1f), CountBasedValue.constant(1f)), CountBasedValue.constant(8f)))
+						.ability(TrimAbilityComponents.SECOND, new ApplyMobEffectAbility(MobEffects.REGENERATION, CountBasedValue.lookup(List.of(-1f, -1f, -1f, 1f), CountBasedValue.constant(1f)), CountBasedValue.constant(8f)))
 						.ability(TrimAbilityComponents.INCOMING_DAMAGE, TrimValueAbility.multiply(CountBasedValue.linear(0.95f, -0.05f)))
 						.build()
 		);
