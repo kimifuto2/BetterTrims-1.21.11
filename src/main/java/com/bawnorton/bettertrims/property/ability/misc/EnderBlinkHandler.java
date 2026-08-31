@@ -1,6 +1,7 @@
 package com.bawnorton.bettertrims.property.ability.misc;
 
 import com.bawnorton.bettertrims.BetterTrims;
+import com.bawnorton.bettertrims.registry.BetterTrimsEffects;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -13,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 // Ender-pearl style blink: on double-tap Shift (client) the server teleports the player toward
 // the aimed position, reusing the ender-pearl randomTeleport mechanics. Cooldown scales per
-// piece: 2min / 1.5min / 1min / 30s for 1..4 pieces.
+// piece: 2min / 1.5min / 1min / 30s for 1..4 pieces, and is shown as a HUD potion icon + seconds.
 public final class EnderBlinkHandler {
 	private static final Map<UUID, Long> LAST_BLINK = new ConcurrentHashMap<>();
 
@@ -30,12 +31,32 @@ public final class EnderBlinkHandler {
 
 		// Teleport toward the aimed position (ender-pearl style, with particles).
 		player.randomTeleport(target.x, target.y, target.z, true);
+		BetterTrimsEffects.applyCooldown(BetterTrimsEffects.ENDER_BLINK_COOLDOWN, player, cooldownSeconds);
 		BetterTrims.LOGGER.info("[AllTheTrims] Ender blink for {} to ({}, {}, {})", player.getName().getString(), target.x, target.y, target.z);
+	}
+
+	// Refreshes the HUD cooldown icon once per second while cooling down (called from the
+	// entity tick mixin so it works server-side without an extra event hook).
+	public static void tick(ServerLevel level, ServerPlayer player) {
+		int pieces = countEnderPearlPieces(player);
+		if (pieces <= 0) {
+			BetterTrimsEffects.clearCooldown(BetterTrimsEffects.ENDER_BLINK_COOLDOWN, player);
+			return;
+		}
+
+		Long last = LAST_BLINK.get(player.getUUID());
+		if (last == null) return;
+
+		long remaining = cooldownFor(pieces) - (level.getGameTime() / 20L - last);
+		if (remaining > 0) {
+			BetterTrimsEffects.applyCooldown(BetterTrimsEffects.ENDER_BLINK_COOLDOWN, player, remaining);
+		} else {
+			BetterTrimsEffects.clearCooldown(BetterTrimsEffects.ENDER_BLINK_COOLDOWN, player);
+		}
 	}
 
 	private static int countEnderPearlPieces(ServerPlayer player) {
 		int pieces = 0;
-		net.minecraft.core.Holder<net.minecraft.world.item.equipment.trim.TrimMaterial> holder = null;
 		for (EquipmentSlot slot : new EquipmentSlot[]{EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET}) {
 			ItemStack stack = player.getItemBySlot(slot);
 			if (stack.isEmpty()) continue;

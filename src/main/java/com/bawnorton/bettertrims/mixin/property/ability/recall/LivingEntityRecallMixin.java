@@ -60,7 +60,7 @@ abstract class LivingEntityRecallMixin extends Entity {
 				64, 0.5, 1.5, 0.5, 0.01
 		);
 		// HUD countdown icon.
-		BetterTrimsEffects.applyCooldown(player, cooldownSeconds);
+		BetterTrimsEffects.applyCooldown(BetterTrimsEffects.ECHO_SHARD_COOLDOWN, player, cooldownSeconds);
 
 		BetterTrims.LOGGER.info("[AllTheTrims] Echo Shard recall triggered for {}", player.getName().getString());
 		cir.setReturnValue(true);
@@ -76,7 +76,7 @@ abstract class LivingEntityRecallMixin extends Entity {
 
 		int pieces = countEchoShardPieces(player);
 		if (pieces <= 0) {
-			BetterTrimsEffects.clearCooldown(player);
+			BetterTrimsEffects.clearCooldown(BetterTrimsEffects.ECHO_SHARD_COOLDOWN, player);
 			return;
 		}
 
@@ -86,10 +86,13 @@ abstract class LivingEntityRecallMixin extends Entity {
 		long cooldownSeconds = cooldownFor(pieces);
 		long remaining = cooldownSeconds - (level.getGameTime() / 20L - lastUse);
 		if (remaining > 0) {
-			BetterTrimsEffects.applyCooldown(player, remaining);
+			BetterTrimsEffects.applyCooldown(BetterTrimsEffects.ECHO_SHARD_COOLDOWN, player, remaining);
 		} else {
-			BetterTrimsEffects.clearCooldown(player);
+			BetterTrimsEffects.clearCooldown(BetterTrimsEffects.ECHO_SHARD_COOLDOWN, player);
 		}
+
+		// Also refresh the ender-pearl blink cooldown icon if worn.
+		com.bawnorton.bettertrims.property.ability.misc.EnderBlinkHandler.tick(level, player);
 	}
 
 	private static int countEchoShardPieces(ServerPlayer player) {
