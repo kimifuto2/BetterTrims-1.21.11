@@ -168,8 +168,8 @@ public interface TrimProperties {
 								new AttributeAbility(BetterTrims.rl("trim_mining_speed"), Attributes.MINING_EFFICIENCY, CountBasedValue.countSquared(1), AttributeModifier.Operation.ADD_VALUE)
 						)
 						.ability(
-								TrimAbilityComponents.EQUIPPED,
-								new ToggleMobEffectAbility(MobEffects.HASTE, CountBasedValue.constant(1)),
+								TrimAbilityComponents.SECOND,
+								new ApplyMobEffectAbility(MobEffects.HASTE, CountBasedValue.constant(1), CountBasedValue.constant(8)),
 								wearingFullSet(materialGetter, TrimMaterialTags.IRON)
 						)
 						.build()
@@ -226,7 +226,7 @@ public interface TrimProperties {
 				context,
 				FIREPROOF,
 				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.NETHERITE))
-						.ability(TrimAbilityComponents.EQUIPPED, new ToggleMobEffectAbility(MobEffects.FIRE_RESISTANCE, CountBasedValue.constant(0)))
+						.ability(TrimAbilityComponents.SECOND, new ApplyMobEffectAbility(MobEffects.FIRE_RESISTANCE, CountBasedValue.constant(0), CountBasedValue.constant(8)))
 						.itemProperty(
 								TrimItemPropertyComponents.DAMAGE_IMMUNITY,
 								DamageImmunityItemProperty.INSTANCE,
