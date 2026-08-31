@@ -60,6 +60,28 @@
           }
         }
       }
+    ],
+    "bettertrims:post_attack": [
+      {
+        "ability": {
+          "type": "bettertrims:behead",
+          "damage_chance": {
+            "type": "bettertrims:linear",
+            "base": 0.2,
+            "per_count_above_first": 0.1
+          },
+          "extra_damage": {
+            "type": "bettertrims:linear",
+            "base": 1.0,
+            "per_count_above_first": 1.0
+          },
+          "head_drop_chance": {
+            "type": "bettertrims:linear",
+            "base": 0.03,
+            "per_count_above_first": 0.03
+          }
+        }
+      }
     ]
   },
   "trim": {

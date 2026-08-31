@@ -3,31 +3,29 @@
     "bettertrims:equipped": [
       {
         "ability": {
-          "type": "bettertrims:all_of",
-          "abilities": [
-            {
-              "type": "bettertrims:attribute",
-              "attribute": "minecraft:knockback_resistance",
-              "id": "bettertrims:trim_slime_knockback_res",
-              "operation": "add_value",
-              "value": {
-                "type": "bettertrims:linear",
-                "base": -0.25,
-                "per_count_above_first": -0.25
-              }
-            },
-            {
-              "type": "bettertrims:attribute",
-              "attribute": "minecraft:attack_knockback",
-              "id": "bettertrims:trim_slime_attack_knockback",
-              "operation": "add_value",
-              "value": {
-                "type": "bettertrims:linear",
-                "base": 1.0,
-                "per_count_above_first": 1.0
-              }
-            }
-          ]
+          "type": "bettertrims:attribute",
+          "attribute": "minecraft:knockback_resistance",
+          "id": "bettertrims:trim_slime_knockback_res",
+          "operation": "add_value",
+          "value": {
+            "type": "bettertrims:linear",
+            "base": 0.1,
+            "per_count_above_first": 0.1
+          }
+        }
+      }
+    ],
+    "bettertrims:post_attack": [
+      {
+        "ability": {
+          "type": "bettertrims:apply_mob_effect",
+          "amplifier": 0.0,
+          "duration": {
+            "type": "bettertrims:linear",
+            "base": 2.0,
+            "per_count_above_first": 2.0
+          },
+          "effect": "minecraft:slowness"
         }
       }
     ]

@@ -1,10 +1,11 @@
 {
   "abilities": {
-    "bettertrims:equipped": [
+    "bettertrims:second": [
       {
         "ability": {
-          "type": "bettertrims:toggle_mob_effect",
+          "type": "bettertrims:apply_mob_effect",
           "amplifier": 0.0,
+          "duration": 8.0,
           "effect": "minecraft:fire_resistance"
         }
       }

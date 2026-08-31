@@ -8,9 +8,26 @@
           "id": "bettertrims:trim_apple_health",
           "operation": "add_value",
           "value": {
+            "type": "bettertrims:lookup",
+            "fallback": 20.0,
+            "values": [
+              6.0,
+              12.0,
+              16.0,
+              20.0
+            ]
+          }
+        }
+      }
+    ],
+    "bettertrims:incoming_damage": [
+      {
+        "ability": {
+          "type": "bettertrims:multiply",
+          "value": {
             "type": "bettertrims:linear",
-            "base": 3.0,
-            "per_count_above_first": 3.0
+            "base": 0.95,
+            "per_count_above_first": -0.05
           }
         }
       }
@@ -18,12 +35,19 @@
     "bettertrims:second": [
       {
         "ability": {
-          "type": "bettertrims:health_regen",
-          "heal_per_second": {
-            "type": "bettertrims:linear",
-            "base": 0.4,
-            "per_count_above_first": 0.4
-          }
+          "type": "bettertrims:apply_mob_effect",
+          "amplifier": {
+            "type": "bettertrims:lookup",
+            "fallback": 2.0,
+            "values": [
+              1.0,
+              1.0,
+              1.0,
+              2.0
+            ]
+          },
+          "duration": 8.0,
+          "effect": "minecraft:regeneration"
         }
       }
     ]

@@ -1,10 +1,36 @@
 {
   "abilities": {
-    "bettertrims:equipped": [
+    "bettertrims:post_attack": [
       {
         "ability": {
-          "type": "bettertrims:toggle_mob_effect",
+          "type": "bettertrims:damage_entity",
+          "damage_type": "minecraft:generic",
+          "max_damage": {
+            "type": "bettertrims:linear",
+            "base": 2.0,
+            "per_count_above_first": 2.0
+          },
+          "min_damage": {
+            "type": "bettertrims:linear",
+            "base": 2.0,
+            "per_count_above_first": 2.0
+          }
+        },
+        "requirements": {
+          "condition": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "type": "#minecraft:aquatic"
+          }
+        }
+      }
+    ],
+    "bettertrims:second": [
+      {
+        "ability": {
+          "type": "bettertrims:apply_mob_effect",
           "amplifier": 0.0,
+          "duration": 8.0,
           "effect": "minecraft:water_breathing"
         }
       }

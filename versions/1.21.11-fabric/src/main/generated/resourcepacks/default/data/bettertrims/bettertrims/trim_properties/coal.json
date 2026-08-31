@@ -1,6 +1,6 @@
 {
   "abilities": {
-    "bettertrims:incoming_damage_entity": [
+    "bettertrims:second": [
       {
         "ability": {
           "type": "bettertrims:smelt_on_hit",

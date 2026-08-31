@@ -1,22 +1,13 @@
 {
   "abilities": {
-    "bettertrims:equipped": [
-      {
-        "ability": {
-          "type": "bettertrims:toggle_mob_effect",
-          "amplifier": 0.0,
-          "effect": "minecraft:fire_resistance"
-        }
-      }
-    ],
     "bettertrims:incoming_damage": [
       {
         "ability": {
           "type": "bettertrims:multiply",
           "value": {
             "type": "bettertrims:linear",
-            "base": 0.88,
-            "per_count_above_first": -0.12
+            "base": 0.95,
+            "per_count_above_first": -0.05
           }
         },
         "requirements": {
@@ -29,6 +20,16 @@
               }
             ]
           }
+        }
+      }
+    ],
+    "bettertrims:second": [
+      {
+        "ability": {
+          "type": "bettertrims:apply_mob_effect",
+          "amplifier": 0.0,
+          "duration": 8.0,
+          "effect": "minecraft:fire_resistance"
         }
       }
     ]

@@ -5,9 +5,14 @@
         "ability": {
           "type": "bettertrims:recall_on_death",
           "cooldown_seconds": {
-            "type": "bettertrims:linear",
-            "base": 60.0,
-            "per_count_above_first": -60.0
+            "type": "bettertrims:lookup",
+            "fallback": 60.0,
+            "values": [
+              600.0,
+              300.0,
+              180.0,
+              60.0
+            ]
           },
           "seconds": 5.0
         }

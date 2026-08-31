@@ -11,6 +11,13 @@
           }
         }
       }
+    ],
+    "bettertrims:second": [
+      {
+        "ability": {
+          "type": "bettertrims:blink_notice"
+        }
+      }
     ]
   },
   "trim": {
