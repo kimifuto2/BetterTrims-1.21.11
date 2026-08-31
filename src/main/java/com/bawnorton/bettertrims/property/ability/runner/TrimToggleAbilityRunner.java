@@ -60,10 +60,12 @@ public final class TrimToggleAbilityRunner<T extends TrimToggleAbility> implemen
 		TrimmedItems items = TrimmedItems.of(matchingStacks, wearer);
 		boolean passes = matchingStacks.size() >= matcher.minCount() && checkRequirement(TrimContexts.equipment(level, items));
 		boolean active = this.active.contains(wearer.getUUID());
-		if (active && !passes) {
+		if (!passes) {
+			// Always stop when the requirement no longer holds (even if the active flag is stale),
+			// so effects like Regeneration can never linger after the armour is removed.
 			ability.stop(level, wearer, items);
 			this.active.remove(wearer.getUUID());
-		} else if (!active && passes) {
+		} else if (!active) {
 			ability.start(level, wearer, items);
 			this.active.add(wearer.getUUID());
 		}
