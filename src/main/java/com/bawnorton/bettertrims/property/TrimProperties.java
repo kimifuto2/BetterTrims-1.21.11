@@ -78,7 +78,6 @@ import net.minecraft.core.component.predicates.DataComponentPredicates;
 public interface TrimProperties {
 	ResourceKey<TrimProperty> CONDUCTIVE = key("conductive");
 	ResourceKey<TrimProperty> CHARGED = key("charged");
-	ResourceKey<TrimProperty> FIREPROOF = key("fireproof");
 	ResourceKey<TrimProperty> IMPROVED_TRADING = key("improved_trading");
 	ResourceKey<TrimProperty> INCREASE_EXPERIENCE_GAIN = key("increase_experience_gain");
 	ResourceKey<TrimProperty> INCREASE_MINING_SPEED = key("increase_mining_speed");
@@ -234,21 +233,16 @@ public interface TrimProperties {
 				).ability(
 						TrimAbilityComponents.POST_ATTACK,
 						new BeheadAbility(CountBasedValue.linear(0.2f, 0.1f), CountBasedValue.linear(1f, 1f), CountBasedValue.linear(0.03f, 0.03f))
+				).ability(
+						TrimAbilityComponents.SECOND,
+						new ApplyMobEffectAbility(MobEffects.FIRE_RESISTANCE, CountBasedValue.constant(0), CountBasedValue.constant(8))
+				).itemProperty(
+						TrimItemPropertyComponents.DAMAGE_IMMUNITY,
+						DamageImmunityItemProperty.INSTANCE,
+						DamageSourceCondition.hasDamageSource(DamageSourcePredicate.Builder.damageType()
+								.tag(TagPredicate.is(DamageTypeTags.IS_FIRE))
+								.tag(TagPredicate.isNot(DamageTypeTags.BYPASSES_INVULNERABILITY)))
 				).build()
-		);
-		register(
-				context,
-				FIREPROOF,
-				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.NETHERITE))
-						.ability(TrimAbilityComponents.SECOND, new ApplyMobEffectAbility(MobEffects.FIRE_RESISTANCE, CountBasedValue.constant(0), CountBasedValue.constant(8)))
-						.itemProperty(
-								TrimItemPropertyComponents.DAMAGE_IMMUNITY,
-								DamageImmunityItemProperty.INSTANCE,
-								DamageSourceCondition.hasDamageSource(DamageSourcePredicate.Builder.damageType()
-										.tag(TagPredicate.is(DamageTypeTags.IS_FIRE))
-										.tag(TagPredicate.isNot(DamageTypeTags.BYPASSES_INVULNERABILITY)))
-						)
-						.build()
 		);
 		register(
 				context,
