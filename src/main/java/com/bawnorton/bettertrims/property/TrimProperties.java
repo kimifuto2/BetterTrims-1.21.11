@@ -65,7 +65,6 @@ import net.minecraft.core.component.predicates.DataComponentPredicates;
 //?}
 
 public interface TrimProperties {
-	ResourceKey<TrimProperty> CONDUCTIVE = key("conductive");
 	ResourceKey<TrimProperty> CHARGED = key("charged");
 	ResourceKey<TrimProperty> IMPROVED_TRADING = key("improved_trading");
 	ResourceKey<TrimProperty> INCREASE_EXPERIENCE_GAIN = key("increase_experience_gain");
@@ -77,7 +76,6 @@ public interface TrimProperties {
 	ResourceKey<TrimProperty> RESONANT = key("resonant");
 	ResourceKey<TrimProperty> SHADOWY = key("shadowy");
 	ResourceKey<TrimProperty> SOLAR_BONUSES = key("solar_bonuses");
-	ResourceKey<TrimProperty> WEARING_GOLD = key("wearing_gold");
 	ResourceKey<TrimProperty> ENCHANTMENT_DISCOUNT = key("enchantment_discount");
 
 	ResourceKey<TrimProperty> BOLT = key("bolt");
@@ -154,11 +152,6 @@ public interface TrimProperties {
 								EntityPredicate.Builder.entity().moving(MovementPredicate.speed(MinMaxBounds.Doubles.atMost(0.1)))
 						)
 				).build()
-		);
-		register(
-				context,
-				WEARING_GOLD,
-				TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.GOLD)).ability(TrimAbilityComponents.PIGLIN_SAFE, PiglinSafeAbility.INSTANCE).build()
 		);
 		register(
 				context, INCREASE_MINING_SPEED, TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.IRON))
@@ -249,21 +242,6 @@ public interface TrimProperties {
 				).build()
 		);
 		register(
-				context, CONDUCTIVE, TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.COPPER)).ability(
-						TrimAbilityComponents.DAMAGE_IMMUNITY,
-						DamageImmunityAbility.INSTANCE,
-						DamageSourceCondition.hasDamageSource(DamageSourcePredicate.Builder.damageType()
-								.tag(TagPredicate.is(DamageTypeTags.IS_LIGHTNING))
-								.tag(TagPredicate.isNot(DamageTypeTags.BYPASSES_INVULNERABILITY)))
-				).itemProperty(
-						TrimItemPropertyComponents.DAMAGE_IMMUNITY,
-						DamageImmunityItemProperty.INSTANCE,
-						DamageSourceCondition.hasDamageSource(DamageSourcePredicate.Builder.damageType()
-								.tag(TagPredicate.is(DamageTypeTags.IS_LIGHTNING))
-								.tag(TagPredicate.isNot(DamageTypeTags.BYPASSES_INVULNERABILITY)))
-				).build()
-		);
-		register(
 				context, CHARGED, TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.COPPER)).ability(
 						TrimAbilityComponents.PROJECTILE_TICK, new SpawnParticlesAbility(
 								ParticleTypes.ELECTRIC_SPARK,
@@ -316,6 +294,18 @@ public interface TrimProperties {
 								LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.LIGHTNING_ROD),
 								InvertedLootItemCondition.invert(MatchTool.toolMatches(itemEnchantedPredicate(enchantmentGetter, Enchantments.CHANNELING)))
 						)
+				).ability(
+						TrimAbilityComponents.DAMAGE_IMMUNITY,
+						DamageImmunityAbility.INSTANCE,
+						DamageSourceCondition.hasDamageSource(DamageSourcePredicate.Builder.damageType()
+								.tag(TagPredicate.is(DamageTypeTags.IS_LIGHTNING))
+								.tag(TagPredicate.isNot(DamageTypeTags.BYPASSES_INVULNERABILITY)))
+				).itemProperty(
+						TrimItemPropertyComponents.DAMAGE_IMMUNITY,
+						DamageImmunityItemProperty.INSTANCE,
+						DamageSourceCondition.hasDamageSource(DamageSourcePredicate.Builder.damageType()
+								.tag(TagPredicate.is(DamageTypeTags.IS_LIGHTNING))
+								.tag(TagPredicate.isNot(DamageTypeTags.BYPASSES_INVULNERABILITY)))
 				).build()
 		);
 		register(
@@ -346,7 +336,7 @@ public interface TrimProperties {
 								TimeCheck.time(IntRange.upperBound(13000)).setPeriod(24000),
 								DimensionCheck.of(dimensionGetter.getOrThrow(BetterTrimsDimensionTypeTags.HAS_SUN))
 						)
-				).build()
+				).ability(TrimAbilityComponents.PIGLIN_SAFE, PiglinSafeAbility.INSTANCE).build()
 		);
 		register(
 				context, LUNAR_BONUSES, TrimProperty.builder(getMaterialMatcher(materialGetter, TrimMaterialTags.SILVER)).ability(
