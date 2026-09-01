@@ -19,6 +19,26 @@
         }
       }
     ],
+    "bettertrims:damage_immunity": [
+      {
+        "ability": {},
+        "requirements": {
+          "condition": "minecraft:damage_source_properties",
+          "predicate": {
+            "tags": [
+              {
+                "expected": true,
+                "id": "minecraft:is_lightning"
+              },
+              {
+                "expected": false,
+                "id": "minecraft:bypasses_invulnerability"
+              }
+            ]
+          }
+        }
+      }
+    ],
     "bettertrims:hit_block": [
       {
         "ability": {
@@ -158,6 +178,28 @@
           "entity": "this",
           "predicate": {
             "type": "#bettertrims:conductive_projectiles"
+          }
+        }
+      }
+    ]
+  },
+  "item_properties": {
+    "bettertrims:damage_immunity": [
+      {
+        "item_property": {},
+        "requirements": {
+          "condition": "minecraft:damage_source_properties",
+          "predicate": {
+            "tags": [
+              {
+                "expected": true,
+                "id": "minecraft:is_lightning"
+              },
+              {
+                "expected": false,
+                "id": "minecraft:bypasses_invulnerability"
+              }
+            ]
           }
         }
       }
