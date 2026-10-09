@@ -525,10 +525,21 @@ public interface TrimProperties {
 	}
 
 	static Iterable<TrimProperty> getProperties(Level level) {
-		return level.registryAccess()
+		return () -> level.registryAccess()
 				.lookupOrThrow(BetterTrimsRegistries.Keys.TRIM_PROPERTIES)
 				.listElements()
-				.map(Holder.Reference::value)::iterator;
+				.map(Holder.Reference::value)
+				.filter(TrimProperties::isPropertyEnabled)
+				.iterator();
+	}
+
+	/**
+	 * Trim <em>pattern</em> effects (shipped in the {@code trim_effects} built-in datapack, matched by
+	 * {@link Matcher#isPatternBased()}) are toggled by the {@code enableTrimEffects} config; trim
+	 * <em>material</em> properties are always active.
+	 */
+	private static boolean isPropertyEnabled(TrimProperty property) {
+		return BetterTrims.enableTrimEffects || !property.matcher().isPatternBased();
 	}
 
 	private static void register(BootstrapContext<TrimProperty> context, ResourceKey<TrimProperty> key, TrimProperty property) {

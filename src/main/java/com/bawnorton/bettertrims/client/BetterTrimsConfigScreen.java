@@ -31,7 +31,6 @@ public final class BetterTrimsConfigScreen extends Screen {
 						(button, value) -> {
 							BetterTrims.enableTrimEffects = value;
 							ConfigurableApi.saveChanges();
-							BetterTrimsRuntimeResources.apply(value);
 							BetterTrims.LOGGER.debug("enableTrimEffects set to {}", value);
 						}));
 

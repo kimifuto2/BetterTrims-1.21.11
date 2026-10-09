@@ -50,6 +50,14 @@ public final class Matcher {
 		return new Matcher(HolderSet.empty(), pattern, minCount);
 	}
 
+	/**
+	 * @return true when this matcher targets trim <em>patterns</em> (the trim-effects datapack) rather
+	 * than trim materials (the default datapack)
+	 */
+	public boolean isPatternBased() {
+		return pattern.size() > 0;
+	}
+
 	public Map<EquipmentSlot, ItemStack> getMatchingStacks(LivingEntity wearer) {
 		Map<EquipmentSlot, ItemStack> stacks = new HashMap<>();
 		for (EquipmentSlot slot : EquipmentSlot.values()) {
