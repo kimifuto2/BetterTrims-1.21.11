@@ -19,10 +19,11 @@ plugins {
 }
 
 repositories {
-  mavenLocal()
   mavenCentral()
   maven("https://maven.parchmentmc.org")
   maven("https://maven.bawnorton.com/releases/")
+  // ModMenu only publishes here (and beta builds are not on Maven Central)
+  maven("https://maven.terraformersmc.com/releases/")
 }
 
 val minecraft: String by project
