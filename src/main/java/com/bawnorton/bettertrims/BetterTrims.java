@@ -35,11 +35,16 @@ public final class BetterTrims {
 		BetterTrimsEffects.init();
 		LOGGER.debug("{} Initialized", MOD_ID);
 		//? if fabric {
+		// ALWAYS_ENABLED (= required) so the datapack is force-loaded in every world: Fabric's built-in
+		// packs are only auto-added when the world has not recorded them in DataPacks.Disabled, and a
+		// pack that once ended up in that list is never loaded again - no activation type can undo it
+		// (NORMAL and DEFAULT_ENABLED both map to required=false). The `enableTrimEffects` config now
+		// gates the pattern effects in code instead, see TrimProperties#getProperties.
 		ResourceManagerHelper.registerBuiltinResourcePack(
 				TRIM_EFFECTS,
 				FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(),
 				Component.translatable("bettertrims.resourcepack.effects"),
-				enableTrimEffects ? ResourcePackActivationType.DEFAULT_ENABLED : ResourcePackActivationType.NORMAL
+				ResourcePackActivationType.ALWAYS_ENABLED
 		);
 
 		ResourceManagerHelper.registerBuiltinResourcePack(
